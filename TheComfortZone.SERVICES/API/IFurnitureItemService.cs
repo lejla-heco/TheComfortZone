@@ -8,7 +8,8 @@ using TheComfortZone.DTO.Utils;
 
 namespace TheComfortZone.SERVICES.API
 {
-    public class IFurnitureItemService {
+    public interface IFurnitureItemService : ICRUDService<FurnitureItemResponse, FurnitureItemSearchRequest, FurnitureItemUpsertRequest, FurnitureItemUpsertRequest>
+    {
 
     }
 }

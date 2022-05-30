@@ -25,6 +25,9 @@ namespace TheComfortZone.SERVICES.DAO.Model
         public string? Description { get; set; }
         public bool? Favourited { get; set; }
         public int MetricUnitId { get; set; }
+        public int InStockQuantity { get; set; }
+        public string Height { get; set; } = null!;
+        public string Width { get; set; } = null!;
 
         public virtual Category Category { get; set; } = null!;
         public virtual Collection Collection { get; set; } = null!;

@@ -11,7 +11,7 @@ namespace TheComfortZone.Controllers
 {
     public class UserController : BaseCRUDController<UserResponse, BaseSearchObject, UserUpsertRequest, UserUpsertRequest>
     {
-        public readonly IUserService userService;
+        private readonly IUserService userService;
         public UserController(IUserService service) : base(service)
         {
             this.userService = service;
@@ -21,6 +21,12 @@ namespace TheComfortZone.Controllers
         public override UserResponse Insert([FromBody] UserUpsertRequest insert)
         {
             return base.Insert(insert);
+        }
+
+        [Authorize(Roles = "Administrator,User")]
+        public override UserResponse Update(int id, [FromBody] UserUpsertRequest update)
+        {
+            return base.Update(id, update);
         }
 
         [HttpGet("user-role")]

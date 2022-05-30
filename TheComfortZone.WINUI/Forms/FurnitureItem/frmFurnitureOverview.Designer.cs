@@ -29,27 +29,35 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvFurnitureItems = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.btnNewItem = new System.Windows.Forms.Button();
+            this.cmbState = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.cmbCategory = new System.Windows.Forms.ComboBox();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.cmbSpace = new System.Windows.Forms.ComboBox();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.FurnitureName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Designer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.InStockQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dimensions = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Material = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Color = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OnSale = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFurnitureItems)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Controls.Add(this.dgvFurnitureItems);
             this.groupBox2.Location = new System.Drawing.Point(15, 162);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(902, 364);
@@ -57,30 +65,40 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Furniture overview";
             // 
-            // dataGridView1
+            // dgvFurnitureItems
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 23);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.Size = new System.Drawing.Size(896, 338);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvFurnitureItems.AllowUserToAddRows = false;
+            this.dgvFurnitureItems.AllowUserToDeleteRows = false;
+            this.dgvFurnitureItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvFurnitureItems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.FurnitureName,
+            this.Designer,
+            this.InStockQuantity,
+            this.Dimensions,
+            this.Material,
+            this.Color,
+            this.Price,
+            this.OnSale});
+            this.dgvFurnitureItems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvFurnitureItems.Location = new System.Drawing.Point(3, 23);
+            this.dgvFurnitureItems.Name = "dgvFurnitureItems";
+            this.dgvFurnitureItems.ReadOnly = true;
+            this.dgvFurnitureItems.RowHeadersWidth = 51;
+            this.dgvFurnitureItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvFurnitureItems.Size = new System.Drawing.Size(896, 338);
+            this.dgvFurnitureItems.TabIndex = 0;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.comboBox3);
+            this.groupBox1.Controls.Add(this.btnNewItem);
+            this.groupBox1.Controls.Add(this.cmbState);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.comboBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.cmbCategory);
+            this.groupBox1.Controls.Add(this.txtName);
+            this.groupBox1.Controls.Add(this.cmbSpace);
+            this.groupBox1.Controls.Add(this.btnSearch);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Controls.Add(this.btnDelete);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(15, 2);
@@ -89,22 +107,22 @@
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             // 
-            // button2
+            // btnNewItem
             // 
-            this.button2.Location = new System.Drawing.Point(634, 38);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(162, 29);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "New furniture item";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnNewItem.Location = new System.Drawing.Point(634, 38);
+            this.btnNewItem.Name = "btnNewItem";
+            this.btnNewItem.Size = new System.Drawing.Size(162, 29);
+            this.btnNewItem.TabIndex = 3;
+            this.btnNewItem.Text = "New furniture item";
+            this.btnNewItem.UseVisualStyleBackColor = true;
             // 
-            // comboBox3
+            // cmbState
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(681, 92);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(213, 28);
-            this.comboBox3.TabIndex = 10;
+            this.cmbState.FormattingEnabled = true;
+            this.cmbState.Location = new System.Drawing.Point(681, 92);
+            this.cmbState.Name = "cmbState";
+            this.cmbState.Size = new System.Drawing.Size(213, 28);
+            this.cmbState.TabIndex = 10;
             // 
             // label1
             // 
@@ -115,37 +133,37 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Name:";
             // 
-            // comboBox2
+            // cmbCategory
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(390, 92);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(213, 28);
-            this.comboBox2.TabIndex = 9;
+            this.cmbCategory.FormattingEnabled = true;
+            this.cmbCategory.Location = new System.Drawing.Point(390, 92);
+            this.cmbCategory.Name = "cmbCategory";
+            this.cmbCategory.Size = new System.Drawing.Size(213, 28);
+            this.cmbCategory.TabIndex = 9;
             // 
-            // textBox1
+            // txtName
             // 
-            this.textBox1.Location = new System.Drawing.Point(63, 39);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(249, 27);
-            this.textBox1.TabIndex = 1;
+            this.txtName.Location = new System.Drawing.Point(63, 39);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(249, 27);
+            this.txtName.TabIndex = 1;
             // 
-            // comboBox1
+            // cmbSpace
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(73, 92);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(213, 28);
-            this.comboBox1.TabIndex = 8;
+            this.cmbSpace.FormattingEnabled = true;
+            this.cmbSpace.Location = new System.Drawing.Point(73, 92);
+            this.cmbSpace.Name = "cmbSpace";
+            this.cmbSpace.Size = new System.Drawing.Size(213, 28);
+            this.cmbSpace.TabIndex = 8;
             // 
-            // button1
+            // btnSearch
             // 
-            this.button1.Location = new System.Drawing.Point(318, 38);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(94, 29);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Search";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnSearch.Location = new System.Drawing.Point(318, 38);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(94, 29);
+            this.btnSearch.TabIndex = 2;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -156,14 +174,15 @@
             this.label4.TabIndex = 7;
             this.label4.Text = "State:";
             // 
-            // button3
+            // btnDelete
             // 
-            this.button3.Location = new System.Drawing.Point(802, 38);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(94, 29);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Delete";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnDelete.Enabled = false;
+            this.btnDelete.Location = new System.Drawing.Point(802, 38);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(94, 29);
+            this.btnDelete.TabIndex = 4;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -183,6 +202,79 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Space:";
             // 
+            // FurnitureName
+            // 
+            this.FurnitureName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.FurnitureName.DataPropertyName = "Name";
+            this.FurnitureName.HeaderText = "Furniture";
+            this.FurnitureName.MinimumWidth = 6;
+            this.FurnitureName.Name = "FurnitureName";
+            this.FurnitureName.ReadOnly = true;
+            // 
+            // Designer
+            // 
+            this.Designer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Designer.DataPropertyName = "DesignerName";
+            this.Designer.HeaderText = "Designer";
+            this.Designer.MinimumWidth = 6;
+            this.Designer.Name = "Designer";
+            this.Designer.ReadOnly = true;
+            // 
+            // InStockQuantity
+            // 
+            this.InStockQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.InStockQuantity.DataPropertyName = "InStockQuantityString";
+            this.InStockQuantity.HeaderText = "In stock quantity";
+            this.InStockQuantity.MinimumWidth = 6;
+            this.InStockQuantity.Name = "InStockQuantity";
+            this.InStockQuantity.ReadOnly = true;
+            // 
+            // Dimensions
+            // 
+            this.Dimensions.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Dimensions.DataPropertyName = "Dimensions";
+            this.Dimensions.HeaderText = "Dimensions";
+            this.Dimensions.MinimumWidth = 6;
+            this.Dimensions.Name = "Dimensions";
+            this.Dimensions.ReadOnly = true;
+            // 
+            // Material
+            // 
+            this.Material.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Material.DataPropertyName = "Material";
+            this.Material.HeaderText = "Material";
+            this.Material.MinimumWidth = 6;
+            this.Material.Name = "Material";
+            this.Material.ReadOnly = true;
+            // 
+            // Color
+            // 
+            this.Color.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Color.DataPropertyName = "Colors";
+            this.Color.HeaderText = "Color";
+            this.Color.MinimumWidth = 6;
+            this.Color.Name = "Color";
+            this.Color.ReadOnly = true;
+            this.Color.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Price
+            // 
+            this.Price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Price.DataPropertyName = "Price";
+            this.Price.HeaderText = "Price";
+            this.Price.MinimumWidth = 6;
+            this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
+            // 
+            // OnSale
+            // 
+            this.OnSale.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.OnSale.DataPropertyName = "OnSale";
+            this.OnSale.HeaderText = "On sale";
+            this.OnSale.MinimumWidth = 6;
+            this.OnSale.Name = "OnSale";
+            this.OnSale.ReadOnly = true;
+            // 
             // frmFurnitureOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -192,8 +284,9 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "frmFurnitureOverview";
             this.Text = "Furniture";
+            this.Load += new System.EventHandler(this.frmFurnitureOverview_Load);
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvFurnitureItems)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -203,18 +296,26 @@
         #endregion
 
         private GroupBox groupBox2;
-        private DataGridView dataGridView1;
+        private DataGridView dgvFurnitureItems;
         private GroupBox groupBox1;
-        private Button button2;
-        private ComboBox comboBox3;
+        private Button btnNewItem;
+        private ComboBox cmbState;
         private Label label1;
-        private ComboBox comboBox2;
-        private TextBox textBox1;
-        private ComboBox comboBox1;
-        private Button button1;
+        private ComboBox cmbCategory;
+        private TextBox txtName;
+        private ComboBox cmbSpace;
+        private Button btnSearch;
         private Label label4;
-        private Button button3;
+        private Button btnDelete;
         private Label label3;
         private Label label2;
+        private DataGridViewTextBoxColumn FurnitureName;
+        private DataGridViewTextBoxColumn Designer;
+        private DataGridViewTextBoxColumn InStockQuantity;
+        private DataGridViewTextBoxColumn Dimensions;
+        private DataGridViewTextBoxColumn Material;
+        private DataGridViewTextBoxColumn Color;
+        private DataGridViewTextBoxColumn Price;
+        private DataGridViewCheckBoxColumn OnSale;
     }
 }

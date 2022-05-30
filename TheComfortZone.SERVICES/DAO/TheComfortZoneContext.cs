@@ -204,7 +204,7 @@ namespace TheComfortZone.SERVICES.DAO
 
                 entity.Property(e => e.ColorId).HasColumnName("ColorID");
 
-                entity.Property(e => e.FurnitureId).HasColumnName("FurnitureID");
+                entity.Property(e => e.FurnitureItemId).HasColumnName("FurnitureItemID");
 
                 entity.HasOne(d => d.Color)
                     .WithMany(p => p.FurnitureColors)
@@ -212,9 +212,9 @@ namespace TheComfortZone.SERVICES.DAO
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_REFERENCE_6");
 
-                entity.HasOne(d => d.Furniture)
+                entity.HasOne(d => d.FurnitureItem)
                     .WithMany(p => p.FurnitureColors)
-                    .HasForeignKey(d => d.FurnitureId)
+                    .HasForeignKey(d => d.FurnitureItemId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_REFERENCE_7");
             });
@@ -231,6 +231,10 @@ namespace TheComfortZone.SERVICES.DAO
 
                 entity.Property(e => e.Description).IsUnicode(false);
 
+                entity.Property(e => e.Height)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.MaterialId).HasColumnName("MaterialID");
 
                 entity.Property(e => e.MetricUnitId).HasColumnName("MetricUnitID");
@@ -241,6 +245,10 @@ namespace TheComfortZone.SERVICES.DAO
 
                 entity.Property(e => e.State)
                     .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Width)
+                    .HasMaxLength(20)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Category)

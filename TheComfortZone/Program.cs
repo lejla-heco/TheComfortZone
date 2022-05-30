@@ -35,6 +35,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IFurnitureItemService, FurnitureItemService>();
 
 builder.Services.AddAutoMapper(typeof(IUserService));
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

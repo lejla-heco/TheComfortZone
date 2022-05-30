@@ -11,7 +11,8 @@ namespace TheComfortZone.WINUI.Service
 {
     public class UserAPIService : BaseAPIService<DTO.User.UserResponse, object, DTO.User.UserUpsertRequest, DTO.User.UserUpsertRequest>
     {
-        public UserAPIService() : base("User")
+        private const string API_ROUTE = "User";
+        public UserAPIService() : base(API_ROUTE)
         {
         }
 
