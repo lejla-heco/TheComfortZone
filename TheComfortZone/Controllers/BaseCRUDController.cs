@@ -23,5 +23,11 @@ namespace TheComfortZone.Controllers
         {
             return crudService.Update(id, update);
         }
+
+        [HttpDelete("{id}")]
+        public virtual string Delete(int id)
+        {
+            return crudService.Delete(id);
+        }
     }
 }

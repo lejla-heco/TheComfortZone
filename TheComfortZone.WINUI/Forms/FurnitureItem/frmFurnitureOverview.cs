@@ -14,6 +14,7 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
     public partial class frmFurnitureOverview : Form
     {
         FurnitureItemAPIService furnitureItemAPIService = new FurnitureItemAPIService();
+        private DTO.FurnitureItem.FurnitureItemResponse selectedRow = null;
         public frmFurnitureOverview()
         {
             InitializeComponent();
@@ -45,6 +46,27 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
             {
                 getGridData();
             }
+        }
+
+        private void dgvFurnitureItems_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btnDelete.Enabled = true;
+            selectedRow = dgvFurnitureItems.SelectedRows[0].DataBoundItem as DTO.FurnitureItem.FurnitureItemResponse;
+        }
+
+        private async void btnDelete_Click(object sender, EventArgs e)
+        {
+            var confirmation = MessageBox.Show("Are you sure you want to delete selected item?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            
+            if (selectedRow != null && confirmation == DialogResult.Yes)
+            {
+                string response = await furnitureItemAPIService.Delete(selectedRow.FurnitureItemId);
+                MessageBox.Show(response, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                getGridData();
+            }
+
+            selectedRow = null;
+            btnDelete.Enabled = false;
         }
     }
 }

@@ -23,21 +23,40 @@ namespace TheComfortZone.WINUI.Service
 
         public async Task<List<T>> Get(object search = null)
         {
-            string url = $"{endpoint}{resource}";
-            if (search != null)
+            try
             {
-                url += "?";
-                url += await search.ToQueryString();
+                string url = $"{endpoint}{resource}";
+                if (search != null)
+                {
+                    url += "?";
+                    url += await search.ToQueryString();
+                }
+                return await url.WithBasicAuth(CredentialHelper.Username, CredentialHelper.Password)
+                    .GetJsonAsync<List<T>>();
             }
-            return await url.WithBasicAuth(CredentialHelper.Username, CredentialHelper.Password).GetJsonAsync<List<T>>();
+            catch (Exception ex)
+            {
+                var stringBuilder = new StringBuilder(ex.Message);
+                MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return default(List<T>);
+            }
         }
 
         public async Task<T> GetById(int id)
         {
-            return await new Uri(endpoint)
-                    .AppendPathSegment(resource)
-                    .AppendPathSegment(id)
-                    .WithBasicAuth(CredentialHelper.Username, CredentialHelper.Password).GetJsonAsync<T>();
+            try
+            {
+                return await new Uri(endpoint)
+                        .AppendPathSegment(resource)
+                        .AppendPathSegment(id)
+                        .WithBasicAuth(CredentialHelper.Username, CredentialHelper.Password).GetJsonAsync<T>();
+            }
+            catch (Exception ex)
+            {
+                var stringBuilder = new StringBuilder(ex.Message);
+                MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return default(T);
+            }
         }
     }
 }

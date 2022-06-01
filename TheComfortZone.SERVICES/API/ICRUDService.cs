@@ -11,5 +11,6 @@ namespace TheComfortZone.SERVICES.API
     {
         public T Insert(TInsert insert);
         public T Update(int id, TUpdate update);
+        public string Delete(int id);
     }
 }

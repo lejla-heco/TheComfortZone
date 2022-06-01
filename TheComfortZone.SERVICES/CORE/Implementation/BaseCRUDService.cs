@@ -51,5 +51,24 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
         {
 
         }
+
+        public virtual string Delete(int id)
+        {
+            TDb entity = context.Set<TDb>().Find(id);
+
+            BeforeDelete(id);
+
+            context.Set<TDb>().Remove(entity);
+            context.SaveChanges();
+
+            string response = $"{typeof(TDb).Name} deleted!";
+
+            return response;
+        }
+
+        public virtual void BeforeDelete(int id)
+        {
+
+        }
     }
 }

@@ -54,5 +54,24 @@ namespace TheComfortZone.WINUI.Service
                 return default(T);
             }
         }
+
+        public async Task<string> Delete(int id)
+        {
+            try
+            {
+                return await new Uri(endpoint)
+                   .AppendPathSegment(resource)
+                   .AppendPathSegment(id)
+                   .WithBasicAuth(CredentialHelper.Username, CredentialHelper.Password)
+                   .DeleteAsync()
+                   .ReceiveString();
+            }
+            catch (FlurlHttpException ex)
+            {
+                var stringBuilder = new StringBuilder(ex.Message);
+                MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return "Not deleted!";
+            }
+        }
     }
 }

@@ -30,6 +30,14 @@
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvFurnitureItems = new System.Windows.Forms.DataGridView();
+            this.FurnitureName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Designer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.InStockQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dimensions = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Material = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Color = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OnSale = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnNewItem = new System.Windows.Forms.Button();
             this.cmbState = new System.Windows.Forms.ComboBox();
@@ -42,14 +50,6 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.FurnitureName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Designer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.InStockQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dimensions = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Material = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Color = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OnSale = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFurnitureItems)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -87,6 +87,80 @@
             this.dgvFurnitureItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvFurnitureItems.Size = new System.Drawing.Size(896, 338);
             this.dgvFurnitureItems.TabIndex = 0;
+            this.dgvFurnitureItems.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFurnitureItems_CellClick);
+            // 
+            // FurnitureName
+            // 
+            this.FurnitureName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.FurnitureName.DataPropertyName = "Name";
+            this.FurnitureName.HeaderText = "Furniture";
+            this.FurnitureName.MinimumWidth = 6;
+            this.FurnitureName.Name = "FurnitureName";
+            this.FurnitureName.ReadOnly = true;
+            // 
+            // Designer
+            // 
+            this.Designer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Designer.DataPropertyName = "DesignerName";
+            this.Designer.HeaderText = "Designer";
+            this.Designer.MinimumWidth = 6;
+            this.Designer.Name = "Designer";
+            this.Designer.ReadOnly = true;
+            // 
+            // InStockQuantity
+            // 
+            this.InStockQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.InStockQuantity.DataPropertyName = "InStockQuantityString";
+            this.InStockQuantity.HeaderText = "In stock quantity";
+            this.InStockQuantity.MinimumWidth = 6;
+            this.InStockQuantity.Name = "InStockQuantity";
+            this.InStockQuantity.ReadOnly = true;
+            // 
+            // Dimensions
+            // 
+            this.Dimensions.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Dimensions.DataPropertyName = "Dimensions";
+            this.Dimensions.HeaderText = "Dimensions";
+            this.Dimensions.MinimumWidth = 6;
+            this.Dimensions.Name = "Dimensions";
+            this.Dimensions.ReadOnly = true;
+            // 
+            // Material
+            // 
+            this.Material.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Material.DataPropertyName = "Material";
+            this.Material.HeaderText = "Material";
+            this.Material.MinimumWidth = 6;
+            this.Material.Name = "Material";
+            this.Material.ReadOnly = true;
+            // 
+            // Color
+            // 
+            this.Color.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Color.DataPropertyName = "Colors";
+            this.Color.HeaderText = "Color";
+            this.Color.MinimumWidth = 6;
+            this.Color.Name = "Color";
+            this.Color.ReadOnly = true;
+            this.Color.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Price
+            // 
+            this.Price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Price.DataPropertyName = "Price";
+            this.Price.HeaderText = "Price (KM)";
+            this.Price.MinimumWidth = 6;
+            this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
+            // 
+            // OnSale
+            // 
+            this.OnSale.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.OnSale.DataPropertyName = "OnSale";
+            this.OnSale.HeaderText = "On sale";
+            this.OnSale.MinimumWidth = 6;
+            this.OnSale.Name = "OnSale";
+            this.OnSale.ReadOnly = true;
             // 
             // groupBox1
             // 
@@ -184,6 +258,7 @@
             this.btnDelete.TabIndex = 4;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // label3
             // 
@@ -202,79 +277,6 @@
             this.label2.Size = new System.Drawing.Size(52, 20);
             this.label2.TabIndex = 5;
             this.label2.Text = "Space:";
-            // 
-            // FurnitureName
-            // 
-            this.FurnitureName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.FurnitureName.DataPropertyName = "Name";
-            this.FurnitureName.HeaderText = "Furniture";
-            this.FurnitureName.MinimumWidth = 6;
-            this.FurnitureName.Name = "FurnitureName";
-            this.FurnitureName.ReadOnly = true;
-            // 
-            // Designer
-            // 
-            this.Designer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Designer.DataPropertyName = "DesignerName";
-            this.Designer.HeaderText = "Designer";
-            this.Designer.MinimumWidth = 6;
-            this.Designer.Name = "Designer";
-            this.Designer.ReadOnly = true;
-            // 
-            // InStockQuantity
-            // 
-            this.InStockQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.InStockQuantity.DataPropertyName = "InStockQuantityString";
-            this.InStockQuantity.HeaderText = "In stock quantity";
-            this.InStockQuantity.MinimumWidth = 6;
-            this.InStockQuantity.Name = "InStockQuantity";
-            this.InStockQuantity.ReadOnly = true;
-            // 
-            // Dimensions
-            // 
-            this.Dimensions.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Dimensions.DataPropertyName = "Dimensions";
-            this.Dimensions.HeaderText = "Dimensions";
-            this.Dimensions.MinimumWidth = 6;
-            this.Dimensions.Name = "Dimensions";
-            this.Dimensions.ReadOnly = true;
-            // 
-            // Material
-            // 
-            this.Material.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Material.DataPropertyName = "Material";
-            this.Material.HeaderText = "Material";
-            this.Material.MinimumWidth = 6;
-            this.Material.Name = "Material";
-            this.Material.ReadOnly = true;
-            // 
-            // Color
-            // 
-            this.Color.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Color.DataPropertyName = "Colors";
-            this.Color.HeaderText = "Color";
-            this.Color.MinimumWidth = 6;
-            this.Color.Name = "Color";
-            this.Color.ReadOnly = true;
-            this.Color.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Price
-            // 
-            this.Price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Price.DataPropertyName = "Price";
-            this.Price.HeaderText = "Price (KM)";
-            this.Price.MinimumWidth = 6;
-            this.Price.Name = "Price";
-            this.Price.ReadOnly = true;
-            // 
-            // OnSale
-            // 
-            this.OnSale.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.OnSale.DataPropertyName = "OnSale";
-            this.OnSale.HeaderText = "On sale";
-            this.OnSale.MinimumWidth = 6;
-            this.OnSale.Name = "OnSale";
-            this.OnSale.ReadOnly = true;
             // 
             // frmFurnitureOverview
             // 

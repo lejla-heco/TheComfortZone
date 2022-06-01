@@ -179,13 +179,13 @@ namespace TheComfortZone.SERVICES.DAO
 
                 entity.Property(e => e.FavouriteId).HasColumnName("FavouriteID");
 
-                entity.Property(e => e.FurnitureId).HasColumnName("FurnitureID");
+                entity.Property(e => e.FurnitureItemId).HasColumnName("FurnitureItemID");
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
-                entity.HasOne(d => d.Furniture)
+                entity.HasOne(d => d.FurnitureItem)
                     .WithMany(p => p.Favourites)
-                    .HasForeignKey(d => d.FurnitureId)
+                    .HasForeignKey(d => d.FurnitureItemId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_REFERENCE_13");
 
@@ -329,13 +329,13 @@ namespace TheComfortZone.SERVICES.DAO
 
                 entity.Property(e => e.OrderItemId).HasColumnName("OrderItemID");
 
-                entity.Property(e => e.FurnitureId).HasColumnName("FurnitureID");
+                entity.Property(e => e.FurnitureItemId).HasColumnName("FurnitureItemID");
 
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
-                entity.HasOne(d => d.Furniture)
+                entity.HasOne(d => d.FurnitureItem)
                     .WithMany(p => p.OrderItems)
-                    .HasForeignKey(d => d.FurnitureId)
+                    .HasForeignKey(d => d.FurnitureItemId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_REFERENCE_11");
 
