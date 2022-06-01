@@ -11,33 +11,10 @@ using TheComfortZone.WINUI.Utils;
 
 namespace TheComfortZone.WINUI.Service
 {
-    public class BaseAPIService<T, TSearch, TInsert, TUpdate>
+    public class BaseAPIService<T, TSearch, TInsert, TUpdate> : BaseReadAPIService<T, TSearch> where T : class where TSearch : class where TInsert : class where TUpdate : class
     {
-        protected string resource = null;
-        public string endpoint = Settings.Default.ApiURL;
-
-        public BaseAPIService(string resource)
+        public BaseAPIService(string resource) : base(resource)
         {
-            this.resource = resource;
-        }
-
-        public async Task<List<T>> Get(object search = null)
-        {
-            string url = $"{endpoint}{resource}";
-            if (search != null)
-            {
-                url += "?";
-                url += await search.ToQueryString();
-            }
-            return await url.WithBasicAuth(CredentialHelper.Username, CredentialHelper.Password).GetJsonAsync<List<T>>();
-        }
-
-        public async Task<T> GetById(int id)
-        {
-            return await new Uri(endpoint)
-                    .AppendPathSegment(resource)
-                    .AppendPathSegment(id)
-                    .WithBasicAuth(CredentialHelper.Username, CredentialHelper.Password).GetJsonAsync<T>();
         }
 
         public async Task<T> Post(TInsert request)
@@ -50,7 +27,7 @@ namespace TheComfortZone.WINUI.Service
                    .PostJsonAsync(request)
                    .ReceiveJson<T>();
             }
-            catch (FlurlHttpException ex)
+            catch (Exception ex)
             {
                 var stringBuilder = new StringBuilder(ex.Message);
                 MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

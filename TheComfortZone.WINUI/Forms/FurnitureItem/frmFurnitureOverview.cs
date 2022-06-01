@@ -20,7 +20,7 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
             dgvFurnitureItems.AutoGenerateColumns = false;
         }
 
-        private void frmFurnitureOverview_Load(object sender, EventArgs e)
+        private async void frmFurnitureOverview_Load(object sender, EventArgs e)
         {
             getGridData();
         }
@@ -35,6 +35,15 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
             catch (Exception ex)
             {
                 MessageBox.Show("Can't display furniture items!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnNewItem_Click(object sender, EventArgs e)
+        {
+            frmFurnitureItemAddEdit frm = new frmFurnitureItemAddEdit();
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                getGridData();
             }
         }
     }

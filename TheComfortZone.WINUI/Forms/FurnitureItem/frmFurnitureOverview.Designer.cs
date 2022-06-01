@@ -115,6 +115,7 @@
             this.btnNewItem.TabIndex = 3;
             this.btnNewItem.Text = "New furniture item";
             this.btnNewItem.UseVisualStyleBackColor = true;
+            this.btnNewItem.Click += new System.EventHandler(this.btnNewItem_Click);
             // 
             // cmbState
             // 
@@ -261,7 +262,7 @@
             // 
             this.Price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Price.DataPropertyName = "Price";
-            this.Price.HeaderText = "Price";
+            this.Price.HeaderText = "Price (KM)";
             this.Price.MinimumWidth = 6;
             this.Price.Name = "Price";
             this.Price.ReadOnly = true;

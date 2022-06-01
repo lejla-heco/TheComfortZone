@@ -6,12 +6,16 @@ using TheComfortZone.Authentication;
 using TheComfortZone.SERVICES.API;
 using TheComfortZone.SERVICES.CORE.Implementation;
 using TheComfortZone.SERVICES.DAO;
+using TheComfortZone.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(x =>
+{
+    x.Filters.Add<ErrorFilter>();
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -36,6 +40,13 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IFurnitureItemService, FurnitureItemService>();
+builder.Services.AddTransient<ISpaceService, SpaceService>();
+builder.Services.AddTransient<ICategoryService, CategoryService>();
+builder.Services.AddTransient<IDesignerService, DesignerService>();
+builder.Services.AddTransient<ICollectionService, CollectionService>();
+builder.Services.AddTransient<IMetricUnitService, MetricUnitService>();
+builder.Services.AddTransient<IMaterialService, MaterialService>();
+builder.Services.AddTransient<IColorService, ColorService>();
 
 builder.Services.AddAutoMapper(typeof(IUserService));
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

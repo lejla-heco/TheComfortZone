@@ -26,5 +26,27 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
                 .Include("FurnitureColors.Color");
             return base.IncludeList(query);
         }
+
+        public override FurnitureItemResponse Insert(FurnitureItemUpsertRequest insert)
+        {
+            var entity = base.Insert(insert);
+            if (insert?.ColorIdList != null)
+            {
+                foreach (int colorId in insert.ColorIdList)
+                {
+                    DAO.Model.FurnitureColor furnitureColor = new DAO.Model.FurnitureColor();
+                    furnitureColor.FurnitureItemId = entity.FurnitureItemId;
+                    furnitureColor.ColorId = colorId;
+                    context.FurnitureColors.Add(furnitureColor);
+                }
+            }
+            context.SaveChanges();
+            return entity;
+        }
+
+        public override void BeforeInsert(FurnitureItemUpsertRequest insert, FurnitureItem entity)
+        {
+            base.BeforeInsert(insert, entity);
+        }
     }
 }

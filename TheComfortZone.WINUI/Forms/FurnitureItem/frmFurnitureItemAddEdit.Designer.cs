@@ -30,54 +30,57 @@
         {
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cmbCategory = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.cmbDesigner = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.cmbCollection = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.nudInStockQuantity = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.cmbMetricUnitISQ = new System.Windows.Forms.ComboBox();
+            this.cmbMetricUnitH = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.comboBox7 = new System.Windows.Forms.ComboBox();
+            this.nudHeight = new System.Windows.Forms.NumericUpDown();
+            this.cmbMetricUnitW = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.comboBox8 = new System.Windows.Forms.ComboBox();
+            this.nudWidth = new System.Windows.Forms.NumericUpDown();
             this.label12 = new System.Windows.Forms.Label();
-            this.comboBox9 = new System.Windows.Forms.ComboBox();
+            this.cmbMaterial = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.nudDiscountPrice = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
-            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
+            this.nudRegularPrice = new System.Windows.Forms.NumericUpDown();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.comboBox10 = new System.Windows.Forms.ComboBox();
+            this.cbOnSale = new System.Windows.Forms.CheckBox();
+            this.cmbState = new System.Windows.Forms.ComboBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.pbImage = new System.Windows.Forms.PictureBox();
+            this.btnUpload = new System.Windows.Forms.Button();
             this.label19 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.txtDescription = new System.Windows.Forms.TextBox();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.clbColors = new System.Windows.Forms.CheckedListBox();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.cmbSpace = new System.Windows.Forms.ComboBox();
+            this.imageErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.nudInStockQuantity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudWidth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudDiscountPrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRegularPrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -89,12 +92,13 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Name:";
             // 
-            // textBox1
+            // txtName
             // 
-            this.textBox1.Location = new System.Drawing.Point(149, 23);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(312, 27);
-            this.textBox1.TabIndex = 1;
+            this.txtName.Location = new System.Drawing.Point(149, 23);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(312, 27);
+            this.txtName.TabIndex = 1;
+            this.txtName.Validating += new System.ComponentModel.CancelEventHandler(this.txtName_Validating);
             // 
             // label2
             // 
@@ -105,21 +109,15 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Space:";
             // 
-            // comboBox1
+            // cmbCategory
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(149, 70);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(312, 28);
-            this.comboBox1.TabIndex = 3;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(149, 118);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(312, 28);
-            this.comboBox2.TabIndex = 5;
+            this.cmbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCategory.FormattingEnabled = true;
+            this.cmbCategory.Location = new System.Drawing.Point(149, 118);
+            this.cmbCategory.Name = "cmbCategory";
+            this.cmbCategory.Size = new System.Drawing.Size(312, 28);
+            this.cmbCategory.TabIndex = 5;
+            this.cmbCategory.Validating += new System.ComponentModel.CancelEventHandler(this.cmbCategory_Validating);
             // 
             // label3
             // 
@@ -130,13 +128,16 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Category:";
             // 
-            // comboBox3
+            // cmbDesigner
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(149, 166);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(312, 28);
-            this.comboBox3.TabIndex = 7;
+            this.cmbDesigner.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDesigner.FormattingEnabled = true;
+            this.cmbDesigner.Location = new System.Drawing.Point(149, 166);
+            this.cmbDesigner.Name = "cmbDesigner";
+            this.cmbDesigner.Size = new System.Drawing.Size(312, 28);
+            this.cmbDesigner.TabIndex = 7;
+            this.cmbDesigner.SelectedIndexChanged += new System.EventHandler(this.cmbDesigner_SelectedIndexChanged);
+            this.cmbDesigner.Validating += new System.ComponentModel.CancelEventHandler(this.cmbDesigner_Validating);
             // 
             // label4
             // 
@@ -147,13 +148,15 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "Designer:";
             // 
-            // comboBox4
+            // cmbCollection
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(149, 213);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(312, 28);
-            this.comboBox4.TabIndex = 9;
+            this.cmbCollection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCollection.FormattingEnabled = true;
+            this.cmbCollection.Location = new System.Drawing.Point(149, 213);
+            this.cmbCollection.Name = "cmbCollection";
+            this.cmbCollection.Size = new System.Drawing.Size(312, 28);
+            this.cmbCollection.TabIndex = 9;
+            this.cmbCollection.Validating += new System.ComponentModel.CancelEventHandler(this.cmbCollection_Validating);
             // 
             // label5
             // 
@@ -164,12 +167,22 @@
             this.label5.TabIndex = 8;
             this.label5.Text = "Collection:";
             // 
-            // numericUpDown1
+            // nudInStockQuantity
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(149, 266);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(97, 27);
-            this.numericUpDown1.TabIndex = 10;
+            this.nudInStockQuantity.Location = new System.Drawing.Point(149, 266);
+            this.nudInStockQuantity.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudInStockQuantity.Name = "nudInStockQuantity";
+            this.nudInStockQuantity.Size = new System.Drawing.Size(97, 27);
+            this.nudInStockQuantity.TabIndex = 10;
+            this.nudInStockQuantity.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label6
             // 
@@ -189,21 +202,25 @@
             this.label7.TabIndex = 12;
             this.label7.Text = "Metric unit:";
             // 
-            // comboBox5
+            // cmbMetricUnitISQ
             // 
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(364, 265);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(97, 28);
-            this.comboBox5.TabIndex = 13;
+            this.cmbMetricUnitISQ.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMetricUnitISQ.FormattingEnabled = true;
+            this.cmbMetricUnitISQ.Location = new System.Drawing.Point(364, 265);
+            this.cmbMetricUnitISQ.Name = "cmbMetricUnitISQ";
+            this.cmbMetricUnitISQ.Size = new System.Drawing.Size(97, 28);
+            this.cmbMetricUnitISQ.TabIndex = 13;
+            this.cmbMetricUnitISQ.Validating += new System.ComponentModel.CancelEventHandler(this.cmbMetricUnitISQ_Validating);
             // 
-            // comboBox6
+            // cmbMetricUnitH
             // 
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(364, 311);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(97, 28);
-            this.comboBox6.TabIndex = 17;
+            this.cmbMetricUnitH.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMetricUnitH.FormattingEnabled = true;
+            this.cmbMetricUnitH.Location = new System.Drawing.Point(364, 311);
+            this.cmbMetricUnitH.Name = "cmbMetricUnitH";
+            this.cmbMetricUnitH.Size = new System.Drawing.Size(97, 28);
+            this.cmbMetricUnitH.TabIndex = 17;
+            this.cmbMetricUnitH.Validating += new System.ComponentModel.CancelEventHandler(this.cmbMetricUnitH_Validating);
             // 
             // label8
             // 
@@ -223,20 +240,32 @@
             this.label9.TabIndex = 15;
             this.label9.Text = "Height:";
             // 
-            // numericUpDown2
+            // nudHeight
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(149, 312);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(97, 27);
-            this.numericUpDown2.TabIndex = 14;
+            this.nudHeight.Location = new System.Drawing.Point(149, 312);
+            this.nudHeight.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudHeight.Name = "nudHeight";
+            this.nudHeight.Size = new System.Drawing.Size(97, 27);
+            this.nudHeight.TabIndex = 14;
+            this.nudHeight.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
-            // comboBox7
+            // cmbMetricUnitW
             // 
-            this.comboBox7.FormattingEnabled = true;
-            this.comboBox7.Location = new System.Drawing.Point(364, 357);
-            this.comboBox7.Name = "comboBox7";
-            this.comboBox7.Size = new System.Drawing.Size(97, 28);
-            this.comboBox7.TabIndex = 21;
+            this.cmbMetricUnitW.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMetricUnitW.FormattingEnabled = true;
+            this.cmbMetricUnitW.Location = new System.Drawing.Point(364, 357);
+            this.cmbMetricUnitW.Name = "cmbMetricUnitW";
+            this.cmbMetricUnitW.Size = new System.Drawing.Size(97, 28);
+            this.cmbMetricUnitW.TabIndex = 21;
+            this.cmbMetricUnitW.Validating += new System.ComponentModel.CancelEventHandler(this.cmbMetricUnitW_Validating);
             // 
             // label10
             // 
@@ -256,37 +285,41 @@
             this.label11.TabIndex = 19;
             this.label11.Text = "Width:";
             // 
-            // numericUpDown3
+            // nudWidth
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(149, 358);
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(97, 27);
-            this.numericUpDown3.TabIndex = 18;
-            // 
-            // comboBox8
-            // 
-            this.comboBox8.FormattingEnabled = true;
-            this.comboBox8.Location = new System.Drawing.Point(149, 450);
-            this.comboBox8.Name = "comboBox8";
-            this.comboBox8.Size = new System.Drawing.Size(312, 28);
-            this.comboBox8.TabIndex = 25;
+            this.nudWidth.Location = new System.Drawing.Point(149, 358);
+            this.nudWidth.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudWidth.Name = "nudWidth";
+            this.nudWidth.Size = new System.Drawing.Size(97, 27);
+            this.nudWidth.TabIndex = 18;
+            this.nudWidth.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(23, 457);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(48, 20);
+            this.label12.Size = new System.Drawing.Size(54, 20);
             this.label12.TabIndex = 24;
-            this.label12.Text = "Color:";
+            this.label12.Text = "Colors:";
             // 
-            // comboBox9
+            // cmbMaterial
             // 
-            this.comboBox9.FormattingEnabled = true;
-            this.comboBox9.Location = new System.Drawing.Point(149, 403);
-            this.comboBox9.Name = "comboBox9";
-            this.comboBox9.Size = new System.Drawing.Size(312, 28);
-            this.comboBox9.TabIndex = 23;
+            this.cmbMaterial.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMaterial.FormattingEnabled = true;
+            this.cmbMaterial.Location = new System.Drawing.Point(149, 403);
+            this.cmbMaterial.Name = "cmbMaterial";
+            this.cmbMaterial.Size = new System.Drawing.Size(312, 28);
+            this.cmbMaterial.TabIndex = 23;
+            this.cmbMaterial.Validating += new System.ComponentModel.CancelEventHandler(this.cmbMaterial_Validating);
             // 
             // label13
             // 
@@ -300,39 +333,59 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(23, 546);
+            this.label14.Location = new System.Drawing.Point(23, 656);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(107, 20);
             this.label14.TabIndex = 29;
             this.label14.Text = "Discount price:";
             // 
-            // numericUpDown4
+            // nudDiscountPrice
             // 
-            this.numericUpDown4.Location = new System.Drawing.Point(149, 544);
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(97, 27);
-            this.numericUpDown4.TabIndex = 28;
+            this.nudDiscountPrice.Location = new System.Drawing.Point(149, 654);
+            this.nudDiscountPrice.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudDiscountPrice.Name = "nudDiscountPrice";
+            this.nudDiscountPrice.Size = new System.Drawing.Size(97, 27);
+            this.nudDiscountPrice.TabIndex = 28;
+            this.nudDiscountPrice.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(23, 500);
+            this.label15.Location = new System.Drawing.Point(23, 610);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(100, 20);
             this.label15.TabIndex = 27;
             this.label15.Text = "Regular price:";
             // 
-            // numericUpDown5
+            // nudRegularPrice
             // 
-            this.numericUpDown5.Location = new System.Drawing.Point(149, 498);
-            this.numericUpDown5.Name = "numericUpDown5";
-            this.numericUpDown5.Size = new System.Drawing.Size(97, 27);
-            this.numericUpDown5.TabIndex = 26;
+            this.nudRegularPrice.Location = new System.Drawing.Point(149, 608);
+            this.nudRegularPrice.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudRegularPrice.Name = "nudRegularPrice";
+            this.nudRegularPrice.Size = new System.Drawing.Size(97, 27);
+            this.nudRegularPrice.TabIndex = 26;
+            this.nudRegularPrice.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(252, 546);
+            this.label16.Location = new System.Drawing.Point(252, 656);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(31, 20);
             this.label16.TabIndex = 31;
@@ -341,150 +394,188 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(252, 500);
+            this.label17.Location = new System.Drawing.Point(252, 610);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(31, 20);
             this.label17.TabIndex = 30;
             this.label17.Text = "KM";
             // 
-            // checkBox1
+            // cbOnSale
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(381, 542);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(80, 24);
-            this.checkBox1.TabIndex = 32;
-            this.checkBox1.Text = "On sale";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.cbOnSale.AutoSize = true;
+            this.cbOnSale.Location = new System.Drawing.Point(381, 652);
+            this.cbOnSale.Name = "cbOnSale";
+            this.cbOnSale.Size = new System.Drawing.Size(80, 24);
+            this.cbOnSale.TabIndex = 32;
+            this.cbOnSale.Text = "On sale";
+            this.cbOnSale.UseVisualStyleBackColor = true;
             // 
-            // comboBox10
+            // cmbState
             // 
-            this.comboBox10.FormattingEnabled = true;
-            this.comboBox10.Location = new System.Drawing.Point(149, 592);
-            this.comboBox10.Name = "comboBox10";
-            this.comboBox10.Size = new System.Drawing.Size(312, 28);
-            this.comboBox10.TabIndex = 34;
+            this.cmbState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbState.FormattingEnabled = true;
+            this.cmbState.Location = new System.Drawing.Point(149, 702);
+            this.cmbState.Name = "cmbState";
+            this.cmbState.Size = new System.Drawing.Size(312, 28);
+            this.cmbState.TabIndex = 34;
+            this.cmbState.Validating += new System.ComponentModel.CancelEventHandler(this.cmbState_Validating);
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(23, 596);
+            this.label18.Location = new System.Drawing.Point(23, 706);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(46, 20);
             this.label18.TabIndex = 33;
             this.label18.Text = "State:";
             // 
-            // pictureBox1
+            // pbImage
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(498, 23);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(400, 400);
-            this.pictureBox1.TabIndex = 35;
-            this.pictureBox1.TabStop = false;
+            this.pbImage.Location = new System.Drawing.Point(498, 23);
+            this.pbImage.Name = "pbImage";
+            this.pbImage.Size = new System.Drawing.Size(350, 467);
+            this.pbImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbImage.TabIndex = 35;
+            this.pbImage.TabStop = false;
             // 
-            // button1
+            // btnUpload
             // 
-            this.button1.Location = new System.Drawing.Point(753, 429);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(145, 29);
-            this.button1.TabIndex = 36;
-            this.button1.Text = "Upload a picture";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnUpload.Location = new System.Drawing.Point(704, 496);
+            this.btnUpload.Name = "btnUpload";
+            this.btnUpload.Size = new System.Drawing.Size(145, 29);
+            this.btnUpload.TabIndex = 36;
+            this.btnUpload.Text = "Upload image";
+            this.btnUpload.UseVisualStyleBackColor = true;
+            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
             // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(498, 453);
+            this.label19.Location = new System.Drawing.Point(498, 529);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(88, 20);
             this.label19.TabIndex = 37;
             this.label19.Text = "Description:";
             // 
-            // textBox2
+            // txtDescription
             // 
-            this.textBox2.Location = new System.Drawing.Point(498, 476);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(400, 90);
-            this.textBox2.TabIndex = 38;
+            this.txtDescription.Location = new System.Drawing.Point(498, 552);
+            this.txtDescription.Multiline = true;
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(351, 124);
+            this.txtDescription.TabIndex = 38;
+            this.txtDescription.Validating += new System.ComponentModel.CancelEventHandler(this.txtDescription_Validating);
             // 
-            // button2
+            // btnCancel
             // 
-            this.button2.Location = new System.Drawing.Point(704, 590);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(94, 29);
-            this.button2.TabIndex = 39;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnCancel.Location = new System.Drawing.Point(654, 697);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(94, 29);
+            this.btnCancel.TabIndex = 39;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // button3
+            // btnSave
             // 
-            this.button3.Location = new System.Drawing.Point(804, 590);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(94, 29);
-            this.button3.TabIndex = 40;
-            this.button3.Text = "Save";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnSave.Location = new System.Drawing.Point(754, 697);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(94, 29);
+            this.btnSave.TabIndex = 40;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // errorProvider
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // clbColors
+            // 
+            this.clbColors.BackColor = System.Drawing.SystemColors.Menu;
+            this.clbColors.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.clbColors.FormattingEnabled = true;
+            this.clbColors.Location = new System.Drawing.Point(149, 457);
+            this.clbColors.Name = "clbColors";
+            this.clbColors.Size = new System.Drawing.Size(312, 132);
+            this.clbColors.TabIndex = 41;
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
+            // 
+            // cmbSpace
+            // 
+            this.cmbSpace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSpace.FormattingEnabled = true;
+            this.cmbSpace.Location = new System.Drawing.Point(149, 70);
+            this.cmbSpace.Name = "cmbSpace";
+            this.cmbSpace.Size = new System.Drawing.Size(312, 28);
+            this.cmbSpace.TabIndex = 3;
+            this.cmbSpace.SelectedIndexChanged += new System.EventHandler(this.cmbSpace_SelectedIndexChanged);
+            this.cmbSpace.Validating += new System.ComponentModel.CancelEventHandler(this.cmbSpace_Validating);
+            // 
+            // imageErrorProvider
+            // 
+            this.imageErrorProvider.ContainerControl = this;
+            // 
             // frmFurnitureItemAddEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(918, 638);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.textBox2);
+            this.ClientSize = new System.Drawing.Size(872, 753);
+            this.Controls.Add(this.clbColors);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.label19);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.comboBox10);
+            this.Controls.Add(this.btnUpload);
+            this.Controls.Add(this.pbImage);
+            this.Controls.Add(this.cmbState);
             this.Controls.Add(this.label18);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.cbOnSale);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label14);
-            this.Controls.Add(this.numericUpDown4);
+            this.Controls.Add(this.nudDiscountPrice);
             this.Controls.Add(this.label15);
-            this.Controls.Add(this.numericUpDown5);
-            this.Controls.Add(this.comboBox8);
+            this.Controls.Add(this.nudRegularPrice);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.comboBox9);
+            this.Controls.Add(this.cmbMaterial);
             this.Controls.Add(this.label13);
-            this.Controls.Add(this.comboBox7);
+            this.Controls.Add(this.cmbMetricUnitW);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.numericUpDown3);
-            this.Controls.Add(this.comboBox6);
+            this.Controls.Add(this.nudWidth);
+            this.Controls.Add(this.cmbMetricUnitH);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.numericUpDown2);
-            this.Controls.Add(this.comboBox5);
+            this.Controls.Add(this.nudHeight);
+            this.Controls.Add(this.cmbMetricUnitISQ);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.comboBox4);
+            this.Controls.Add(this.nudInStockQuantity);
+            this.Controls.Add(this.cmbCollection);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.cmbDesigner);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.cmbCategory);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cmbSpace);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtName);
             this.Controls.Add(this.label1);
             this.Name = "frmFurnitureItemAddEdit";
             this.Text = "Add / Edit Furniture Pieces";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Load += new System.EventHandler(this.frmFurnitureItemAddEdit_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.nudInStockQuantity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudWidth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudDiscountPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRegularPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imageErrorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -493,46 +584,48 @@
         #endregion
 
         private Label label1;
-        private TextBox textBox1;
+        private TextBox txtName;
         private Label label2;
-        private ComboBox comboBox1;
-        private ComboBox comboBox2;
+        private ComboBox cmbCategory;
         private Label label3;
-        private ComboBox comboBox3;
+        private ComboBox cmbDesigner;
         private Label label4;
-        private ComboBox comboBox4;
+        private ComboBox cmbCollection;
         private Label label5;
-        private NumericUpDown numericUpDown1;
+        private NumericUpDown nudInStockQuantity;
         private Label label6;
         private Label label7;
-        private ComboBox comboBox5;
-        private ComboBox comboBox6;
+        private ComboBox cmbMetricUnitISQ;
+        private ComboBox cmbMetricUnitH;
         private Label label8;
         private Label label9;
-        private NumericUpDown numericUpDown2;
-        private ComboBox comboBox7;
+        private NumericUpDown nudHeight;
+        private ComboBox cmbMetricUnitW;
         private Label label10;
         private Label label11;
-        private NumericUpDown numericUpDown3;
-        private ComboBox comboBox8;
+        private NumericUpDown nudWidth;
         private Label label12;
-        private ComboBox comboBox9;
+        private ComboBox cmbMaterial;
         private Label label13;
         private Label label14;
-        private NumericUpDown numericUpDown4;
+        private NumericUpDown nudDiscountPrice;
         private Label label15;
-        private NumericUpDown numericUpDown5;
+        private NumericUpDown nudRegularPrice;
         private Label label16;
         private Label label17;
-        private CheckBox checkBox1;
-        private ComboBox comboBox10;
+        private CheckBox cbOnSale;
+        private ComboBox cmbState;
         private Label label18;
-        private PictureBox pictureBox1;
-        private Button button1;
+        private PictureBox pbImage;
+        private Button btnUpload;
         private Label label19;
-        private TextBox textBox2;
-        private Button button2;
-        private Button button3;
+        private TextBox txtDescription;
+        private Button btnCancel;
+        private Button btnSave;
         private ErrorProvider errorProvider;
+        private CheckedListBox clbColors;
+        private OpenFileDialog openFileDialog;
+        private ComboBox cmbSpace;
+        private ErrorProvider imageErrorProvider;
     }
 }

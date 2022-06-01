@@ -51,6 +51,8 @@ namespace TheComfortZone.SERVICES.CORE.Mapper
                 .ForMember(dto => dto.CollectionName, opts => opts.MapFrom(entity => entity.Collection.Name))
                 .ForMember(dto => dto.Colors, opts => opts.MapFrom(entity => string.Join(", ", entity.FurnitureColors.Select(x => x.Color.Name).ToList())))
                 .ForMember(dto => dto.Material, opts => opts.MapFrom(entity => entity.Material.Name));
+
+            CreateMap<DTO.FurnitureItem.FurnitureItemUpsertRequest, DAO.Model.FurnitureItem>();
         }
     }
 }
