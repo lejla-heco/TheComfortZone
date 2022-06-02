@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using TheComfortZone.DTO.Utils;
 using TheComfortZone.SERVICES.API;
 using TheComfortZone.SERVICES.CORE.Utils;
 using TheComfortZone.SERVICES.DAO;
+using TheComfortZone.SERVICES.DAO.Model;
 
 namespace TheComfortZone.SERVICES.CORE.Implementation
 {
@@ -26,6 +28,11 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             }
             var entities = context.Categories.Where(c => c.SpaceId == id);
             return mapper.Map<List<CategoryResponse>>(entities.ToList());
+        }
+
+        public override IQueryable<Category> IncludeList(IQueryable<Category> query)
+        {
+            return query.Include(c => c.Space);
         }
     }
 }

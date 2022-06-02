@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TheComfortZone.DTO.Utils;
+using TheComfortZone.WINUI.Forms.Category;
 using TheComfortZone.WINUI.Forms.FurnitureItem;
 using TheComfortZone.WINUI.Forms.Order;
 using TheComfortZone.WINUI.Forms.Space;
@@ -128,6 +129,12 @@ namespace TheComfortZone.WINUI.Forms
         private void spacesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmSpace frm = new frmSpace();
+            OpenForm(frm);
+        }
+
+        private void categoriesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCategory frm = new frmCategory();
             OpenForm(frm);
         }
     }

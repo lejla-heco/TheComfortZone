@@ -12,5 +12,6 @@ namespace TheComfortZone.DTO.Category
         public int SpaceId { get; set; }
         public string Description { get; set; }
         public virtual SpaceResponse Space { get; set; }
+        public string SpaceName => Space?.Name;
     }
 }

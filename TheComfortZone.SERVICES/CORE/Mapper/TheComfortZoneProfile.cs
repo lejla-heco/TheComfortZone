@@ -25,6 +25,7 @@ namespace TheComfortZone.SERVICES.CORE.Mapper
 
             /** CATEGORY **/
             CreateMap<DAO.Model.Category, DTO.Category.CategoryResponse>();
+            CreateMap<DTO.Category.CategoryUpsertRequest, DAO.Model.Category>();
 
             /** DESIGNER **/
             CreateMap<DAO.Model.Designer, DTO.Designer.DesignerResponse>();
