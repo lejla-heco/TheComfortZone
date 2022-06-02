@@ -36,7 +36,7 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             if (entity != null)
             {
                 mapper.Map(update, entity);
-                BeforeUpdate(id, update);
+                BeforeUpdate(entity, update);
             }
             else
             {
@@ -47,7 +47,7 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             return mapper.Map<T>(entity);
         }
 
-        public virtual void BeforeUpdate(int id, TUpdate update)
+        public virtual void BeforeUpdate(TDb entity, TUpdate update)
         {
 
         }

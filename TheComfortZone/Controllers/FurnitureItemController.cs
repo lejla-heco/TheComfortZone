@@ -12,15 +12,23 @@ namespace TheComfortZone.Controllers
         {
             furnitureItemService = service;
         }
+
         [Authorize(Roles = "Administrator,Employee")]
         public override FurnitureItemResponse Insert([FromBody] FurnitureItemUpsertRequest insert)
         {
             return base.Insert(insert);
         }
+
         [Authorize(Roles = "Administrator,Employee")]
         public override FurnitureItemResponse Update(int id, [FromBody] FurnitureItemUpsertRequest update)
         {
             return base.Update(id, update);
+        }
+
+        [Authorize(Roles = "Administrator,Employee")]
+        public override string Delete(int id)
+        {
+            return base.Delete(id);
         }
     }
 }

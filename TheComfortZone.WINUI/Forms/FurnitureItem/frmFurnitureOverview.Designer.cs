@@ -88,6 +88,7 @@
             this.dgvFurnitureItems.Size = new System.Drawing.Size(896, 338);
             this.dgvFurnitureItems.TabIndex = 0;
             this.dgvFurnitureItems.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFurnitureItems_CellClick);
+            this.dgvFurnitureItems.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFurnitureItems_CellDoubleClick);
             // 
             // FurnitureName
             // 

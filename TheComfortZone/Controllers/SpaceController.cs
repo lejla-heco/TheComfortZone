@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TheComfortZone.DTO.Space;
 using TheComfortZone.DTO.Utils;
 using TheComfortZone.SERVICES.API;
@@ -12,6 +13,18 @@ namespace TheComfortZone.Controllers
         public SpaceController(ISpaceService service) : base(service)
         {
             spaceService = service;
+        }
+
+        [Authorize(Roles = "Administrator,Employee")]
+        public override SpaceResponse Insert([FromBody] SpaceUpsertRequest insert)
+        {
+            return base.Insert(insert);
+        }
+
+        [Authorize(Roles = "Administrator,Employee")]
+        public override SpaceResponse Update(int id, [FromBody] SpaceUpsertRequest update)
+        {
+            return base.Update(id, update);
         }
 
         [HttpGet("spaces-with-categories")]

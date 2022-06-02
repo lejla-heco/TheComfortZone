@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TheComfortZone.DTO.FurnitureItem;
 using TheComfortZone.WINUI.Service;
 
 namespace TheComfortZone.WINUI.Forms.FurnitureItem
@@ -67,6 +68,16 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
 
             selectedRow = null;
             btnDelete.Enabled = false;
+        }
+
+        private void dgvFurnitureItems_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var selectedItem = dgvFurnitureItems.SelectedRows[0].DataBoundItem as FurnitureItemResponse;
+            frmFurnitureItemAddEdit frm = new frmFurnitureItemAddEdit(selectedItem);
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                getGridData();
+            }
         }
     }
 }

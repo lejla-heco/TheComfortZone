@@ -36,26 +36,29 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
             design = this.furnitureItem == null ? false : true;
         }
 
-        private void frmFurnitureItemAddEdit_Load(object sender, EventArgs e)
+        private async void frmFurnitureItemAddEdit_Load(object sender, EventArgs e)
         {
-            loadSpaces();
-            loadDesigners();
-            loadMetricUnits();
-            loadMaterials();
-            loadColors();
+            await loadSpaces();
+            await loadDesigners();
+            await loadMetricUnits();
+            await loadMaterials();
+            await loadColors();
             loadStates();
+
+            if (design)
+                loadItemData();
         }
 
-        private async void loadSpaces()
+        private async Task loadSpaces()
         {
             var spaces = await spaceAPIService.GetSpacesWithCateroryData();
-            if (spaces.Count != 0) loadCategories(spaces[0].SpaceId);
             cmbSpace.DataSource = spaces;
             cmbSpace.DisplayMember = "Name";
             cmbSpace.ValueMember = "SpaceId";
+            if (spaces.Count != 0) await loadCategories(spaces[0].SpaceId);
         }
 
-        private async void loadCategories(int spaceId)
+        private async Task loadCategories(int spaceId)
         {
             var categories = await categoryAPIService.GetCategoriesBySpaceId(spaceId);
             cmbCategory.DataSource = categories;
@@ -63,16 +66,16 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
             cmbCategory.ValueMember = "CategoryId";
         }
 
-        private async void loadDesigners()
+        private async Task loadDesigners()
         {
             var designers = await designerAPIService.GetDesignersWithCollectionData();
-            if (designers.Count != 0) loadCollections(designers[0].DesignerId);
             cmbDesigner.DataSource = designers;
             cmbDesigner.DisplayMember = "Name";
             cmbDesigner.ValueMember = "DesignerId";
+            if (designers.Count != 0) await loadCollections(designers[0].DesignerId);
         }
 
-        private async void loadCollections(int designerId)
+        private async Task loadCollections(int designerId)
         {
             var collections = await collectionAPIService.GetCollectionsByDesignerId(designerId);
             cmbCollection.DataSource = collections;
@@ -80,19 +83,19 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
             cmbCollection.ValueMember = "CollectionId";
         }
 
-        private void cmbSpace_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cmbSpace_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbSpace.SelectedIndex != -1 && int.TryParse(cmbSpace.SelectedValue.ToString(), out int spaceId))
             {
-                loadCategories(spaceId);
+                await loadCategories(spaceId);
             }
         }
 
-        private void cmbDesigner_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cmbDesigner_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbDesigner.SelectedIndex <= -1 && int.TryParse(cmbDesigner.SelectedValue.ToString(), out int designerId))
+            if (cmbDesigner.SelectedIndex != -1 && int.TryParse(cmbDesigner.SelectedValue.ToString(), out int designerId))
             {
-                    loadCollections(designerId);
+                await loadCollections(designerId);
             }
         }
 
@@ -104,33 +107,33 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
             comboBox.ValueMember = valueMember;
         }
 
-        private async void loadMetricUnitsISQ()
+        private async Task loadMetricUnitsISQ()
         {
             var metricUnits = await metricUnitAPIService.Get();
             loadComboBoxMetricUnitData(cmbMetricUnitISQ, metricUnits, "Name", "MetricUnitId");
         }
 
-        private async void loadMetricUnitsH()
+        private async Task loadMetricUnitsH()
         {
             var metricUnits = await metricUnitAPIService.Get();
             loadComboBoxMetricUnitData(cmbMetricUnitH, metricUnits, "Name", "MetricUnitId");
         }
 
-        private async void loadMetricUnitsW()
+        private async Task loadMetricUnitsW()
         {
             var metricUnits = await metricUnitAPIService.Get();
             loadComboBoxMetricUnitData(cmbMetricUnitW, metricUnits, "Name", "MetricUnitId");
         }
 
-        private async void loadMetricUnits()
+        private async Task loadMetricUnits()
         {
             var metricUnits = await metricUnitAPIService.Get();
-            loadMetricUnitsISQ();
-            loadMetricUnitsH();
-            loadMetricUnitsW();
+            await loadMetricUnitsISQ();
+            await loadMetricUnitsH();
+            await loadMetricUnitsW();
         }
 
-        private async void loadMaterials()
+        private async Task loadMaterials()
         {
             var materials = await materialAPIService.Get();
             cmbMaterial.DataSource = materials;
@@ -138,7 +141,7 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
             cmbMaterial.ValueMember = "MaterialId";
         }
 
-        private async void loadColors()
+        private async Task loadColors()
         {
             var colors = await colorAPIService.Get();
             clbColors.DataSource = colors;
@@ -171,6 +174,44 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
             }
         }
 
+        private void loadItemData()
+        {
+            txtName.Text = furnitureItem.Name;
+            cmbSpace.SelectedIndex = ((List<DTO.Space.SpaceResponse>)cmbSpace.DataSource).FindIndex(s => s.SpaceId == furnitureItem.SpaceId);
+            cmbCategory.SelectedIndex = ((List<DTO.Category.CategoryResponse>)cmbCategory.DataSource).FindIndex(c => c.CategoryId == furnitureItem.CategoryId);
+            cmbDesigner.SelectedIndex = ((List<DTO.Designer.DesignerResponse>)cmbDesigner.DataSource).FindIndex(d => d.DesignerId == furnitureItem.DesignerId);
+            cmbCollection.SelectedIndex = ((List<DTO.Collection.CollectionResponse>)cmbCollection.DataSource).FindIndex(c => c.CollectionId == furnitureItem.CollectionId);
+            nudInStockQuantity.Value = furnitureItem.InStockQuantity;
+            cmbMetricUnitISQ.SelectedIndex = ((List<DTO.MetricUnit.MetricUnitResponse>)cmbMetricUnitISQ.DataSource).FindIndex(m => m.MetricUnitId == furnitureItem.MetricUnitId);
+
+            var heightData = furnitureItem.Height.Split(' ');
+            var widthData = furnitureItem.Width.Split(' ');
+
+            nudHeight.Value = int.Parse(heightData[0]);
+            nudWidth.Value = int.Parse(widthData[0]);
+
+            cmbMetricUnitH.SelectedIndex = cmbMetricUnitH.FindStringExact(heightData[1]);
+            cmbMetricUnitW.SelectedIndex = cmbMetricUnitW.FindStringExact(widthData[1]);
+
+            cmbMaterial.SelectedIndex =((List<DTO.Material.MaterialResponse>)cmbMaterial.DataSource).FindIndex(m => m.MaterialId == furnitureItem.MaterialId);
+
+            var colors = clbColors.Items.Cast<DTO.Color.ColorResponse>().ToList();
+            for (int i = 0; i < colors.Count; i++) 
+            {
+                if (furnitureItem.Colors.Contains(colors[i].Name))
+                {
+                    clbColors.SetItemChecked(i, true);
+                }
+            }
+
+            nudRegularPrice.Value = (decimal)furnitureItem.RegularPrice;
+            nudDiscountPrice.Value = (decimal)furnitureItem.DiscountPrice;
+            cbOnSale.Checked = furnitureItem.OnSale ?? false;
+            cmbState.SelectedIndex = cmbState.FindStringExact(furnitureItem.State);
+            txtDescription.Text = furnitureItem.Description;
+            pbImage.Image = ImageHelper.FromByteToImage(furnitureItem.Image);
+        }
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();
@@ -199,6 +240,12 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
                 if (!design)
                 {
                     await furnitureItemAPIService.Post(insert);
+                    DialogResult = DialogResult.OK;
+                }
+                if (design)
+                {
+                    await furnitureItemAPIService.Put(furnitureItem.FurnitureItemId, insert);
+                    MessageBox.Show("Successfully updated furniture item!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     DialogResult = DialogResult.OK;
                 }
             }

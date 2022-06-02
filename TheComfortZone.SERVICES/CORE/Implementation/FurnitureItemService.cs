@@ -49,6 +49,23 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             base.BeforeInsert(insert, entity);
         }
 
+        public override void BeforeUpdate(FurnitureItem entity, FurnitureItemUpsertRequest update)
+        {
+            if (update?.ColorIdList != null)
+            {
+                var colors = context.FurnitureColors.Where(fc => fc.FurnitureItemId == entity.FurnitureItemId).ToList();
+                context.RemoveRange(colors);
+
+                foreach (int colorId in update.ColorIdList)
+                {
+                    DAO.Model.FurnitureColor furnitureColor = new DAO.Model.FurnitureColor();
+                    furnitureColor.FurnitureItemId = entity.FurnitureItemId;
+                    furnitureColor.ColorId = colorId;
+                    context.FurnitureColors.Add(furnitureColor);
+                }
+            }
+        }
+
         public override void BeforeDelete(int id)
         {
             List<DAO.Model.FurnitureColor> furnitureColors = context.FurnitureColors.Where(fc => fc.FurnitureItemId == id).ToList();

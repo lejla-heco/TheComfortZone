@@ -35,6 +35,8 @@ namespace TheComfortZone.DTO.FurnitureItem
         public string DesignerName { get; set; }
         public string Colors { get; set; }
         public string Material { get; set; }
+        public int SpaceId { get; set; }
+        public int DesignerId { get; set; }
 
         /** RELATIONSHIPS **/
         public virtual MetricUnitResponse MetricUnit { get; set; }

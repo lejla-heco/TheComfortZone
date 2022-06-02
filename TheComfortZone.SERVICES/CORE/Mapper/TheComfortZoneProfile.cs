@@ -50,7 +50,9 @@ namespace TheComfortZone.SERVICES.CORE.Mapper
                 .ForMember(dto => dto.SpaceName, opts => opts.MapFrom(entity => entity.Category.Space.Name))
                 .ForMember(dto => dto.CollectionName, opts => opts.MapFrom(entity => entity.Collection.Name))
                 .ForMember(dto => dto.Colors, opts => opts.MapFrom(entity => string.Join(", ", entity.FurnitureColors.Select(x => x.Color.Name).ToList())))
-                .ForMember(dto => dto.Material, opts => opts.MapFrom(entity => entity.Material.Name));
+                .ForMember(dto => dto.Material, opts => opts.MapFrom(entity => entity.Material.Name))
+                .ForMember(dto => dto.SpaceId, opts => opts.MapFrom(entity => entity.Category.SpaceId))
+                .ForMember(dto => dto.DesignerId, opts => opts.MapFrom(entity => entity.Collection.DesignerId));
 
             CreateMap<DTO.FurnitureItem.FurnitureItemUpsertRequest, DAO.Model.FurnitureItem>();
         }
