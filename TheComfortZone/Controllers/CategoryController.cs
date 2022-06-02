@@ -27,7 +27,6 @@ namespace TheComfortZone.Controllers
         }
 
         [HttpGet("categories-by-space-id/{id}")]
-        [Authorize]
         public async Task<List<DTO.Category.CategoryResponse>> GetCategoriesBySpaceId(int id)
         {
             return await categoryService.GetCategoriesBySpaceId(id);

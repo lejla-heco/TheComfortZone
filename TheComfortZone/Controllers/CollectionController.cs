@@ -28,7 +28,6 @@ namespace TheComfortZone.Controllers
         }
 
         [HttpGet("collections-by-designer-id/{id}")]
-        [Authorize]
         public async Task<List<DTO.Collection.CollectionResponse>> GetCollectionsByDesignerId(int id)
         {
             return await collectionService.GetCollectionsByDesignerId(id);

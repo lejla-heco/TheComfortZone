@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using TheComfortZone.DTO.Utils;
 using TheComfortZone.WINUI.Forms.FurnitureItem;
 using TheComfortZone.WINUI.Forms.Order;
+using TheComfortZone.WINUI.Forms.Space;
 using TheComfortZone.WINUI.Properties;
 
 namespace TheComfortZone.WINUI.Forms
@@ -121,6 +122,12 @@ namespace TheComfortZone.WINUI.Forms
         private void ordersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmOrdersOverview frm = new frmOrdersOverview();
+            OpenForm(frm);
+        }
+
+        private void spacesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmSpace frm = new frmSpace();
             OpenForm(frm);
         }
     }

@@ -21,6 +21,7 @@ namespace TheComfortZone.SERVICES.CORE.Mapper
 
             /** SPACE **/
             CreateMap<DAO.Model.Space, DTO.Space.SpaceResponse>();
+            CreateMap<DTO.Space.SpaceUpsertRequest, DAO.Model.Space>(); 
 
             /** CATEGORY **/
             CreateMap<DAO.Model.Category, DTO.Category.CategoryResponse>();
@@ -30,6 +31,7 @@ namespace TheComfortZone.SERVICES.CORE.Mapper
 
             /** COLLECTION **/
             CreateMap<DAO.Model.Collection, DTO.Collection.CollectionResponse>();
+            CreateMap<DTO.Collection.CollectionUpsertRequest, DAO.Model.Collection>();
 
             /** MATERIAL **/
             CreateMap<DAO.Model.Material, DTO.Material.MaterialResponse>();

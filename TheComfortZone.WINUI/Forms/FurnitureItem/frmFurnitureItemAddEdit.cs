@@ -220,31 +220,31 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
         private async void btnSave_Click(object sender, EventArgs e)
         {
             if (ValidateChildren() && ImageHelper.ValidateImage(pbImage, imageErrorProvider)) {
-                FurnitureItemUpsertRequest insert = new FurnitureItemUpsertRequest();
-                insert.Name = txtName.Text;
-                insert.CategoryId = (cmbCategory.SelectedItem as DTO.Category.CategoryResponse).CategoryId;
-                insert.CollectionId = (cmbCollection.SelectedItem as DTO.Collection.CollectionResponse).CollectionId;
-                insert.MaterialId = (cmbMaterial.SelectedItem as DTO.Material.MaterialResponse).MaterialId;
-                insert.RegularPrice = int.Parse(nudRegularPrice.Value.ToString());
-                insert.DiscountPrice = int.Parse(nudDiscountPrice.Value.ToString());
-                insert.OnSale = cbOnSale.Checked;
-                insert.Image = ImageHelper.FromImageToByte(pbImage.Image);
-                insert.State = cmbState.SelectedValue.ToString();
-                insert.Description = txtDescription.Text;
-                insert.MetricUnitId = (cmbMetricUnitISQ.SelectedItem as DTO.MetricUnit.MetricUnitResponse).MetricUnitId;
-                insert.InStockQuantity = int.Parse(nudInStockQuantity.Value.ToString());
-                insert.Height = $"{nudHeight.Value} {cmbMetricUnitH.Text}";
-                insert.Width = $"{nudWidth.Value} {cmbMetricUnitW.Text}";
-                insert.ColorIdList = clbColors.CheckedItems.Cast<DTO.Color.ColorResponse>().ToList().Select(x => x.ColorId).ToList();
+                FurnitureItemUpsertRequest upsert = new FurnitureItemUpsertRequest();
+                upsert.Name = txtName.Text;
+                upsert.CategoryId = (cmbCategory.SelectedItem as DTO.Category.CategoryResponse).CategoryId;
+                upsert.CollectionId = (cmbCollection.SelectedItem as DTO.Collection.CollectionResponse).CollectionId;
+                upsert.MaterialId = (cmbMaterial.SelectedItem as DTO.Material.MaterialResponse).MaterialId;
+                upsert.RegularPrice = int.Parse(nudRegularPrice.Value.ToString());
+                upsert.DiscountPrice = int.Parse(nudDiscountPrice.Value.ToString());
+                upsert.OnSale = cbOnSale.Checked;
+                upsert.Image = ImageHelper.FromImageToByte(pbImage.Image);
+                upsert.State = cmbState.SelectedValue.ToString();
+                upsert.Description = txtDescription.Text;
+                upsert.MetricUnitId = (cmbMetricUnitISQ.SelectedItem as DTO.MetricUnit.MetricUnitResponse).MetricUnitId;
+                upsert.InStockQuantity = int.Parse(nudInStockQuantity.Value.ToString());
+                upsert.Height = $"{nudHeight.Value} {cmbMetricUnitH.Text}";
+                upsert.Width = $"{nudWidth.Value} {cmbMetricUnitW.Text}";
+                upsert.ColorIdList = clbColors.CheckedItems.Cast<DTO.Color.ColorResponse>().ToList().Select(x => x.ColorId).ToList();
 
                 if (!design)
                 {
-                    await furnitureItemAPIService.Post(insert);
+                    await furnitureItemAPIService.Post(upsert);
                     DialogResult = DialogResult.OK;
                 }
                 if (design)
                 {
-                    await furnitureItemAPIService.Put(furnitureItem.FurnitureItemId, insert);
+                    await furnitureItemAPIService.Put(furnitureItem.FurnitureItemId, upsert);
                     MessageBox.Show("Successfully updated furniture item!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     DialogResult = DialogResult.OK;
                 }

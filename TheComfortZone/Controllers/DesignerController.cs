@@ -28,7 +28,6 @@ namespace TheComfortZone.Controllers
         }
 
         [HttpGet("designers-with-collections")]
-        [Authorize]
         public async Task<List<DTO.Designer.DesignerResponse>> GetDesignersWithCollectionData()
         {
             return await designerService.GetDesignersWithCollectionData();

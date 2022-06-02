@@ -66,15 +66,8 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
 
         private async Task getGridData(DTO.FurnitureItem.FurnitureItemSearchRequest searchRequest = null)
         {
-            try
-            {
-                var furnitureItems = await furnitureItemAPIService.Get(searchRequest);
-                dgvFurnitureItems.DataSource = furnitureItems;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Can't display furniture items!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            var furnitureItems = await furnitureItemAPIService.Get(searchRequest);
+            dgvFurnitureItems.DataSource = furnitureItems;
         }
 
         private void btnNewItem_Click(object sender, EventArgs e)
@@ -95,7 +88,7 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
         private async void btnDelete_Click(object sender, EventArgs e)
         {
             var confirmation = MessageBox.Show("Are you sure you want to delete selected item?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            
+
             if (selectedRow != null && confirmation == DialogResult.Yes)
             {
                 string response = await furnitureItemAPIService.Delete(selectedRow.FurnitureItemId);
