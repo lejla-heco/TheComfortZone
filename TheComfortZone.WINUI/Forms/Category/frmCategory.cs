@@ -68,15 +68,17 @@ namespace TheComfortZone.WINUI.Forms.Category
                 upsert.SpaceId = ((DTO.Space.SpaceResponse)cmbSpace.SelectedItem).SpaceId;
                 if (!design)
                 {
-                    await categoryAPIService.Post(upsert);
+                    var response = await categoryAPIService.Post(upsert);
                     await getGridData();
-                    MessageBox.Show("Successfully added data!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (response != null)
+                        MessageBox.Show("Successfully added data!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 if (design)
                 {
-                    await categoryAPIService.Put(selectedRow.CategoryId, upsert);
+                    var response = await categoryAPIService.Put(selectedRow.CategoryId, upsert);
                     await getGridData();
-                    MessageBox.Show("Successfully updated data!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (response != null)
+                        MessageBox.Show("Successfully updated data!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 clearForm();
             }

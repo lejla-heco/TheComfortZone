@@ -80,15 +80,17 @@ namespace TheComfortZone.WINUI.Forms.Space
                 upsert.Image = ImageHelper.FromImageToByte(pbImage.Image);
                 if (!design)
                 {
-                    await spaceAPIService.Post(upsert);
+                    var response = await spaceAPIService.Post(upsert);
                     await getGridData();
-                    MessageBox.Show("Successfully added data!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (response != null)
+                        MessageBox.Show("Successfully added data!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 if (design)
                 {
-                    await spaceAPIService.Put(selectedRow.SpaceId, upsert);
+                    var response = await spaceAPIService.Put(selectedRow.SpaceId, upsert);
                     await getGridData();
-                    MessageBox.Show("Successfully updated data!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (response != null)
+                        MessageBox.Show("Successfully updated data!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 clearForm();
             }  
