@@ -27,7 +27,7 @@ namespace TheComfortZone.WINUI.Forms
             StartPosition = FormStartPosition.CenterScreen;
 
             string userRole = Settings.Default.LoggedInUserType;
-            if(userRole != null)
+            if (userRole != null)
             {
                 switch (userRole)
                 {
@@ -68,18 +68,18 @@ namespace TheComfortZone.WINUI.Forms
                 switch (LoggedInUserType.Value)
                 {
                     case UserType.Administrator:
-                        administrationToolStripMenuItem.Visible=true;
-                        employeesToolStripMenuItem.Visible=true;
-                        designersToolStripMenuItem.Visible=true;
-                        collectionsToolStripMenuItem.Visible=true;
-                        unitsOfMeasurementToolStripMenuItem.Visible=true;
-                        furnitureOverviewToolStripMenuItem.Visible=true;
+                        administrationToolStripMenuItem.Visible = true;
+                        employeesToolStripMenuItem.Visible = true;
+                        designersToolStripMenuItem.Visible = true;
+                        collectionsToolStripMenuItem.Visible = true;
+                        unitsOfMeasurementToolStripMenuItem.Visible = true;
+                        furnitureOverviewToolStripMenuItem.Visible = true;
                         spacesToolStripMenuItem.Visible = true;
-                        categoriesToolStripMenuItem.Visible=true;
+                        categoriesToolStripMenuItem.Visible = true;
                         ordersToolStripMenuItem.Visible = true;
-                        appointmentsToolStripMenuItem.Visible=true;
-                        discountCouponsToolStripMenuItem.Visible=true;
-                        reportsToolStripMenuItem.Visible=true;
+                        appointmentsToolStripMenuItem.Visible = true;
+                        discountCouponsToolStripMenuItem.Visible = true;
+                        reportsToolStripMenuItem.Visible = true;
                         break;
                     case UserType.Employee:
                         furnitureOverviewToolStripMenuItem.Visible = true;
@@ -150,6 +150,12 @@ namespace TheComfortZone.WINUI.Forms
         {
             frmCollection frm = new frmCollection();
             OpenForm(frm);
+        }
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to log out?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                Application.Restart();
         }
     }
 }

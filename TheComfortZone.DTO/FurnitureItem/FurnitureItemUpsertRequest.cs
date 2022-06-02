@@ -16,8 +16,10 @@ namespace TheComfortZone.DTO.FurnitureItem
         [Required]
         public int MaterialId { get; set; }
         [Required]
+        [Range(1, 2500)]
         public float RegularPrice { get; set; }
         [Required]
+        [Range(1, 2500)]
         public float DiscountPrice { get; set; }
         public bool? OnSale { get; set; }
         [Required]
@@ -30,6 +32,7 @@ namespace TheComfortZone.DTO.FurnitureItem
         [Required]
         public int MetricUnitId { get; set; }
         [Required]
+        [Range(1, 100)]
         public int InStockQuantity { get; set; }
         [Required]
         public string Height { get; set; }
