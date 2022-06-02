@@ -25,8 +25,8 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
         {
             IQueryable<TDb> query = context.Set<TDb>().AsQueryable();
 
-            query = AddFilter(query, search);
             query = IncludeList(query);
+            query = AddFilter(query, search);
 
             if (search?.Page.HasValue == true && search?.PageSize.HasValue == true)
             {

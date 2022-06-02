@@ -27,6 +27,19 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             return base.IncludeList(query);
         }
 
+        public override IQueryable<FurnitureItem> AddFilter(IQueryable<FurnitureItem> query, FurnitureItemSearchRequest search = null)
+        {
+
+            if (!string.IsNullOrWhiteSpace(search?.Name))
+                query = query.Where(x => x.Name.StartsWith(search.Name));
+            if (search?.CategoryId.HasValue == true)
+                query = query.Where(x => x.CategoryId == search.CategoryId);
+            if (!string.IsNullOrWhiteSpace(search?.State))
+                query = query.Where(x => x.State == search.State);
+
+            return query;
+        }
+
         public override FurnitureItemResponse Insert(FurnitureItemUpsertRequest insert)
         {
             var entity = base.Insert(insert);

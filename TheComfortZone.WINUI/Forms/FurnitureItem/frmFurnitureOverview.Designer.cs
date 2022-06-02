@@ -50,6 +50,7 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnClearFields = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFurnitureItems)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -165,6 +166,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnClearFields);
             this.groupBox1.Controls.Add(this.btnNewItem);
             this.groupBox1.Controls.Add(this.cmbState);
             this.groupBox1.Controls.Add(this.label1);
@@ -194,6 +196,7 @@
             // 
             // cmbState
             // 
+            this.cmbState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbState.FormattingEnabled = true;
             this.cmbState.Location = new System.Drawing.Point(681, 92);
             this.cmbState.Name = "cmbState";
@@ -211,6 +214,7 @@
             // 
             // cmbCategory
             // 
+            this.cmbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCategory.FormattingEnabled = true;
             this.cmbCategory.Location = new System.Drawing.Point(390, 92);
             this.cmbCategory.Name = "cmbCategory";
@@ -226,11 +230,13 @@
             // 
             // cmbSpace
             // 
+            this.cmbSpace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSpace.FormattingEnabled = true;
             this.cmbSpace.Location = new System.Drawing.Point(73, 92);
             this.cmbSpace.Name = "cmbSpace";
             this.cmbSpace.Size = new System.Drawing.Size(213, 28);
             this.cmbSpace.TabIndex = 8;
+            this.cmbSpace.SelectedIndexChanged += new System.EventHandler(this.cmbSpace_SelectedIndexChanged);
             // 
             // btnSearch
             // 
@@ -240,6 +246,7 @@
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // label4
             // 
@@ -278,6 +285,16 @@
             this.label2.Size = new System.Drawing.Size(52, 20);
             this.label2.TabIndex = 5;
             this.label2.Text = "Space:";
+            // 
+            // btnClearFields
+            // 
+            this.btnClearFields.Location = new System.Drawing.Point(418, 39);
+            this.btnClearFields.Name = "btnClearFields";
+            this.btnClearFields.Size = new System.Drawing.Size(94, 29);
+            this.btnClearFields.TabIndex = 11;
+            this.btnClearFields.Text = "Clear fields";
+            this.btnClearFields.UseVisualStyleBackColor = true;
+            this.btnClearFields.Click += new System.EventHandler(this.btnClearFields_Click);
             // 
             // frmFurnitureOverview
             // 
@@ -321,5 +338,6 @@
         private DataGridViewTextBoxColumn Color;
         private DataGridViewTextBoxColumn Price;
         private DataGridViewCheckBoxColumn OnSale;
+        private Button btnClearFields;
     }
 }

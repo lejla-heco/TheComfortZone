@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TheComfortZone.DTO.FurnitureItem;
+using TheComfortZone.DTO.Utils;
 using TheComfortZone.WINUI.Service;
 
 namespace TheComfortZone.WINUI.Forms.FurnitureItem
@@ -15,6 +16,9 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
     public partial class frmFurnitureOverview : Form
     {
         FurnitureItemAPIService furnitureItemAPIService = new FurnitureItemAPIService();
+        SpaceAPIService spaceAPIService = new SpaceAPIService();
+        CategoryAPIService categoryAPIService = new CategoryAPIService();
+
         private DTO.FurnitureItem.FurnitureItemResponse selectedRow = null;
         public frmFurnitureOverview()
         {
@@ -24,14 +28,47 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
 
         private async void frmFurnitureOverview_Load(object sender, EventArgs e)
         {
-            getGridData();
+            await loadSpaces();
+            loadStates();
+
+            await getGridData();
+        }
+        private async Task loadSpaces()
+        {
+            var spaces = await spaceAPIService.GetSpacesWithCateroryData();
+            cmbSpace.DataSource = spaces;
+            cmbSpace.DisplayMember = "Name";
+            cmbSpace.ValueMember = "SpaceId";
+            cmbSpace.SelectedIndex = -1;
         }
 
-        private async void getGridData()
+        private async Task loadCategories(int spaceId)
+        {
+            var categories = await categoryAPIService.GetCategoriesBySpaceId(spaceId);
+            cmbCategory.DataSource = categories;
+            cmbCategory.DisplayMember = "Name";
+            cmbCategory.ValueMember = "CategoryId";
+        }
+
+        private void loadStates()
+        {
+            cmbState.DataSource = Enum.GetValues(typeof(StateEnum));
+            cmbState.SelectedIndex = -1;
+        }
+
+        private async void cmbSpace_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbSpace.SelectedIndex != -1 && int.TryParse(cmbSpace.SelectedValue?.ToString(), out int spaceId))
+            {
+                await loadCategories(spaceId);
+            }
+        }
+
+        private async Task getGridData(DTO.FurnitureItem.FurnitureItemSearchRequest searchRequest = null)
         {
             try
             {
-                var furnitureItems = await furnitureItemAPIService.Get();
+                var furnitureItems = await furnitureItemAPIService.Get(searchRequest);
                 dgvFurnitureItems.DataSource = furnitureItems;
             }
             catch (Exception ex)
@@ -78,6 +115,24 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
             {
                 getGridData();
             }
+        }
+
+        private async void btnSearch_Click(object sender, EventArgs e)
+        {
+            FurnitureItemSearchRequest searchRequest = new FurnitureItemSearchRequest();
+            searchRequest.Name = txtName.Text;
+            searchRequest.CategoryId = ((DTO.Category.CategoryResponse)cmbCategory.SelectedItem)?.CategoryId;
+            searchRequest.State = cmbState.SelectedIndex == -1 ? null : cmbState.Text;
+
+            await getGridData(searchRequest);
+        }
+
+        private void btnClearFields_Click(object sender, EventArgs e)
+        {
+            txtName.Text = null;
+            cmbSpace.SelectedIndex = -1;
+            cmbCategory.DataSource = null;
+            cmbState.SelectedIndex = -1;
         }
     }
 }
