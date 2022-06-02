@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TheComfortZone.DTO.Utils;
 using TheComfortZone.WINUI.Forms.Category;
+using TheComfortZone.WINUI.Forms.Collection;
 using TheComfortZone.WINUI.Forms.Designer;
 using TheComfortZone.WINUI.Forms.FurnitureItem;
 using TheComfortZone.WINUI.Forms.Order;
@@ -142,6 +143,12 @@ namespace TheComfortZone.WINUI.Forms
         private void designersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmDesigner frm = new frmDesigner();
+            OpenForm(frm);
+        }
+
+        private void collectionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCollection frm = new frmCollection();
             OpenForm(frm);
         }
     }

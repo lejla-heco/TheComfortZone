@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using TheComfortZone.DTO.Utils;
 using TheComfortZone.SERVICES.API;
 using TheComfortZone.SERVICES.CORE.Utils;
 using TheComfortZone.SERVICES.DAO;
+using TheComfortZone.SERVICES.DAO.Model;
 
 namespace TheComfortZone.SERVICES.CORE.Implementation
 {
@@ -16,6 +18,11 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
     {
         public CollectionService(TheComfortZoneContext context, IMapper mapper) : base(context, mapper)
         {
+        }
+
+        public override IQueryable<Collection> IncludeList(IQueryable<Collection> query)
+        {
+            return query.Include(c => c.Designer);
         }
 
         public async Task<List<CollectionResponse>> GetCollectionsByDesignerId(int id)

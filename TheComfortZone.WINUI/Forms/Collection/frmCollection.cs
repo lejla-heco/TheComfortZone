@@ -7,75 +7,74 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TheComfortZone.DTO.Category;
+using TheComfortZone.DTO.Collection;
 using TheComfortZone.WINUI.Service;
 
-namespace TheComfortZone.WINUI.Forms.Category
+namespace TheComfortZone.WINUI.Forms.Collection
 {
-    public partial class frmCategory : Form
+    public partial class frmCollection : Form
     {
-        SpaceAPIService spaceAPIService = new SpaceAPIService();
-        CategoryAPIService categoryAPIService = new CategoryAPIService();
-        private DTO.Category.CategoryResponse? selectedRow;
+        DesignerAPIService designerAPIService = new DesignerAPIService();
+        CollectionAPIService collectionAPIService = new CollectionAPIService();
+        private DTO.Collection.CollectionResponse? selectedRow;
         private bool design = false;
-
-        public frmCategory()
+        public frmCollection()
         {
             InitializeComponent();
-            dgvCategories.AutoGenerateColumns = false;
+            dgvCollections.AutoGenerateColumns = false;
         }
 
-        private async void frmCategory_Load(object sender, EventArgs e)
+        private async void frmCollection_Load(object sender, EventArgs e)
         {
             await getGridData();
-            await loadSpaces();
+            await loadDesigners();
         }
 
-        private async Task loadSpaces()
+        private async Task loadDesigners()
         {
-            var spaces = await spaceAPIService.Get();
-            cmbSpace.DataSource = spaces;
-            cmbSpace.DisplayMember = "Name";
-            cmbSpace.ValueMember = "SpaceId";
+            var designers = await designerAPIService.Get();
+            cmbDesigner.DataSource = designers;
+            cmbDesigner.DisplayMember = "Name";
+            cmbDesigner.ValueMember = "DesignerId";
         }
 
         private async Task getGridData()
         {
-            var categories = await categoryAPIService.Get();
-            dgvCategories.DataSource = categories;
+            var collections = await collectionAPIService.Get();
+            dgvCollections.DataSource = collections;
         }
 
-        private void dgvCategories_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvCollections_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            selectedRow = dgvCategories.SelectedRows[0].DataBoundItem as DTO.Category.CategoryResponse;
+            selectedRow = dgvCollections.SelectedRows[0].DataBoundItem as DTO.Collection.CollectionResponse;
             design = true;
             loadRowData();
         }
         private void loadRowData()
         {
             txtName.Text = selectedRow.Name;
-            txtDescription.Text = selectedRow.Description;
-            cmbSpace.SelectedIndex = ((List<DTO.Space.SpaceResponse>)cmbSpace.DataSource).FindIndex(s => s.SpaceId == selectedRow.SpaceId);
+            cmbDesigner.SelectedIndex = ((List<DTO.Designer.DesignerResponse>)cmbDesigner.DataSource).FindIndex(d => d.DesignerId == selectedRow.DesignerId);
+            dtpCreated.Value = (DateTime)selectedRow.Created;
         }
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
             if (ValidateChildren())
             {
-                CategoryUpsertRequest upsert = new CategoryUpsertRequest();
+                CollectionUpsertRequest upsert = new CollectionUpsertRequest();
                 upsert.Name = txtName.Text;
-                upsert.Description = txtDescription.Text;
-                upsert.SpaceId = ((DTO.Space.SpaceResponse)cmbSpace.SelectedItem).SpaceId;
+                upsert.Created = dtpCreated.Value;
+                upsert.DesignerId = ((DTO.Designer.DesignerResponse)cmbDesigner.SelectedItem).DesignerId;
                 if (!design)
                 {
-                    var response = await categoryAPIService.Post(upsert);
+                    var response = await collectionAPIService.Post(upsert);
                     await getGridData();
                     if (response != null)
                         MessageBox.Show("Successfully added data!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 if (design)
                 {
-                    var response = await categoryAPIService.Put(selectedRow.CategoryId, upsert);
+                    var response = await collectionAPIService.Put(selectedRow.CollectionId, upsert);
                     await getGridData();
                     if (response != null)
                         MessageBox.Show("Successfully updated data!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -83,6 +82,7 @@ namespace TheComfortZone.WINUI.Forms.Category
                 clearForm();
             }
         }
+
         private void clearForm()
         {
             if (design)
@@ -91,9 +91,10 @@ namespace TheComfortZone.WINUI.Forms.Category
                 selectedRow = null;
             }
             txtName.Text = null;
-            txtDescription.Text = null;
-            cmbSpace.SelectedIndex = -1;
+            dtpCreated.Value = DateTime.Now;
+            cmbDesigner.SelectedIndex = -1;
         }
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
             clearForm();
@@ -115,18 +116,18 @@ namespace TheComfortZone.WINUI.Forms.Category
             }
         }
 
-        private void cmbSpace_Validating(object sender, CancelEventArgs e)
+        private void cmbDesigner_Validating(object sender, CancelEventArgs e)
         {
-            if (cmbSpace.SelectedIndex == -1)
+            if (cmbDesigner.SelectedIndex == -1)
             {
                 e.Cancel = true;
-                cmbSpace.Focus();
-                errorProvider.SetError(cmbSpace, "Space field cannot be left blank!");
+                cmbDesigner.Focus();
+                errorProvider.SetError(cmbDesigner, "Designer field cannot be left blank!");
             }
             else
             {
                 e.Cancel = false;
-                errorProvider.SetError(cmbSpace, null);
+                errorProvider.SetError(cmbDesigner, null);
             }
         }
     }

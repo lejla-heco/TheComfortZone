@@ -12,5 +12,6 @@ namespace TheComfortZone.DTO.Collection
         public DateTime? Created { get; set; }
         public int DesignerId { get; set; }
         public virtual DesignerResponse Designer { get; set; }
+        public string DesignerName => Designer?.Name;
     }
 }

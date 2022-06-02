@@ -15,13 +15,13 @@ namespace TheComfortZone.Controllers
             collectionService = service;
         }
 
-        [Authorize(Roles = "Administrator,Employee")]
+        [Authorize(Roles = "Administrator")]
         public override CollectionResponse Insert([FromBody] CollectionUpsertRequest insert)
         {
             return base.Insert(insert);
         }
 
-        [Authorize(Roles = "Administrator,Employee")]
+        [Authorize(Roles = "Administrator")]
         public override CollectionResponse Update(int id, [FromBody] CollectionUpsertRequest update)
         {
             return base.Update(id, update);

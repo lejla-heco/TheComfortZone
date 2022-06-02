@@ -15,13 +15,13 @@ namespace TheComfortZone.Controllers
             designerService = service;
         }
 
-        [Authorize(Roles = "Administrator,Employee")]
+        [Authorize(Roles = "Administrator")]
         public override DesignerResponse Insert([FromBody] DesignerUpsertRequest insert)
         {
             return base.Insert(insert);
         }
 
-        [Authorize(Roles = "Administrator,Employee")]
+        [Authorize(Roles = "Administrator")]
         public override DesignerResponse Update(int id, [FromBody] DesignerUpsertRequest update)
         {
             return base.Update(id, update);
