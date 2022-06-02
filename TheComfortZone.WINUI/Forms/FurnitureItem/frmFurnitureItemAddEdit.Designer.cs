@@ -342,6 +342,11 @@
             // nudDiscountPrice
             // 
             this.nudDiscountPrice.Location = new System.Drawing.Point(149, 654);
+            this.nudDiscountPrice.Maximum = new decimal(new int[] {
+            2500,
+            0,
+            0,
+            0});
             this.nudDiscountPrice.Minimum = new decimal(new int[] {
             1,
             0,
@@ -368,6 +373,11 @@
             // nudRegularPrice
             // 
             this.nudRegularPrice.Location = new System.Drawing.Point(149, 608);
+            this.nudRegularPrice.Maximum = new decimal(new int[] {
+            2500,
+            0,
+            0,
+            0});
             this.nudRegularPrice.Minimum = new decimal(new int[] {
             1,
             0,

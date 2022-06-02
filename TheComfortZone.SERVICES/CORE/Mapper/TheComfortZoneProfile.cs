@@ -29,6 +29,7 @@ namespace TheComfortZone.SERVICES.CORE.Mapper
 
             /** DESIGNER **/
             CreateMap<DAO.Model.Designer, DTO.Designer.DesignerResponse>();
+            CreateMap<DTO.Designer.DesignerUpsertRequest, DAO.Model.Designer>();
 
             /** COLLECTION **/
             CreateMap<DAO.Model.Collection, DTO.Collection.CollectionResponse>();
