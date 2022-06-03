@@ -27,6 +27,12 @@ namespace TheComfortZone.Controllers
             return base.Update(id, update);
         }
 
+        [NonAction]
+        public override string Delete(int id)
+        {
+            return base.Delete(id);
+        }
+
         [HttpGet("spaces-with-categories")]
         public async Task<List<DTO.Space.SpaceResponse>> GetSpacesWithCategoryData()
         {

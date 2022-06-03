@@ -27,6 +27,12 @@ namespace TheComfortZone.Controllers
             return base.Update(id, update);
         }
 
+        [NonAction]
+        public override string Delete(int id)
+        {
+            return base.Delete(id);
+        }
+
         [HttpGet("designers-with-collections")]
         public async Task<List<DTO.Designer.DesignerResponse>> GetDesignersWithCollectionData()
         {
