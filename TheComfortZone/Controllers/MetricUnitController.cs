@@ -15,21 +15,21 @@ namespace TheComfortZone.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public override MetricUnitResponse Insert([FromBody] MetricUnitUpsertRequest insert)
+        public override async Task<MetricUnitResponse> Insert([FromBody] MetricUnitUpsertRequest insert)
         {
-            return base.Insert(insert);
+            return await base.Insert(insert);
         }
 
         [Authorize(Roles = "Administrator")]
-        public override MetricUnitResponse Update(int id, [FromBody] MetricUnitUpsertRequest update)
+        public override async Task<MetricUnitResponse> Update(int id, [FromBody] MetricUnitUpsertRequest update)
         {
-            return base.Update(id, update);
+            return await base.Update(id, update);
         }
 
         [NonAction]
-        public override string Delete(int id)
+        public override async Task<string> Delete(int id)
         {
-            return base.Delete(id);
+            return await base.Delete(id);
         }
     }
 }

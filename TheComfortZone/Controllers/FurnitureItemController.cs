@@ -14,21 +14,21 @@ namespace TheComfortZone.Controllers
         }
 
         [Authorize(Roles = "Administrator,Employee")]
-        public override FurnitureItemResponse Insert([FromBody] FurnitureItemUpsertRequest insert)
+        public override async Task<FurnitureItemResponse> Insert([FromBody] FurnitureItemUpsertRequest insert)
         {
-            return base.Insert(insert);
+            return await base.Insert(insert);
         }
 
         [Authorize(Roles = "Administrator,Employee")]
-        public override FurnitureItemResponse Update(int id, [FromBody] FurnitureItemUpsertRequest update)
+        public override async Task<FurnitureItemResponse> Update(int id, [FromBody] FurnitureItemUpsertRequest update)
         {
-            return base.Update(id, update);
+            return await base.Update(id, update);
         }
 
         [Authorize(Roles = "Administrator,Employee")]
-        public override string Delete(int id)
+        public override async Task<string> Delete(int id)
         {
-            return base.Delete(id);
+            return await base.Delete(id);
         }
     }
 }

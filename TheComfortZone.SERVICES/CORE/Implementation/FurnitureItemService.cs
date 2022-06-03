@@ -40,9 +40,9 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             return query;
         }
 
-        public override FurnitureItemResponse Insert(FurnitureItemUpsertRequest insert)
+        public async override Task<FurnitureItemResponse> Insert(FurnitureItemUpsertRequest insert)
         {
-            var entity = base.Insert(insert);
+            var entity = await base.Insert(insert);
             if (insert?.ColorIdList != null)
             {
                 foreach (int colorId in insert.ColorIdList)

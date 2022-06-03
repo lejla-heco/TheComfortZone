@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TheComfortZone.DTO.Utils;
 using TheComfortZone.SERVICES.API;
+using TheComfortZone.SERVICES.CORE.Utils;
 using TheComfortZone.SERVICES.DAO;
 
 namespace TheComfortZone.SERVICES.CORE.Implementation
@@ -21,7 +22,7 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             this.mapper = mapper;
         }
 
-        public virtual IEnumerable<T> Get(TSearch search = null)
+        public virtual async Task<IEnumerable<T>> Get(TSearch search = null)
         {
             IQueryable<TDb> query = context.Set<TDb>().AsQueryable();
 
@@ -47,10 +48,18 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             return query;
         }
 
-        public T GetById(int id)
+        public async Task<T> GetById(int id)
         {
+            ValidateGetById(id);
             var entity = context.Set<TDb>().Find(id);
             return mapper.Map<T>(entity);
+        }
+
+        /** VALIDATION **/
+        public virtual void ValidateGetById(int id)
+        {
+            if (context.Set<TDb>().Find(id) == null)
+                throw new UserException($"{typeof(TDb).Name} with specified ID does not exist!");
         }
     }
 }

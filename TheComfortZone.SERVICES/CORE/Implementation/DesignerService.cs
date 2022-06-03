@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TheComfortZone.DTO.Designer;
 using TheComfortZone.DTO.Utils;
 using TheComfortZone.SERVICES.API;
+using TheComfortZone.SERVICES.CORE.Utils;
 using TheComfortZone.SERVICES.DAO;
 
 namespace TheComfortZone.SERVICES.CORE.Implementation
@@ -21,6 +22,13 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
         {
             var entities = context.Designers.Where(s => s.Collections.Count != 0);
             return mapper.Map<List<DesignerResponse>>(entities.ToList());
+        }
+
+        /** VALIDATION **/
+        public override void ValidateUpdate(int id, DesignerUpsertRequest update)
+        {
+            if (context.Designers.Find(id) == null)
+                throw new UserException("Designer with specified ID does not exist!");
         }
     }
 }

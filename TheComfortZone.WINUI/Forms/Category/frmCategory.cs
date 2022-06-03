@@ -15,7 +15,7 @@ namespace TheComfortZone.WINUI.Forms.Category
     public partial class frmCategory : Form
     {
         SpaceAPIService spaceAPIService = new SpaceAPIService();
-        CategoryAPIService categoryAPIService = new CategoryAPIService();
+        private CategoryAPIService categoryAPIService = new CategoryAPIService();
         private DTO.Category.CategoryResponse? selectedRow;
         private bool design = false;
 

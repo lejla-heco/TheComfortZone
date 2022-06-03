@@ -29,9 +29,8 @@ namespace TheComfortZone.WINUI.Service
             }
             catch (FlurlHttpException ex)
             {
-                var stringBuilder = new StringBuilder(ex.Message);
-                MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return default(List<DesignerResponse>);
+                var errors = await ex.GetResponseJsonAsync<Dictionary<string, dynamic>>();
+                return ExceptionHandler.HandleException<List<DesignerResponse>>(errors);
             }
         }
     }

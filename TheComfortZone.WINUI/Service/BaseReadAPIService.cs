@@ -34,11 +34,10 @@ namespace TheComfortZone.WINUI.Service
                 return await url.WithBasicAuth(CredentialHelper.Username, CredentialHelper.Password)
                     .GetJsonAsync<List<T>>();
             }
-            catch (Exception ex)
+            catch (FlurlHttpException ex)
             {
-                var stringBuilder = new StringBuilder(ex.Message);
-                MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return default(List<T>);
+                var errors = await ex.GetResponseJsonAsync<Dictionary<string, dynamic>>();
+                return ExceptionHandler.HandleException<List<T>>(errors);
             }
         }
 
@@ -51,11 +50,10 @@ namespace TheComfortZone.WINUI.Service
                         .AppendPathSegment(id)
                         .WithBasicAuth(CredentialHelper.Username, CredentialHelper.Password).GetJsonAsync<T>();
             }
-            catch (Exception ex)
+            catch (FlurlHttpException ex)
             {
-                var stringBuilder = new StringBuilder(ex.Message);
-                MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return default(T);
+                var errors = await ex.GetResponseJsonAsync<Dictionary<string, dynamic>>();
+                return ExceptionHandler.HandleException<T>(errors);
             }
         }
     }

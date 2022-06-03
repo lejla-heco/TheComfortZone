@@ -24,5 +24,12 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             var entities = context.Spaces.Where(s => s.Categories.Count != 0);
             return mapper.Map<List<SpaceResponse>>(entities.ToList());
         }
+
+        /** VALIDATION **/
+        public override void ValidateUpdate(int id, SpaceUpsertRequest update)
+        {
+            if (context.Spaces.Find(id) == null)
+                throw new UserException("Space with specified ID does not exist!");
+        }
     }
 }

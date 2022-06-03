@@ -17,15 +17,15 @@ namespace TheComfortZone.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<T> Get([FromQuery] TSearch search = null)
+        public async Task<IEnumerable<T>> Get([FromQuery] TSearch search = null)
         {
-            return service.Get(search);
+            return await service.Get(search);
         }
 
         [HttpGet("{id}")]
-        public T GetById(int id)
+        public async Task<T> GetById(int id)
         {
-            return service.GetById(id);
+            return await service.GetById(id);
         }
     }
 }

@@ -16,21 +16,21 @@ namespace TheComfortZone.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public override CollectionResponse Insert([FromBody] CollectionUpsertRequest insert)
+        public override async Task<CollectionResponse> Insert([FromBody] CollectionUpsertRequest insert)
         {
-            return base.Insert(insert);
+            return await base.Insert(insert);
         }
 
         [Authorize(Roles = "Administrator")]
-        public override CollectionResponse Update(int id, [FromBody] CollectionUpsertRequest update)
+        public override async Task<CollectionResponse> Update(int id, [FromBody] CollectionUpsertRequest update)
         {
-            return base.Update(id, update);
+            return await base.Update(id, update);
         }
 
         [NonAction]
-        public override string Delete(int id)
+        public override async Task<string> Delete([FromBody] int id)
         {
-            return base.Delete(id);
+            return await base.Delete(id);
         }
 
         [HttpGet("collections-by-designer-id/{id}")]

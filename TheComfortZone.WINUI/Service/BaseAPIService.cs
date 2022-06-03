@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using TheComfortZone.DTO.Utils;
 using TheComfortZone.WINUI.Properties;
@@ -27,13 +28,11 @@ namespace TheComfortZone.WINUI.Service
                    .PostJsonAsync(request)
                    .ReceiveJson<T>();
             }
-            catch (Exception ex)
+            catch (FlurlHttpException ex)
             {
-                var stringBuilder = new StringBuilder(ex.Message);
-                MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return default(T);
+                var errors = await ex.GetResponseJsonAsync<Dictionary<string, dynamic>>();
+                return ExceptionHandler.HandleException<T>(errors);
             }
-
         }
 
         public async Task<T> Put(int id, TUpdate request)
@@ -49,9 +48,8 @@ namespace TheComfortZone.WINUI.Service
             }
             catch (FlurlHttpException ex)
             {
-                var stringBuilder = new StringBuilder(ex.Message);
-                MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return default(T);
+                var errors = await ex.GetResponseJsonAsync<Dictionary<string, dynamic>>();
+                return ExceptionHandler.HandleException<T>(errors);
             }
         }
 
@@ -68,9 +66,8 @@ namespace TheComfortZone.WINUI.Service
             }
             catch (FlurlHttpException ex)
             {
-                var stringBuilder = new StringBuilder(ex.Message);
-                MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return "Not deleted!";
+                var errors = await ex.GetResponseJsonAsync<Dictionary<string, dynamic>>();
+                return ExceptionHandler.HandleException<string>(errors);
             }
         }
     }

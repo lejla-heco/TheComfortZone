@@ -13,21 +13,21 @@ namespace TheComfortZone.Controllers
         }
 
         [HttpPost]
-        public virtual T Insert([FromBody] TInsert insert)
+        public async virtual Task<T> Insert([FromBody] TInsert insert)
         {
-            return crudService.Insert(insert);
+            return await crudService.Insert(insert);
         }
 
         [HttpPut("{id}")]
-        public virtual T Update(int id, [FromBody] TUpdate update)
+        public async virtual Task<T> Update(int id, [FromBody] TUpdate update)
         {
-            return crudService.Update(id, update);
+            return await crudService.Update(id, update);
         }
 
         [HttpDelete("{id}")]
-        public virtual string Delete(int id)
+        public async virtual Task<string> Delete(int id)
         {
-            return crudService.Delete(id);
+            return await crudService.Delete(id);
         }
     }
 }

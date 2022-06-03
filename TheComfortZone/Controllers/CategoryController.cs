@@ -15,21 +15,21 @@ namespace TheComfortZone.Controllers
         }
 
         [Authorize(Roles = "Administrator,Employee")]
-        public override CategoryResponse Insert([FromBody] CategoryUpsertRequest insert)
+        public override async Task<CategoryResponse> Insert([FromBody] CategoryUpsertRequest insert)
         {
-            return base.Insert(insert);
+            return await base.Insert(insert);
         }
 
         [Authorize(Roles = "Administrator,Employee")]
-        public override CategoryResponse Update(int id, [FromBody] CategoryUpsertRequest update)
+        public override async Task<CategoryResponse> Update(int id, [FromBody] CategoryUpsertRequest update)
         {
-            return base.Update(id, update);
+            return await base.Update(id, update);
         }
 
         [NonAction]
-        public override string Delete(int id)
+        public override async Task<string> Delete(int id)
         {
-            return base.Delete(id);
+            return await base.Delete(id);
         }
 
         [HttpGet("categories-by-space-id/{id}")]

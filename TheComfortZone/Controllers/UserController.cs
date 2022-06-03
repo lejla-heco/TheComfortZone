@@ -18,15 +18,15 @@ namespace TheComfortZone.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public override UserResponse Insert([FromBody] UserUpsertRequest insert)
+        public override async Task<UserResponse> Insert([FromBody] UserUpsertRequest insert)
         {
-            return base.Insert(insert);
+            return await base.Insert(insert);
         }
 
         [Authorize(Roles = "Administrator,User")]
-        public override UserResponse Update(int id, [FromBody] UserUpsertRequest update)
+        public override async Task<UserResponse> Update(int id, [FromBody] UserUpsertRequest update)
         {
-            return base.Update(id, update);
+            return await base.Update(id, update);
         }
 
         [HttpGet("user-role")]

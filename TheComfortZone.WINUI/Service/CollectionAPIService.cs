@@ -20,10 +20,18 @@ namespace TheComfortZone.WINUI.Service
 
         public async Task<List<CollectionResponse>> GetCollectionsByDesignerId(int id)
         {
-            return await new Uri(endpoint)
-                .AppendPathSegments(resource, "collections-by-designer-id", id)
-                .WithBasicAuth(CredentialHelper.Username, CredentialHelper.Password)
-                .GetJsonAsync<List<CollectionResponse>>();
+            try
+            {
+                return await new Uri(endpoint)
+                    .AppendPathSegments(resource, "collections-by-designer-id", id)
+                    .WithBasicAuth(CredentialHelper.Username, CredentialHelper.Password)
+                    .GetJsonAsync<List<CollectionResponse>>();
+            }
+            catch (FlurlHttpException ex)
+            {
+                var errors = await ex.GetResponseJsonAsync<Dictionary<string, dynamic>>();
+                return ExceptionHandler.HandleException<List<CollectionResponse>>(errors);
+            }
         }
     }
 }

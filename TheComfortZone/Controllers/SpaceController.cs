@@ -16,21 +16,21 @@ namespace TheComfortZone.Controllers
         }
 
         [Authorize(Roles = "Administrator,Employee")]
-        public override SpaceResponse Insert([FromBody] SpaceUpsertRequest insert)
+        public override async Task<SpaceResponse> Insert([FromBody] SpaceUpsertRequest insert)
         {
-            return base.Insert(insert);
+            return await base.Insert(insert);
         }
 
         [Authorize(Roles = "Administrator,Employee")]
-        public override SpaceResponse Update(int id, [FromBody] SpaceUpsertRequest update)
+        public override async Task<SpaceResponse> Update(int id, [FromBody] SpaceUpsertRequest update)
         {
-            return base.Update(id, update);
+            return await base.Update(id, update);
         }
 
         [NonAction]
-        public override string Delete(int id)
+        public override async Task<string> Delete(int id)
         {
-            return base.Delete(id);
+            return await base.Delete(id);
         }
 
         [HttpGet("spaces-with-categories")]

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using TheComfortZone.DTO.Category;
 using TheComfortZone.DTO.Utils;
@@ -20,10 +21,18 @@ namespace TheComfortZone.WINUI.Service
 
         public async Task<List<CategoryResponse>> GetCategoriesBySpaceId(int id)
         {
-            return await new Uri(endpoint)
-                .AppendPathSegments(resource, "categories-by-space-id", id)
-                .WithBasicAuth(CredentialHelper.Username, CredentialHelper.Password)
-                .GetJsonAsync<List<CategoryResponse>>();
+            try
+            {
+                return await new Uri(endpoint)
+                    .AppendPathSegments(resource, "categories-by-space-id", id)
+                    .WithBasicAuth(CredentialHelper.Username, CredentialHelper.Password)
+                    .GetJsonAsync<List<CategoryResponse>>();
+            }
+            catch (FlurlHttpException ex)
+            {
+                var errors = await ex.GetResponseJsonAsync<Dictionary<string, dynamic>>();
+                return ExceptionHandler.HandleException<List<CategoryResponse>>(errors);
+            }
         }
     }
 }

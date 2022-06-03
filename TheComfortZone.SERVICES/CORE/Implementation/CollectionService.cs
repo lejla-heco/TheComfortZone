@@ -27,12 +27,38 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
 
         public async Task<List<CollectionResponse>> GetCollectionsByDesignerId(int id)
         {
-            if (context.Designers.FirstOrDefault(d => d.DesignerId == id) == null)
-            {
+            /** VALIDATION **/
+            if (context.Designers.Find(id) == null)
                 throw new UserException("Designer with specified ID does not exist!");
-            }
+
             var entities = context.Collections.Where(c => c.DesignerId == id);
             return mapper.Map<List<CollectionResponse>>(entities.ToList());
+        }
+
+        /** VALIDATION **/
+        public override void ValidateInsert(CollectionUpsertRequest insert)
+        {
+            if (context.Designers.Find(insert.DesignerId) == null)
+                throw new UserException("Designer with specified ID does not exist!");
+        }
+        public override void ValidateUpdate(int id, CollectionUpsertRequest update)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            bool exception = false;
+            if (context.Collections.Find(id) == null)
+            {
+                exception = true;
+                stringBuilder.Append("Collection with specified ID does not exist!\n");
+            }
+            if (context.Designers.Find(update.DesignerId) == null)
+            {
+                exception = true;
+                stringBuilder.Append("Designer with specified ID does not exist!");
+            }
+            if (exception)
+            {
+                throw new UserException(stringBuilder.ToString());
+            }
         }
     }
 }

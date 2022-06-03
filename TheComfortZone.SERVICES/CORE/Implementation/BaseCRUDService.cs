@@ -16,8 +16,10 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
         {
         }
 
-        public virtual T Insert(TInsert insert)
+        public async virtual Task<T> Insert(TInsert insert)
         {
+            ValidateInsert(insert);
+
             var entity = mapper.Map<TDb>(insert);
             context.Set<TDb>().Add(entity);
             BeforeInsert(insert, entity);
@@ -25,13 +27,12 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             return mapper.Map<T>(entity);
         }
 
-        public virtual void BeforeInsert(TInsert insert, TDb entity)
-        {
+        public virtual void BeforeInsert(TInsert insert, TDb entity) { }
 
-        }
-
-        public virtual T Update(int id, TUpdate update)
+        public async virtual Task<T> Update(int id, TUpdate update)
         {
+            ValidateUpdate(id, update);
+
             var entity = context.Set<TDb>().Find(id);
             if (entity != null)
             {
@@ -47,12 +48,9 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             return mapper.Map<T>(entity);
         }
 
-        public virtual void BeforeUpdate(TDb entity, TUpdate update)
-        {
+        public virtual void BeforeUpdate(TDb entity, TUpdate update) { }
 
-        }
-
-        public virtual string Delete(int id)
+        public async virtual Task<string> Delete(int id)
         {
             TDb entity = context.Set<TDb>().Find(id);
 
@@ -66,9 +64,10 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             return response;
         }
 
-        public virtual void BeforeDelete(int id)
-        {
+        public virtual void BeforeDelete(int id) { }
 
-        }
+        /** VALIDATION **/
+        public virtual void ValidateInsert(TInsert insert) { }
+        public virtual void ValidateUpdate(int id, TUpdate update) { }
     }
 }

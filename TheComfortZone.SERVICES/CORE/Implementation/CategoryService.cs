@@ -20,19 +20,45 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
         {
         }
 
+        public override IQueryable<Category> IncludeList(IQueryable<Category> query)
+        {
+            return query.Include(c => c.Space);
+        }
+
         public async Task<List<CategoryResponse>> GetCategoriesBySpaceId(int id)
         {
-            if (context.Spaces.FirstOrDefault(s => s.SpaceId == id) == null)
-            {
+            /** VALIDATION **/
+            if (context.Spaces.Find(id) == null)
                 throw new UserException("Space with specified ID does not exist!");
-            }
+
             var entities = context.Categories.Where(c => c.SpaceId == id);
             return mapper.Map<List<CategoryResponse>>(entities.ToList());
         }
 
-        public override IQueryable<Category> IncludeList(IQueryable<Category> query)
+        /** VALIDATION **/
+        public override void ValidateInsert(CategoryUpsertRequest insert)
         {
-            return query.Include(c => c.Space);
+            if (context.Spaces.Find(insert.SpaceId) == null)
+                throw new UserException("Space with specified ID does not exist!");
+        }
+        public override void ValidateUpdate(int id, CategoryUpsertRequest update)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            bool exception = false;
+            if (context.Categories.Find(id) == null)
+            {
+                exception = true;
+                stringBuilder.Append("Category with specified ID does not exist!\n");
+            }
+            if (context.Spaces.Find(update.SpaceId) == null)
+            {
+                exception = true;
+                stringBuilder.Append("Space with specified ID does not exist!");
+            }
+            if (exception)
+            {
+                throw new UserException(stringBuilder.ToString());
+            }
         }
     }
 }
