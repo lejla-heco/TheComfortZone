@@ -52,6 +52,8 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
 
         public async virtual Task<string> Delete(int id)
         {
+            ValidateDelete(id);
+
             TDb entity = context.Set<TDb>().Find(id);
 
             BeforeDelete(id);
@@ -69,5 +71,6 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
         /** VALIDATION **/
         public virtual void ValidateInsert(TInsert insert) { }
         public virtual void ValidateUpdate(int id, TUpdate update) { }
+        public virtual void ValidateDelete(int id) { }
     }
 }

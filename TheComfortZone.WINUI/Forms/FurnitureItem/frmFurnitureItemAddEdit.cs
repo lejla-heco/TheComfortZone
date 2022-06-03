@@ -239,14 +239,21 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
 
                 if (!design)
                 {
-                    await furnitureItemAPIService.Post(upsert);
-                    DialogResult = DialogResult.OK;
+                    var response = await furnitureItemAPIService.Post(upsert);
+                    if (response != null)
+                    {
+                        MessageBox.Show("Successfully added new furniture item!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        DialogResult = DialogResult.OK;
+                    }
                 }
                 if (design)
                 {
-                    await furnitureItemAPIService.Put(furnitureItem.FurnitureItemId, upsert);
-                    MessageBox.Show("Successfully updated furniture item!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    DialogResult = DialogResult.OK;
+                    var response = await furnitureItemAPIService.Put(furnitureItem.FurnitureItemId, upsert);
+                    if (response != null)
+                    {
+                        MessageBox.Show("Successfully updated furniture item!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        DialogResult = DialogResult.OK;
+                    }
                 }
             }
         }

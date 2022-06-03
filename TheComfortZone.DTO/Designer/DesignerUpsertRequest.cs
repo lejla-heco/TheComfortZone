@@ -8,6 +8,7 @@ namespace TheComfortZone.DTO.Designer
     public class DesignerUpsertRequest
     {
         [Required(AllowEmptyStrings = false)]
+        [MaxLength(60)]
         public string Name { get; set; }
         [Required]
         [Range(10, 750)]

@@ -8,6 +8,7 @@ namespace TheComfortZone.DTO.FurnitureItem
     public class FurnitureItemUpsertRequest
     {
         [Required(AllowEmptyStrings = false)]
+        [MaxLength(60)]
         public string Name { get; set; }
         [Required]
         public int CategoryId { get; set; }
@@ -25,9 +26,10 @@ namespace TheComfortZone.DTO.FurnitureItem
         [Required]
         public byte[] Image { get; set; }
         [Required]
+        [MaxLength(10)]
         public string State { get; set; }
         [Required(AllowEmptyStrings = false)]
-        [MaxLength(100)]
+        [MaxLength(150)]
         public string Description { get; set; }
         [Required]
         public int MetricUnitId { get; set; }
@@ -35,8 +37,10 @@ namespace TheComfortZone.DTO.FurnitureItem
         [Range(1, 100)]
         public int InStockQuantity { get; set; }
         [Required]
+        [MaxLength(10)]
         public string Height { get; set; }
         [Required]
+        [MaxLength(10)]
         public string Width { get; set; }
         [Required]
         public List<int> ColorIdList { get; set; } = new List<int> { };

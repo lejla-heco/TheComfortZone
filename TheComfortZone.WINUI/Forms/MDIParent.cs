@@ -11,6 +11,7 @@ using TheComfortZone.DTO.Utils;
 using TheComfortZone.WINUI.Forms.Category;
 using TheComfortZone.WINUI.Forms.Collection;
 using TheComfortZone.WINUI.Forms.Designer;
+using TheComfortZone.WINUI.Forms.Employee;
 using TheComfortZone.WINUI.Forms.FurnitureItem;
 using TheComfortZone.WINUI.Forms.MetricUnit;
 using TheComfortZone.WINUI.Forms.Order;
@@ -108,10 +109,10 @@ namespace TheComfortZone.WINUI.Forms
 
                 frm.MdiParent = this;
 
+                frm.ControlBox = false;
                 frm.WindowState = FormWindowState.Maximized;
                 frm.FormBorderStyle = FormBorderStyle.None;
                 frm.Dock = DockStyle.Fill;
-                frm.ControlBox = false;
 
                 frm.Show();
             }
@@ -156,6 +157,12 @@ namespace TheComfortZone.WINUI.Forms
         private void unitsOfMeasurementToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmMetricUnit frm = new frmMetricUnit();
+            OpenForm(frm);
+        }
+
+        private void employeesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmEmployee frm = new frmEmployee();
             OpenForm(frm);
         }
 

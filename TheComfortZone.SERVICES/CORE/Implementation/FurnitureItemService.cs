@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TheComfortZone.DTO.FurnitureItem;
 using TheComfortZone.SERVICES.API;
+using TheComfortZone.SERVICES.CORE.Utils;
 using TheComfortZone.SERVICES.DAO;
 using TheComfortZone.SERVICES.DAO.Model;
 
@@ -29,7 +30,6 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
 
         public override IQueryable<FurnitureItem> AddFilter(IQueryable<FurnitureItem> query, FurnitureItemSearchRequest search = null)
         {
-
             if (!string.IsNullOrWhiteSpace(search?.Name))
                 query = query.Where(x => x.Name.StartsWith(search.Name));
             if (search?.CategoryId.HasValue == true)
@@ -90,6 +90,51 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             context.RemoveRange(favourites);
 
             context.SaveChanges(true);
+        }
+
+        /** VALIDATION **/
+        public override void ValidateInsert(FurnitureItemUpsertRequest insert)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            bool exception = false;
+            if (context.Categories.Find(insert.CategoryId) == null)
+            {
+                exception = true;
+                stringBuilder.Append("Category with specified ID does not exist!\n");
+            }
+            if (context.Collections.Find(insert.CollectionId) == null)
+            {
+                exception = true;
+                stringBuilder.Append("Collection with specified ID does not exist!\n");
+            }
+            if (context.Materials.Find(insert.MaterialId) == null)
+            {
+                exception = true;
+                stringBuilder.Append("Material with specified ID does not exist!\n");
+            }
+            if (context.MetricUnits.Find(insert.MetricUnitId) == null)
+            {
+                exception = true;
+                stringBuilder.Append("Metric unit with specified ID does not exist!\n");
+            }
+            if (exception)
+            {
+                throw new UserException(stringBuilder.ToString());
+            }
+        }
+
+        public override void ValidateUpdate(int id, FurnitureItemUpsertRequest update)
+        {
+            if (context.FurnitureItems.Find(id) == null)
+                throw new UserException("Furniture item with specified ID does not exist!");
+            
+            ValidateInsert(update);
+        }
+
+        public override void ValidateDelete(int id)
+        {
+            if (context.FurnitureItems.Find(id) == null)
+                throw new UserException("Furniture item with specified ID does not exist!");
         }
     }
 }
