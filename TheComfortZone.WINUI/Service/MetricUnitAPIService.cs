@@ -7,7 +7,7 @@ using TheComfortZone.DTO.Utils;
 
 namespace TheComfortZone.WINUI.Service
 {
-    public class MetricUnitAPIService : BaseReadAPIService<DTO.MetricUnit.MetricUnitResponse, BaseSearchObject>
+    public class MetricUnitAPIService : BaseAPIService<DTO.MetricUnit.MetricUnitResponse, BaseSearchObject, DTO.MetricUnit.MetricUnitUpsertRequest, DTO.MetricUnit.MetricUnitUpsertRequest>
     {
         private const string API_ROUTE = "MetricUnit";
         public MetricUnitAPIService() : base(API_ROUTE)

@@ -12,6 +12,7 @@ using TheComfortZone.WINUI.Forms.Category;
 using TheComfortZone.WINUI.Forms.Collection;
 using TheComfortZone.WINUI.Forms.Designer;
 using TheComfortZone.WINUI.Forms.FurnitureItem;
+using TheComfortZone.WINUI.Forms.MetricUnit;
 using TheComfortZone.WINUI.Forms.Order;
 using TheComfortZone.WINUI.Forms.Space;
 using TheComfortZone.WINUI.Properties;
@@ -149,6 +150,12 @@ namespace TheComfortZone.WINUI.Forms
         private void collectionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmCollection frm = new frmCollection();
+            OpenForm(frm);
+        }
+
+        private void unitsOfMeasurementToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmMetricUnit frm = new frmMetricUnit();
             OpenForm(frm);
         }
 

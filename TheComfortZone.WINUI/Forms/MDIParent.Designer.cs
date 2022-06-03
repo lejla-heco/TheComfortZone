@@ -134,6 +134,7 @@
             this.unitsOfMeasurementToolStripMenuItem.Name = "unitsOfMeasurementToolStripMenuItem";
             this.unitsOfMeasurementToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
             this.unitsOfMeasurementToolStripMenuItem.Text = "Units of measurement";
+            this.unitsOfMeasurementToolStripMenuItem.Click += new System.EventHandler(this.unitsOfMeasurementToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 

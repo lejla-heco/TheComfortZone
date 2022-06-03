@@ -4,9 +4,8 @@ using System.Text;
 
 namespace TheComfortZone.DTO.MetricUnit
 {
-    public class MetricUnitResponse
+    public class MetricUnitUpsertRequest
     {
-        public int MetricUnitId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
     }

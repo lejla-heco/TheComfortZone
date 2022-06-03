@@ -10,7 +10,7 @@ using TheComfortZone.SERVICES.DAO;
 
 namespace TheComfortZone.SERVICES.CORE.Implementation
 {
-    public class MetricUnitService : BaseReadService<DTO.MetricUnit.MetricUnitResponse, DAO.Model.MetricUnit, BaseSearchObject>, IMetricUnitService
+    public class MetricUnitService : BaseCRUDService<DTO.MetricUnit.MetricUnitResponse, DAO.Model.MetricUnit, BaseSearchObject, DTO.MetricUnit.MetricUnitUpsertRequest, DTO.MetricUnit.MetricUnitUpsertRequest>, IMetricUnitService
     {
         public MetricUnitService(TheComfortZoneContext context, IMapper mapper) : base(context, mapper)
         {

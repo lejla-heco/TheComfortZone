@@ -7,7 +7,7 @@ using TheComfortZone.DTO.Utils;
 
 namespace TheComfortZone.SERVICES.API
 {
-    public interface IMetricUnitService : IReadService<DTO.MetricUnit.MetricUnitResponse, BaseSearchObject>
+    public interface IMetricUnitService : ICRUDService<DTO.MetricUnit.MetricUnitResponse, BaseSearchObject, DTO.MetricUnit.MetricUnitUpsertRequest, DTO.MetricUnit.MetricUnitUpsertRequest>
     {
     }
 }

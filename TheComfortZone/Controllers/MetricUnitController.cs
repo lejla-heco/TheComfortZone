@@ -3,7 +3,7 @@ using TheComfortZone.SERVICES.API;
 
 namespace TheComfortZone.Controllers
 {
-    public class MetricUnitController : BaseReadController<DTO.MetricUnit.MetricUnitResponse, BaseSearchObject>
+    public class MetricUnitController : BaseCRUDController<DTO.MetricUnit.MetricUnitResponse, BaseSearchObject, DTO.MetricUnit.MetricUnitUpsertRequest, DTO.MetricUnit.MetricUnitUpsertRequest>
     {
         private readonly IMetricUnitService metricUnitService;
         public MetricUnitController(IMetricUnitService service) : base(service)

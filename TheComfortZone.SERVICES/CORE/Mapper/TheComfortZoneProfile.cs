@@ -40,6 +40,7 @@ namespace TheComfortZone.SERVICES.CORE.Mapper
 
             /** METRIC UNIT **/
             CreateMap<DAO.Model.MetricUnit, DTO.MetricUnit.MetricUnitResponse>();
+            CreateMap<DTO.MetricUnit.MetricUnitUpsertRequest, DAO.Model.MetricUnit>();
 
             /** COLOR **/
             CreateMap<DAO.Model.Color, DTO.Color.ColorResponse>();
