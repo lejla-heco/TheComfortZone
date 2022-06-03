@@ -31,7 +31,7 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
         public override IQueryable<FurnitureItem> AddFilter(IQueryable<FurnitureItem> query, FurnitureItemSearchRequest search = null)
         {
             if (!string.IsNullOrWhiteSpace(search?.Name))
-                query = query.Where(x => x.Name.StartsWith(search.Name));
+                query = query.Where(x => x.Name.ToLower().StartsWith(search.Name.ToLower()));
             if (search?.CategoryId.HasValue == true)
                 query = query.Where(x => x.CategoryId == search.CategoryId);
             if (!string.IsNullOrWhiteSpace(search?.State))

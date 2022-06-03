@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TheComfortZone.WINUI.Utils;
+using TheComfortZone.DTO.Utils;
 
 namespace TheComfortZone.WINUI.Service
 {
-    public class UserAPIService : BaseAPIService<DTO.User.UserResponse, object, DTO.User.UserUpsertRequest, DTO.User.UserUpsertRequest>
+    public class UserAPIService : BaseAPIService<DTO.User.UserResponse, DTO.User.UserSearchRequest, DTO.User.UserUpsertRequest, DTO.User.UserUpsertRequest>
     {
         private const string API_ROUTE = "User";
         public UserAPIService() : base(API_ROUTE)
@@ -18,11 +19,19 @@ namespace TheComfortZone.WINUI.Service
 
         public async Task<string> GetUserRole()
         {
-            return await new Uri(endpoint)
-                    .AppendPathSegment(resource)
-                    .AppendPathSegment("user-role")
-                    .WithBasicAuth(CredentialHelper.Username, CredentialHelper.Password)
-                    .GetStringAsync();
+            try
+            {
+                return await new Uri(endpoint)
+                        .AppendPathSegment(resource)
+                        .AppendPathSegment("user-role")
+                        .WithBasicAuth(CredentialHelper.Username, CredentialHelper.Password)
+                        .GetStringAsync();
+            }
+            catch (FlurlHttpException ex)
+            {
+                var errors = await ex.GetResponseJsonAsync<Dictionary<string, dynamic>>();
+                return ExceptionHandler.HandleException<string>(errors);
+            }
         }
 
     }

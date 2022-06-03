@@ -17,7 +17,7 @@ namespace TheComfortZone.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<T>> Get([FromQuery] TSearch search = null)
+        public async virtual Task<IEnumerable<T>> Get([FromQuery] TSearch search = null)
         {
             return await service.Get(search);
         }

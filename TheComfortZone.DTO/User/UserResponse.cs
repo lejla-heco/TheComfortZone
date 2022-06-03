@@ -12,10 +12,14 @@ namespace TheComfortZone.DTO.User
         public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Username { get; set; }
         public string Adress { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public virtual RoleResponse Role { get; set; }
         public string UserType => Role?.Name;
+
+        /** CALCULATED FIELDS **/
+        public string FullName => $"{FirstName} {LastName}";
     }
 }

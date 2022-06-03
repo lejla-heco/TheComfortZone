@@ -9,12 +9,18 @@ using TheComfortZone.Utils;
 
 namespace TheComfortZone.Controllers
 {
-    public class UserController : BaseCRUDController<UserResponse, BaseSearchObject, UserUpsertRequest, UserUpsertRequest>
+    public class UserController : BaseCRUDController<UserResponse, UserSearchRequest, UserUpsertRequest, UserUpsertRequest>
     {
         private readonly IUserService userService;
         public UserController(IUserService service) : base(service)
         {
             this.userService = service;
+        }
+
+        [Authorize(Roles = "Administrator")]
+        public override Task<IEnumerable<UserResponse>> Get([FromQuery] UserSearchRequest search = null)
+        {
+            return base.Get(search);
         }
 
         [Authorize(Roles = "Administrator")]

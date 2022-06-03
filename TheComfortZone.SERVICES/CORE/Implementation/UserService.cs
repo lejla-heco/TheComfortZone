@@ -15,7 +15,7 @@ using TheComfortZone.SERVICES.DAO.Model;
 
 namespace TheComfortZone.SERVICES.CORE.Implementation
 {
-    public class UserService : BaseCRUDService<UserResponse, User, BaseSearchObject, UserUpsertRequest, UserUpsertRequest>, IUserService
+    public class UserService : BaseCRUDService<UserResponse, User, UserSearchRequest, UserUpsertRequest, UserUpsertRequest>, IUserService
     {
         public UserService(TheComfortZoneContext context, IMapper mapper) : base(context, mapper)
         {
@@ -56,6 +56,20 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
         {
             UserResponse currentUser = await Login(username, password);
             return currentUser.UserType;
+        }
+
+        public override IQueryable<User> AddFilter(IQueryable<User> query, UserSearchRequest search = null)
+        {
+            if (!string.IsNullOrWhiteSpace(search?.RoleName))
+            {
+                query = query.Where(u => u.Role.Name == search.RoleName);
+            }
+            if (!string.IsNullOrWhiteSpace(search?.Username))
+            {
+                query = query.Where(u => u.Username.ToLower().StartsWith(search.Username.ToLower()));
+            }
+
+            return query;
         }
     }
 }
