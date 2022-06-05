@@ -58,8 +58,12 @@ namespace TheComfortZone.SERVICES.CORE.Mapper
                 .ForMember(dto => dto.Material, opts => opts.MapFrom(entity => entity.Material.Name))
                 .ForMember(dto => dto.SpaceId, opts => opts.MapFrom(entity => entity.Category.SpaceId))
                 .ForMember(dto => dto.DesignerId, opts => opts.MapFrom(entity => entity.Collection.DesignerId));
-
             CreateMap<DTO.FurnitureItem.FurnitureItemUpsertRequest, DAO.Model.FurnitureItem>();
+
+            /** ORDER **/
+            CreateMap<DAO.Model.Order, DTO.Order.OrderResponse>()
+                .ForMember(dto => dto.Customer, opts => opts.MapFrom(entity => $"{entity.User.FirstName} {entity.User.LastName}"));
+            CreateMap<DTO.Order.OrderUpdateRequest, DAO.Model.Order>();
         }
     }
 }

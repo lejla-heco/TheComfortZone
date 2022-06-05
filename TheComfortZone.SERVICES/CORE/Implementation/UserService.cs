@@ -64,10 +64,10 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             return mapper.Map<UserResponse>(entity);
         }
 
-        public async Task<string> GetUserRole(string username, string password)
+        public async Task<LoggedUser> GetUserRole(string username, string password)
         {
             UserResponse currentUser = await Login(username, password);
-            return currentUser.UserType;
+            return new LoggedUser { UserId = currentUser.UserId, UserRole = currentUser.Role.Name };
         }
 
         public override IQueryable<User> AddFilter(IQueryable<User> query, UserSearchRequest search = null)
@@ -91,8 +91,19 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
                 List<DAO.Model.Order> orders = context.Orders.Where(o => o.EmployeeId == id).ToList();
                 List<DAO.Model.Appointment> appointments = context.Appointments.Where(a => a.EmployeeId == id).ToList();
 
-                orders.ForEach(o => o.EmployeeId = null);
-                appointments.ForEach(a => a.EmployeeId = null);
+                orders.ForEach(o =>
+                {
+                    o.EmployeeId = null;
+                    if (o.Status != OrderStatus.Sent.ToString())
+                        o.OrderDate = DateTime.Now;
+                });
+                appointments.ForEach(a =>
+                {
+                    a.EmployeeId = null;
+                    if (a.Approved == null)
+                        a.AppointmentDate = DateTime.Now;
+                }
+                );
             }
 
             context.SaveChanges();

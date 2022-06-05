@@ -18,7 +18,7 @@ namespace TheComfortZone.WINUI.Service
         {
         }
 
-        public async Task<string> GetUserRole()
+        public async Task<DTO.Utils.LoggedUser> GetUserRole()
         {
             try
             {
@@ -26,12 +26,12 @@ namespace TheComfortZone.WINUI.Service
                         .AppendPathSegment(resource)
                         .AppendPathSegment("user-role")
                         .WithBasicAuth(CredentialHelper.Username, CredentialHelper.Password)
-                        .GetStringAsync();
+                        .GetJsonAsync<DTO.Utils.LoggedUser>();
             }
             catch (FlurlHttpException ex)
             {
                 var errors = await ex.GetResponseJsonAsync<Dictionary<string, dynamic>>();
-                return ExceptionHandler.HandleException<string>(errors);
+                return ExceptionHandler.HandleException<DTO.Utils.LoggedUser>(errors);
             }
         }
     }

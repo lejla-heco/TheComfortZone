@@ -36,7 +36,7 @@ namespace TheComfortZone.Controllers
         }
 
         [HttpGet("user-role")]
-        public Task<string> GetUserRole()
+        public Task<LoggedUser> GetUserRole()
         {
             Credentials credentials = CredentialsParser.ParseCredentials(Request);
             return userService.GetUserRole(credentials.Username, credentials.Password);

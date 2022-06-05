@@ -44,5 +44,17 @@ namespace TheComfortZone.WINUI.Properties {
                 this["LoggedInUserType"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public int LoggedInUserId {
+            get {
+                return ((int)(this["LoggedInUserId"]));
+            }
+            set
+            {
+                this["LoggedInUserId"] = value;
+            }
+        }
     }
 }

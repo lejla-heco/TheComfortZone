@@ -31,8 +31,9 @@ namespace TheComfortZone.WINUI.Forms
 
             try
             {
-                string UserRole = await userService.GetUserRole();
-                Settings.Default.LoggedInUserType = UserRole;
+                var User = await userService.GetUserRole();
+                Settings.Default.LoggedInUserType = User.UserRole;
+                Settings.Default.LoggedInUserId = User.UserId;
                 this.Hide();
                 MDIParent mdiForm = new MDIParent();
                 mdiForm.ShowDialog();

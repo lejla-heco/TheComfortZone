@@ -47,6 +47,7 @@ builder.Services.AddTransient<ICollectionService, CollectionService>();
 builder.Services.AddTransient<IMetricUnitService, MetricUnitService>();
 builder.Services.AddTransient<IMaterialService, MaterialService>();
 builder.Services.AddTransient<IColorService, ColorService>();
+builder.Services.AddTransient<IOrderService, OrderService>();
 
 builder.Services.AddAutoMapper(typeof(IUserService));
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

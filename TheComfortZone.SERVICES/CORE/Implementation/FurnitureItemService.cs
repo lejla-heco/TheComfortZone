@@ -25,7 +25,7 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
                 .Include(x => x.Material)
                 .Include(x => x.MetricUnit)
                 .Include("FurnitureColors.Color");
-            return base.IncludeList(query);
+            return query;
         }
 
         public override IQueryable<FurnitureItem> AddFilter(IQueryable<FurnitureItem> query, FurnitureItemSearchRequest search = null)
