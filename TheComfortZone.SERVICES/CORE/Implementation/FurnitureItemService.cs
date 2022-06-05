@@ -89,7 +89,7 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             context.RemoveRange(orderItems);
             context.RemoveRange(favourites);
 
-            context.SaveChanges(true);
+            context.SaveChanges();
         }
 
         /** VALIDATION **/
@@ -129,12 +129,6 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
                 throw new UserException("Furniture item with specified ID does not exist!");
             
             ValidateInsert(update);
-        }
-
-        public override void ValidateDelete(int id)
-        {
-            if (context.FurnitureItems.Find(id) == null)
-                throw new UserException("Furniture item with specified ID does not exist!");
         }
     }
 }

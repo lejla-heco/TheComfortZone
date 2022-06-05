@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TheComfortZone.DTO.Utils;
 using TheComfortZone.SERVICES.API;
+using TheComfortZone.SERVICES.CORE.Utils;
 using TheComfortZone.SERVICES.DAO;
 
 namespace TheComfortZone.SERVICES.CORE.Implementation
@@ -71,6 +72,10 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
         /** VALIDATION **/
         public virtual void ValidateInsert(TInsert insert) { }
         public virtual void ValidateUpdate(int id, TUpdate update) { }
-        public virtual void ValidateDelete(int id) { }
+        public virtual void ValidateDelete(int id)
+        {
+            if (context.Set<TDb>().Find(id) == null)
+                throw new UserException($"{typeof(TDb).Name} with specified ID does not exist!");
+        }
     }
 }

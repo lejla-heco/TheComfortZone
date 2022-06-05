@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TheComfortZone.DTO.User;
+using TheComfortZone.DTO.Utils;
 using TheComfortZone.WINUI.Service;
 
 namespace TheComfortZone.WINUI.Forms.Employee
@@ -15,7 +16,7 @@ namespace TheComfortZone.WINUI.Forms.Employee
     public partial class frmEmployeeAddEdit : Form
     {
         UserAPIService userAPIService = new UserAPIService();
-        private const string EMPLOYEE_ROLE = "Employee";
+        private string EMPLOYEE_ROLE = UserType.Employee.ToString();
         private UserResponse? user;
         private bool design = false;
 

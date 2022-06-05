@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TheComfortZone.DTO.User;
+using TheComfortZone.DTO.Utils;
 using TheComfortZone.WINUI.Service;
 
 namespace TheComfortZone.WINUI.Forms.Employee
@@ -15,8 +16,9 @@ namespace TheComfortZone.WINUI.Forms.Employee
     public partial class frmEmployeeOverview : Form
     {
         UserAPIService userAPIService = new UserAPIService();
-        private const string EMPLOYEE_ROLE = "Employee";
+        private string EMPLOYEE_ROLE = UserType.Employee.ToString();
         private UserSearchRequest searchRequest = new UserSearchRequest();
+        private UserResponse selectedRow = null;
         public frmEmployeeOverview()
         {
             InitializeComponent();
@@ -48,6 +50,30 @@ namespace TheComfortZone.WINUI.Forms.Employee
             {
                 await getGridData();
             }
+        }
+
+        private void dgvEmployees_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btnDelete.Enabled = true;
+            selectedRow = dgvEmployees.SelectedRows[0].DataBoundItem as DTO.User.UserResponse;
+        }
+
+        private async void btnDelete_Click(object sender, EventArgs e)
+        {
+            var confirmation = MessageBox.Show("Are you sure you want to delete selected employee?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (selectedRow != null && confirmation == DialogResult.Yes)
+            {
+                string response = await userAPIService.Delete(selectedRow.UserId);
+                if (!string.IsNullOrWhiteSpace(response))
+                {
+                    MessageBox.Show(response, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    getGridData();
+                }
+            }
+
+            selectedRow = null;
+            btnDelete.Enabled = false;
         }
 
         private void dgvEmployees_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

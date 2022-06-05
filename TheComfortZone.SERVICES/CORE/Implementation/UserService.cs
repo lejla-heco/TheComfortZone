@@ -84,6 +84,20 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             return query;
         }
 
+        public override void BeforeDelete(int id)
+        {
+            if (context.Users.Include(u => u.Role).Where(u => u.UserId == id).First().Role.Name == UserType.Employee.ToString())
+            {
+                List<DAO.Model.Order> orders = context.Orders.Where(o => o.EmployeeId == id).ToList();
+                List<DAO.Model.Appointment> appointments = context.Appointments.Where(a => a.EmployeeId == id).ToList();
+
+                orders.ForEach(o => o.EmployeeId = null);
+                appointments.ForEach(a => a.EmployeeId = null);
+            }
+
+            context.SaveChanges();
+        }
+
         /** VALIDATION **/
         public override void ValidateInsert(UserInsertRequest insert)
         {

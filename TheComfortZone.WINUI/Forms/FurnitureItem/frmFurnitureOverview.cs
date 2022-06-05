@@ -92,8 +92,11 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
             if (selectedRow != null && confirmation == DialogResult.Yes)
             {
                 string response = await furnitureItemAPIService.Delete(selectedRow.FurnitureItemId);
-                MessageBox.Show(response, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                getGridData();
+                if (!string.IsNullOrWhiteSpace(response))
+                {
+                    MessageBox.Show(response, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    getGridData();
+                }
             }
 
             selectedRow = null;

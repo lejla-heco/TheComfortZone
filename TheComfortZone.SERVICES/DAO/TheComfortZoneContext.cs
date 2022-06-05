@@ -58,6 +58,8 @@ namespace TheComfortZone.SERVICES.DAO
 
                 entity.Property(e => e.DesignerId).HasColumnName("DesignerID");
 
+                entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
+
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
                 entity.HasOne(d => d.AppointmentType)
@@ -72,8 +74,13 @@ namespace TheComfortZone.SERVICES.DAO
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_REFERENCE_17");
 
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.AppointmentEmployees)
+                    .HasForeignKey(d => d.EmployeeId)
+                    .HasConstraintName("FK_REFERENCE_22");
+
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.Appointments)
+                    .WithMany(p => p.AppointmentUsers)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_REFERENCE_16");
@@ -306,6 +313,8 @@ namespace TheComfortZone.SERVICES.DAO
 
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
+                entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
+
                 entity.Property(e => e.Noip).HasColumnName("NOIP");
 
                 entity.Property(e => e.OrderDate).HasColumnType("datetime");
@@ -316,8 +325,13 @@ namespace TheComfortZone.SERVICES.DAO
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.OrderEmployees)
+                    .HasForeignKey(d => d.EmployeeId)
+                    .HasConstraintName("FK_REFERENCE_21");
+
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.Orders)
+                    .WithMany(p => p.OrderUsers)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_REFERENCE_10");

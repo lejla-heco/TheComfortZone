@@ -7,10 +7,12 @@ namespace TheComfortZone.SERVICES.DAO.Model
     {
         public User()
         {
-            Appointments = new HashSet<Appointment>();
+            AppointmentEmployees = new HashSet<Appointment>();
+            AppointmentUsers = new HashSet<Appointment>();
             Coupons = new HashSet<Coupon>();
             Favourites = new HashSet<Favourite>();
-            Orders = new HashSet<Order>();
+            OrderEmployees = new HashSet<Order>();
+            OrderUsers = new HashSet<Order>();
         }
 
         public int UserId { get; set; }
@@ -21,13 +23,15 @@ namespace TheComfortZone.SERVICES.DAO.Model
         public string Email { get; set; } = null!;
         public string PasswordHash { get; set; } = null!;
         public string PasswordSalt { get; set; } = null!;
-        public string? Username { get; set; }
+        public string Username { get; set; } = null!;
         public int RoleId { get; set; }
 
         public virtual Role Role { get; set; } = null!;
-        public virtual ICollection<Appointment> Appointments { get; set; }
+        public virtual ICollection<Appointment> AppointmentEmployees { get; set; }
+        public virtual ICollection<Appointment> AppointmentUsers { get; set; }
         public virtual ICollection<Coupon> Coupons { get; set; }
         public virtual ICollection<Favourite> Favourites { get; set; }
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Order> OrderEmployees { get; set; }
+        public virtual ICollection<Order> OrderUsers { get; set; }
     }
 }
