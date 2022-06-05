@@ -13,6 +13,7 @@ using TheComfortZone.WINUI.Forms.Collection;
 using TheComfortZone.WINUI.Forms.Designer;
 using TheComfortZone.WINUI.Forms.Employee;
 using TheComfortZone.WINUI.Forms.FurnitureItem;
+using TheComfortZone.WINUI.Forms.HomePage;
 using TheComfortZone.WINUI.Forms.MetricUnit;
 using TheComfortZone.WINUI.Forms.Order;
 using TheComfortZone.WINUI.Forms.Space;
@@ -96,6 +97,9 @@ namespace TheComfortZone.WINUI.Forms
                         break;
                 }
             }
+
+            frmHomePage frm = new frmHomePage();
+            OpenForm(frm);
         }
 
         private void OpenForm(Form frm)
