@@ -14,5 +14,11 @@ namespace TheComfortZone.Controllers
         {
             orderService = service;
         }
+
+        [NonAction]
+        public override async Task<string> Delete(int id)
+        {
+            return await base.Delete(id);
+        }
     }
 }

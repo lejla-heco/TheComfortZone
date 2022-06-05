@@ -59,12 +59,14 @@
             // 
             // btnClearSearch
             // 
+            this.btnClearSearch.Enabled = false;
             this.btnClearSearch.Location = new System.Drawing.Point(761, 36);
             this.btnClearSearch.Name = "btnClearSearch";
             this.btnClearSearch.Size = new System.Drawing.Size(127, 29);
             this.btnClearSearch.TabIndex = 3;
             this.btnClearSearch.Text = "Clear search";
             this.btnClearSearch.UseVisualStyleBackColor = true;
+            this.btnClearSearch.Click += new System.EventHandler(this.btnClearSearch_Click);
             // 
             // btnSearch
             // 
@@ -74,6 +76,7 @@
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // label1
             // 

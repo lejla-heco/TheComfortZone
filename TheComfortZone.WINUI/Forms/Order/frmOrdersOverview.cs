@@ -18,6 +18,8 @@ namespace TheComfortZone.WINUI.Forms.Order
         OrderAPIService orderAPIService = new OrderAPIService();
         private string USER_ROLE = Properties.Settings.Default.LoggedInUserType;
         private int USER_ID = Properties.Settings.Default.LoggedInUserId;
+        private OrderSearchRequest searchRequest = new OrderSearchRequest();
+        private OrderResponse selectedRow = null;
         public frmOrdersOverview()
         {
             InitializeComponent();
@@ -30,12 +32,28 @@ namespace TheComfortZone.WINUI.Forms.Order
         }
         private async Task getGridData()
         {
-            OrderSearchRequest searchRequest = new OrderSearchRequest();
             if (USER_ROLE == UserType.Employee.ToString())
                 searchRequest.EmployeeId = USER_ID;
 
             var orders = await orderAPIService.Get(searchRequest);
             dgvOrders.DataSource = orders;
+        }
+
+        private async void btnSearch_Click(object sender, EventArgs e)
+        {
+            searchRequest.OrderDate = dtpOrderDate.Value;
+            btnClearSearch.Enabled = true;
+
+            await getGridData();
+        }
+
+        private async void btnClearSearch_Click(object sender, EventArgs e)
+        {
+            searchRequest.OrderDate = null;
+            dtpOrderDate.Value = DateTime.Now;
+            btnClearSearch.Enabled = false;
+
+            await getGridData();
         }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,6 +36,13 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
                 query = query.Include(x => x.User).Where(x => x.UserId == search.UserId);
 
             return query.OrderByDescending(x => x.OrderDate);
+        }
+
+        public override List<Order> AddListFiler(List<Order> list, OrderSearchRequest search = null)
+        {
+            if (search?.OrderDate.HasValue == true)
+                list = list.Where(x => x.OrderDate.Value.ToShortDateString() == search.OrderDate.Value.ToShortDateString()).ToList();
+            return list;
         }
     }
 }
