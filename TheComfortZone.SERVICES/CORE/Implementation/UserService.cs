@@ -15,7 +15,7 @@ using TheComfortZone.SERVICES.DAO.Model;
 
 namespace TheComfortZone.SERVICES.CORE.Implementation
 {
-    public class UserService : BaseCRUDService<UserResponse, User, UserSearchRequest, UserUpsertRequest, UserUpsertRequest>, IUserService
+    public class UserService : BaseCRUDService<UserResponse, User, UserSearchRequest, UserInsertRequest, UserUpdateRequest>, IUserService
     {
         public UserService(TheComfortZoneContext context, IMapper mapper) : base(context, mapper)
         {
@@ -26,12 +26,24 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             return query.Include("Role");
         }
 
-        public override void BeforeInsert(UserUpsertRequest insert, User entity)
+        public override void BeforeInsert(UserInsertRequest insert, User entity)
         {
             var passwordSalt = PasswordGenerator.GenerateSalt();
             var passwordHash = PasswordGenerator.GenerateHash(passwordSalt, insert.Password);
             entity.PasswordSalt = passwordSalt;
             entity.PasswordHash = passwordHash;
+            entity.RoleId = context.Roles.Where(r => r.Name == insert.RoleName).First().RoleId;
+        }
+
+        public override void BeforeUpdate(User entity, UserUpdateRequest update)
+        {
+            if (!string.IsNullOrWhiteSpace(update.Password) && !string.IsNullOrWhiteSpace(update.PasswordConfirmation))
+            {
+                var passwordSalt = PasswordGenerator.GenerateSalt();
+                var passwordHash = PasswordGenerator.GenerateHash(passwordSalt, update.Password);
+                entity.PasswordSalt = passwordSalt;
+                entity.PasswordHash = passwordHash;
+            }
         }
 
         public async Task<UserResponse> Login(string username, string password)
@@ -70,6 +82,22 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             }
 
             return query;
+        }
+
+        /** VALIDATION **/
+        public override void ValidateInsert(UserInsertRequest insert)
+        {
+            if (insert.Password != insert.PasswordConfirmation)
+                throw new UserException("Password and Password confirmation must be the same!");
+        }
+
+        public override void ValidateUpdate(int id, UserUpdateRequest update)
+        {
+            if (!string.IsNullOrWhiteSpace(update.Password) && !string.IsNullOrWhiteSpace(update.PasswordConfirmation))
+            {
+                if (update.Password != update.PasswordConfirmation)
+                    throw new UserException("Password and Password confirmation must be the same!");
+            }
         }
     }
 }

@@ -12,12 +12,12 @@ using TheComfortZone.WINUI.Service;
 
 namespace TheComfortZone.WINUI.Forms.Employee
 {
-    public partial class frmEmployee : Form
+    public partial class frmEmployeeOverview : Form
     {
         UserAPIService userAPIService = new UserAPIService();
         private const string EMPLOYEE_ROLE = "Employee";
         private UserSearchRequest searchRequest = new UserSearchRequest();
-        public frmEmployee()
+        public frmEmployeeOverview()
         {
             InitializeComponent();
             dgvEmployees.AutoGenerateColumns = false;
@@ -39,6 +39,25 @@ namespace TheComfortZone.WINUI.Forms.Employee
         {
             searchRequest.Username = txtUsername.Text;
             await getGridData();
+        }
+
+        private async void btnNewEmployee_Click(object sender, EventArgs e)
+        {
+            frmEmployeeAddEdit frm = new frmEmployeeAddEdit();
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                await getGridData();
+            }
+        }
+
+        private void dgvEmployees_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var selectedItem = dgvEmployees.SelectedRows[0].DataBoundItem as UserResponse;
+            frmEmployeeAddEdit frm = new frmEmployeeAddEdit(selectedItem);
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                getGridData();
+            }
         }
     }
 }

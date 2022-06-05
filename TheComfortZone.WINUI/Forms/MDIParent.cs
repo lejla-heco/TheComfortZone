@@ -162,7 +162,7 @@ namespace TheComfortZone.WINUI.Forms
 
         private void employeesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmEmployee frm = new frmEmployee();
+            frmEmployeeOverview frm = new frmEmployeeOverview();
             OpenForm(frm);
         }
 

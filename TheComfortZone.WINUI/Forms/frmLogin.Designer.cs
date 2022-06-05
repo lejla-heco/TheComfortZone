@@ -28,20 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtUsername = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.txtUsername = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // txtUsername
-            // 
-            this.txtUsername.Location = new System.Drawing.Point(103, 268);
-            this.txtUsername.Name = "txtUsername";
-            this.txtUsername.PlaceholderText = "Username:";
-            this.txtUsername.Size = new System.Drawing.Size(230, 27);
-            this.txtUsername.TabIndex = 0;
             // 
             // txtPassword
             // 
@@ -72,6 +64,14 @@
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
+            // txtUsername
+            // 
+            this.txtUsername.Location = new System.Drawing.Point(103, 268);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.PlaceholderText = "Username:";
+            this.txtUsername.Size = new System.Drawing.Size(230, 27);
+            this.txtUsername.TabIndex = 0;
+            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -90,10 +90,9 @@
         }
 
         #endregion
-
-        private TextBox txtUsername;
         private TextBox txtPassword;
         private Button btnLogin;
         private PictureBox pictureBox1;
+        private TextBox txtUsername;
     }
 }

@@ -13,8 +13,8 @@ namespace TheComfortZone.SERVICES.CORE.Mapper
         {
             /** USER **/
             CreateMap<DAO.Model.User, DTO.User.UserResponse>();
-            CreateMap<DTO.User.UserUpsertRequest, DAO.Model.User>();
-            CreateMap<DTO.User.UserUpsertRequest, DAO.Model.User>();
+            CreateMap<DTO.User.UserInsertRequest, DAO.Model.User>();
+            CreateMap<DTO.User.UserUpdateRequest, DAO.Model.User>();
 
             /** ROLE **/
             CreateMap<DAO.Model.Role, DTO.Role.RoleResponse>();

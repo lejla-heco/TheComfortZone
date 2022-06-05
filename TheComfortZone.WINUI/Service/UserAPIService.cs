@@ -7,10 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using TheComfortZone.WINUI.Utils;
 using TheComfortZone.DTO.Utils;
+using TheComfortZone.DTO.User;
 
 namespace TheComfortZone.WINUI.Service
 {
-    public class UserAPIService : BaseAPIService<DTO.User.UserResponse, DTO.User.UserSearchRequest, DTO.User.UserUpsertRequest, DTO.User.UserUpsertRequest>
+    public class UserAPIService : BaseAPIService<DTO.User.UserResponse, DTO.User.UserSearchRequest, DTO.User.UserInsertRequest, DTO.User.UserUpdateRequest>
     {
         private const string API_ROUTE = "User";
         public UserAPIService() : base(API_ROUTE)
@@ -33,6 +34,5 @@ namespace TheComfortZone.WINUI.Service
                 return ExceptionHandler.HandleException<string>(errors);
             }
         }
-
     }
 }

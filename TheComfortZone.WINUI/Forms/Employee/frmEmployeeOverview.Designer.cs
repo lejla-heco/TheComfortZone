@@ -1,6 +1,6 @@
 ﻿namespace TheComfortZone.WINUI.Forms.Employee
 {
-    partial class frmEmployee
+    partial class frmEmployeeOverview
     {
         /// <summary>
         /// Required designer variable.
@@ -73,6 +73,7 @@
             this.dgvEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEmployees.Size = new System.Drawing.Size(896, 397);
             this.dgvEmployees.TabIndex = 0;
+            this.dgvEmployees.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEmployees_CellDoubleClick);
             // 
             // Employee
             // 
@@ -131,6 +132,7 @@
             this.btnNewEmployee.TabIndex = 3;
             this.btnNewEmployee.Text = "New employee";
             this.btnNewEmployee.UseVisualStyleBackColor = true;
+            this.btnNewEmployee.Click += new System.EventHandler(this.btnNewEmployee_Click);
             // 
             // label1
             // 
@@ -168,14 +170,14 @@
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             // 
-            // frmEmployee
+            // frmEmployeeOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(932, 538);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Name = "frmEmployee";
+            this.Name = "frmEmployeeOverview";
             this.Text = "Employees";
             this.Load += new System.EventHandler(this.frmEmployee_Load);
             this.groupBox2.ResumeLayout(false);
