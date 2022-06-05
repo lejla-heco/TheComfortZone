@@ -32,17 +32,21 @@
             this.btnLogin = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.txtUsername = new System.Windows.Forms.TextBox();
+            this.pbEye = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbEye)).BeginInit();
             this.SuspendLayout();
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(103, 318);
+            this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtPassword.Location = new System.Drawing.Point(83, 321);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '●';
-            this.txtPassword.PlaceholderText = "Password:";
-            this.txtPassword.Size = new System.Drawing.Size(230, 27);
+            this.txtPassword.PlaceholderText = "Password";
+            this.txtPassword.Size = new System.Drawing.Size(266, 30);
             this.txtPassword.TabIndex = 1;
+            this.txtPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btnLogin
             // 
@@ -66,17 +70,31 @@
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(103, 268);
+            this.txtUsername.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtUsername.Location = new System.Drawing.Point(83, 273);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.PlaceholderText = "Username:";
-            this.txtUsername.Size = new System.Drawing.Size(230, 27);
+            this.txtUsername.PlaceholderText = "Username";
+            this.txtUsername.Size = new System.Drawing.Size(266, 30);
             this.txtUsername.TabIndex = 0;
+            this.txtUsername.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // pbEye
+            // 
+            this.pbEye.Image = global::TheComfortZone.WINUI.Properties.Resources.closed_eye;
+            this.pbEye.Location = new System.Drawing.Point(359, 321);
+            this.pbEye.Name = "pbEye";
+            this.pbEye.Size = new System.Drawing.Size(30, 30);
+            this.pbEye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbEye.TabIndex = 4;
+            this.pbEye.TabStop = false;
+            this.pbEye.Click += new System.EventHandler(this.pbEye_Click);
             // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(433, 450);
+            this.Controls.Add(this.pbEye);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtUsername);
@@ -84,6 +102,7 @@
             this.Name = "frmLogin";
             this.Text = "The Comfort Zone";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbEye)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -94,5 +113,6 @@
         private Button btnLogin;
         private PictureBox pictureBox1;
         private TextBox txtUsername;
+        private PictureBox pbEye;
     }
 }

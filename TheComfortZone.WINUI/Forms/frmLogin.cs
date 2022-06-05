@@ -45,5 +45,10 @@ namespace TheComfortZone.WINUI.Forms
 
             Cursor = Cursors.Default;
         }
+
+        private void pbEye_Click(object sender, EventArgs e)
+        {
+            PasswordChar.ShowHidePassword(txtPassword, pbEye);
+        }
     }
 }

@@ -35,6 +35,8 @@
             this.txtFirstName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pbEyePassConfirmation = new System.Windows.Forms.PictureBox();
+            this.pbEyePass = new System.Windows.Forms.PictureBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtPasswordConfirmation = new System.Windows.Forms.TextBox();
@@ -49,6 +51,8 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbEyePassConfirmation)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbEyePass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -98,6 +102,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.pbEyePassConfirmation);
+            this.groupBox1.Controls.Add(this.pbEyePass);
             this.groupBox1.Controls.Add(this.txtEmail);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.txtPasswordConfirmation);
@@ -116,9 +122,31 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(516, 382);
+            this.groupBox1.Size = new System.Drawing.Size(554, 382);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
+            // 
+            // pbEyePassConfirmation
+            // 
+            this.pbEyePassConfirmation.Image = global::TheComfortZone.WINUI.Properties.Resources.closed_eye;
+            this.pbEyePassConfirmation.Location = new System.Drawing.Point(508, 338);
+            this.pbEyePassConfirmation.Name = "pbEyePassConfirmation";
+            this.pbEyePassConfirmation.Size = new System.Drawing.Size(30, 30);
+            this.pbEyePassConfirmation.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbEyePassConfirmation.TabIndex = 25;
+            this.pbEyePassConfirmation.TabStop = false;
+            this.pbEyePassConfirmation.Click += new System.EventHandler(this.pbEyePassConfirmation_Click);
+            // 
+            // pbEyePass
+            // 
+            this.pbEyePass.Image = global::TheComfortZone.WINUI.Properties.Resources.closed_eye;
+            this.pbEyePass.Location = new System.Drawing.Point(508, 293);
+            this.pbEyePass.Name = "pbEyePass";
+            this.pbEyePass.Size = new System.Drawing.Size(30, 30);
+            this.pbEyePass.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbEyePass.TabIndex = 25;
+            this.pbEyePass.TabStop = false;
+            this.pbEyePass.Click += new System.EventHandler(this.pbEyePass_Click);
             // 
             // txtEmail
             // 
@@ -234,7 +262,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(543, 441);
+            this.ClientSize = new System.Drawing.Size(580, 441);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmEmployeeAddEdit";
@@ -242,6 +270,8 @@
             this.Load += new System.EventHandler(this.frmEmployeeAddEdit_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbEyePassConfirmation)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbEyePass)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
@@ -267,5 +297,7 @@
         private ErrorProvider errorProvider;
         private TextBox txtEmail;
         private Label label8;
+        private PictureBox pbEyePassConfirmation;
+        private PictureBox pbEyePass;
     }
 }

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using TheComfortZone.DTO.User;
 using TheComfortZone.DTO.Utils;
 using TheComfortZone.WINUI.Service;
+using TheComfortZone.WINUI.Utils;
 
 namespace TheComfortZone.WINUI.Forms.Employee
 {
@@ -221,6 +222,16 @@ namespace TheComfortZone.WINUI.Forms.Employee
                     errorProvider.SetError(txtPasswordConfirmation, null);
                 }
             }
+        }
+
+        private void pbEyePass_Click(object sender, EventArgs e)
+        {
+            PasswordChar.ShowHidePassword(txtPassword, pbEyePass);
+        }
+
+        private void pbEyePassConfirmation_Click(object sender, EventArgs e)
+        {
+            PasswordChar.ShowHidePassword(txtPasswordConfirmation, pbEyePassConfirmation);
         }
     }
 }
