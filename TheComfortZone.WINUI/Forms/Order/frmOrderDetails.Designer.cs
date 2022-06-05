@@ -47,7 +47,7 @@
             this.Color = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Material = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnChangeStatus = new System.Windows.Forms.Button();
             this.cmbOrderStatus = new System.Windows.Forms.ComboBox();
             this.lblTotalPrice = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -238,7 +238,7 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button1);
+            this.groupBox3.Controls.Add(this.btnChangeStatus);
             this.groupBox3.Controls.Add(this.cmbOrderStatus);
             this.groupBox3.Controls.Add(this.lblTotalPrice);
             this.groupBox3.Controls.Add(this.label7);
@@ -249,14 +249,15 @@
             this.groupBox3.TabIndex = 8;
             this.groupBox3.TabStop = false;
             // 
-            // button1
+            // btnChangeStatus
             // 
-            this.button1.Location = new System.Drawing.Point(628, 67);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(197, 29);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Change order status";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnChangeStatus.Location = new System.Drawing.Point(628, 67);
+            this.btnChangeStatus.Name = "btnChangeStatus";
+            this.btnChangeStatus.Size = new System.Drawing.Size(197, 29);
+            this.btnChangeStatus.TabIndex = 4;
+            this.btnChangeStatus.Text = "Change order status";
+            this.btnChangeStatus.UseVisualStyleBackColor = true;
+            this.btnChangeStatus.Click += new System.EventHandler(this.btnChangeStatus_Click);
             // 
             // cmbOrderStatus
             // 
@@ -328,7 +329,7 @@
         private GroupBox groupBox2;
         private DataGridView dgvOrderItems;
         private GroupBox groupBox3;
-        private Button button1;
+        private Button btnChangeStatus;
         private ComboBox cmbOrderStatus;
         private Label lblTotalPrice;
         private Label label7;

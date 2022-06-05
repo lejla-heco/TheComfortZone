@@ -66,6 +66,7 @@ namespace TheComfortZone.SERVICES.CORE.Mapper
                 .ForMember(dto => dto.PhoneNumber, opts => opts.MapFrom(entity => entity.User.PhoneNumber))
                 .ForMember(dto => dto.Adress, opts => opts.MapFrom(entity => entity.User.Adress));
             CreateMap<DTO.Order.OrderUpdateRequest, DAO.Model.Order>();
+            CreateMap<DTO.Order.OrderUpdateRequest, DAO.Model.Order>();
 
             /** ORDER ITEM **/
             CreateMap<DAO.Model.OrderItem, DTO.OrderItem.OrderItemResponse>()

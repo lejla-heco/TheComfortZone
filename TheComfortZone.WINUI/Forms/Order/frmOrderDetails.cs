@@ -16,6 +16,7 @@ namespace TheComfortZone.WINUI.Forms.Order
 {
     public partial class frmOrderDetails : Form
     {
+        OrderAPIService orderAPIService = new OrderAPIService();
         OrderItemAPIService orderItemAPIService = new OrderItemAPIService();
         private OrderResponse order;
         private OrderItemSearchRequest searchRequest = new OrderItemSearchRequest();
@@ -60,6 +61,23 @@ namespace TheComfortZone.WINUI.Forms.Order
         {
             var orderItems = await orderItemAPIService.Get(searchRequest);
             dgvOrderItems.DataSource = orderItems;
+        }
+
+        private async void btnChangeStatus_Click(object sender, EventArgs e)
+        {
+            if (cmbOrderStatus.Text == order.Status)
+                MessageBox.Show("You didn't update order status", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            else
+            {
+                OrderUpdateRequest update = new OrderUpdateRequest();
+                update.Status = cmbOrderStatus.Text;
+                var result = await orderAPIService.Put(order.OrderId, update);
+                if (result != null)
+                {
+                    MessageBox.Show("Successfully updated order!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    DialogResult = DialogResult.OK;
+                }
+            }
         }
     }
 }

@@ -6,5 +6,6 @@ namespace TheComfortZone.DTO.Order
 {
     public class OrderUpdateRequest
     {
+        public string Status { get; set; }
     }
 }
