@@ -34,11 +34,7 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
                 query = query.Skip(search.Page.Value * search.PageSize.Value).Take(search.PageSize.Value);
             }
 
-            var list = query.ToList();
-            list = AddListFiler(list, search);
-
-            return mapper.Map<List<T>>(list);
-
+            return mapper.Map<List<T>>(query.ToList());
         }
 
         public virtual IQueryable<TDb> IncludeList(IQueryable<TDb> query)
@@ -49,11 +45,6 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
         public virtual IQueryable<TDb> AddFilter(IQueryable<TDb> query, TSearch search = null)
         {
             return query;
-        }
-
-        public virtual List<TDb> AddListFiler(List<TDb> list, TSearch search = null)
-        {
-            return list;
         }
 
         public async Task<T> GetById(int id)

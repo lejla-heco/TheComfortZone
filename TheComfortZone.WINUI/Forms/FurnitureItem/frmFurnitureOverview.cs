@@ -18,7 +18,6 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
         FurnitureItemAPIService furnitureItemAPIService = new FurnitureItemAPIService();
         SpaceAPIService spaceAPIService = new SpaceAPIService();
         CategoryAPIService categoryAPIService = new CategoryAPIService();
-
         private DTO.FurnitureItem.FurnitureItemResponse selectedRow = null;
         public frmFurnitureOverview()
         {

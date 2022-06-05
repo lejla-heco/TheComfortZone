@@ -9,6 +9,7 @@ namespace TheComfortZone.SERVICES.DAO.Model
         public int FurnitureItemId { get; set; }
         public int OrderId { get; set; }
         public int? OrderQuantity { get; set; }
+        public string? Color { get; set; }
 
         public virtual FurnitureItem FurnitureItem { get; set; } = null!;
         public virtual Order Order { get; set; } = null!;

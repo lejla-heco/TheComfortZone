@@ -6,8 +6,8 @@ namespace TheComfortZone.DTO.Utils
 {
     public enum OrderStatus
     {
-        On_hold,
-        In_the_preparation,
-        Sent
+        Sent,
+        Preparing,
+        Completed
     }
 }

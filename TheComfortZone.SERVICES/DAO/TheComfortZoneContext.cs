@@ -343,6 +343,10 @@ namespace TheComfortZone.SERVICES.DAO
 
                 entity.Property(e => e.OrderItemId).HasColumnName("OrderItemID");
 
+                entity.Property(e => e.Color)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.FurnitureItemId).HasColumnName("FurnitureItemID");
 
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");

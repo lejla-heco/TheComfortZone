@@ -31,18 +31,16 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
         public override IQueryable<Order> AddFilter(IQueryable<Order> query, OrderSearchRequest search = null)
         {
             if (search?.EmployeeId.HasValue == true)
-                query = query.Include(x => x.Employee).Where(x => x.EmployeeId == search.EmployeeId);
+                query = query.Include(x => x.Employee)
+                    .Where(x => x.EmployeeId == search.EmployeeId && x.Status != OrderStatus.Completed.ToString());
             if (search?.UserId.HasValue == true)
                 query = query.Include(x => x.User).Where(x => x.UserId == search.UserId);
+
+            if (search?.OrderDate.HasValue == true)
+                query = query.Where(x => x.OrderDate.Value.Date == search.OrderDate.Value.Date);
 
             return query.OrderByDescending(x => x.OrderDate);
         }
 
-        public override List<Order> AddListFiler(List<Order> list, OrderSearchRequest search = null)
-        {
-            if (search?.OrderDate.HasValue == true)
-                list = list.Where(x => x.OrderDate.Value.ToShortDateString() == search.OrderDate.Value.ToShortDateString()).ToList();
-            return list;
-        }
     }
 }

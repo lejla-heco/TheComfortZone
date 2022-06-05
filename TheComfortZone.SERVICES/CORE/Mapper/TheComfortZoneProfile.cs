@@ -62,8 +62,19 @@ namespace TheComfortZone.SERVICES.CORE.Mapper
 
             /** ORDER **/
             CreateMap<DAO.Model.Order, DTO.Order.OrderResponse>()
-                .ForMember(dto => dto.Customer, opts => opts.MapFrom(entity => $"{entity.User.FirstName} {entity.User.LastName}"));
+                .ForMember(dto => dto.Customer, opts => opts.MapFrom(entity => $"{entity.User.FirstName} {entity.User.LastName}"))
+                .ForMember(dto => dto.PhoneNumber, opts => opts.MapFrom(entity => entity.User.PhoneNumber))
+                .ForMember(dto => dto.Adress, opts => opts.MapFrom(entity => entity.User.Adress));
             CreateMap<DTO.Order.OrderUpdateRequest, DAO.Model.Order>();
+
+            /** ORDER ITEM **/
+            CreateMap<DAO.Model.OrderItem, DTO.OrderItem.OrderItemResponse>()
+                .ForMember(dto => dto.ProductName, opts => opts.MapFrom(entity => entity.FurnitureItem.Name))
+                .ForMember(dto => dto.CategoryName, opts => opts.MapFrom(entity => entity.FurnitureItem.Category.Name))
+                .ForMember(dto => dto.CollectionName, opts => opts.MapFrom(entity => entity.FurnitureItem.Collection.Name))
+                .ForMember(dto => dto.UnitPrice, opts => opts
+                .MapFrom(entity => entity.FurnitureItem.OnSale == true ? entity.FurnitureItem.DiscountPrice : entity.FurnitureItem.RegularPrice))
+                .ForMember(dto => dto.MaterialName, opts => opts.MapFrom(entity => entity.FurnitureItem.Material.Name));
         }
     }
 }

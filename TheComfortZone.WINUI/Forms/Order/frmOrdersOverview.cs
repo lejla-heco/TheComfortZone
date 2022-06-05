@@ -55,5 +55,12 @@ namespace TheComfortZone.WINUI.Forms.Order
 
             await getGridData();
         }
+
+        private void dgvOrders_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var selectedItem = dgvOrders.SelectedRows[0].DataBoundItem as OrderResponse;
+            frmOrderDetails frm = new frmOrderDetails(selectedItem);
+            frm.ShowDialog();
+        }
     }
 }

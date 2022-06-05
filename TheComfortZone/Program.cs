@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using TheComfortZone;
 using TheComfortZone.Authentication;
 using TheComfortZone.SERVICES.API;
 using TheComfortZone.SERVICES.CORE.Implementation;
@@ -48,6 +47,7 @@ builder.Services.AddTransient<IMetricUnitService, MetricUnitService>();
 builder.Services.AddTransient<IMaterialService, MaterialService>();
 builder.Services.AddTransient<IColorService, ColorService>();
 builder.Services.AddTransient<IOrderService, OrderService>();
+builder.Services.AddTransient<IOrderItemService, OrderItemService>();
 
 builder.Services.AddAutoMapper(typeof(IUserService));
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
