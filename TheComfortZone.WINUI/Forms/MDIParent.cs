@@ -11,6 +11,7 @@ using TheComfortZone.DTO.Utils;
 using TheComfortZone.WINUI.Forms.Appointment;
 using TheComfortZone.WINUI.Forms.Category;
 using TheComfortZone.WINUI.Forms.Collection;
+using TheComfortZone.WINUI.Forms.Coupon;
 using TheComfortZone.WINUI.Forms.Designer;
 using TheComfortZone.WINUI.Forms.Employee;
 using TheComfortZone.WINUI.Forms.FurnitureItem;
@@ -173,6 +174,12 @@ namespace TheComfortZone.WINUI.Forms
         private void appointmentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAppointmentOverview frm = new frmAppointmentOverview();
+            OpenForm(frm);
+        }
+
+        private void discountCouponsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCouponOverview frm = new frmCouponOverview();
             OpenForm(frm);
         }
 

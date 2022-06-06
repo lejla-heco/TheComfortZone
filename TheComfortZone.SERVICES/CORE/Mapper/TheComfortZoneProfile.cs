@@ -84,6 +84,10 @@ namespace TheComfortZone.SERVICES.CORE.Mapper
 
             /** APPOINTMENT TYPE **/
             CreateMap<DAO.Model.AppointmentType, DTO.AppointmentType.AppointmentTypeResponse>();
+
+            /** COUPON **/
+            CreateMap<DAO.Model.Coupon, DTO.Coupon.CouponResponse>()
+                .ForMember(dto => dto.Customer, opts => opts.MapFrom(entity => $"{entity.User.FirstName} {entity.User.LastName}"));
         }
     }
 }
