@@ -34,5 +34,22 @@ namespace TheComfortZone.WINUI.Service
                 return ExceptionHandler.HandleException<DTO.Utils.LoggedUser>(errors);
             }
         }
+
+        public async Task<List<UserCmbList>> GetUsernames()
+        {
+            try
+            {
+                return await new Uri(endpoint)
+                        .AppendPathSegment(resource)
+                        .AppendPathSegment("cmb-usernames")
+                        .WithBasicAuth(CredentialHelper.Username, CredentialHelper.Password)
+                        .GetJsonAsync<List<UserCmbList>>();
+            }
+            catch (FlurlHttpException ex)
+            {
+                var errors = await ex.GetResponseJsonAsync<Dictionary<string, dynamic>>();
+                return ExceptionHandler.HandleException<List<UserCmbList>>(errors);
+            }
+        }
     }
 }

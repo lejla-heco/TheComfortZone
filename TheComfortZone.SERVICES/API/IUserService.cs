@@ -12,5 +12,6 @@ namespace TheComfortZone.SERVICES.API
     {
         Task<DTO.User.UserResponse> Login(string username, string password);
         Task<LoggedUser> GetUserRole(string username, string password);
+        Task<List<UserCmbList>> GetUsernames();
     }
 }

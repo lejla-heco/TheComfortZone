@@ -15,6 +15,7 @@ namespace TheComfortZone.SERVICES.CORE.Mapper
             CreateMap<DAO.Model.User, DTO.User.UserResponse>();
             CreateMap<DTO.User.UserInsertRequest, DAO.Model.User>();
             CreateMap<DTO.User.UserUpdateRequest, DAO.Model.User>();
+            CreateMap<DAO.Model.User, DTO.User.UserCmbList>();
 
             /** ROLE **/
             CreateMap<DAO.Model.Role, DTO.Role.RoleResponse>();

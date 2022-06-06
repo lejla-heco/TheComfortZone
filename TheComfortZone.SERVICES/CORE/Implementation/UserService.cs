@@ -109,6 +109,12 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             context.SaveChanges();
         }
 
+        public async Task<List<UserCmbList>> GetUsernames()
+        {
+            var query = context.Users.Include(u => u.Role).Where(u => u.Role.Name == UserType.User.ToString());
+            return mapper.Map<List<UserCmbList>>(query.ToList());
+        }
+
         /** VALIDATION **/
         public override void ValidateInsert(UserInsertRequest insert)
         {

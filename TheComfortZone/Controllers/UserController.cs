@@ -41,5 +41,12 @@ namespace TheComfortZone.Controllers
             Credentials credentials = CredentialsParser.ParseCredentials(Request);
             return userService.GetUserRole(credentials.Username, credentials.Password);
         }
+
+        [Authorize(Roles = "Administrator")]
+        [HttpGet("cmb-usernames")]
+        public async Task<List<UserCmbList>> GetCmbList()
+        {
+            return await userService.GetUsernames();
+        }
     }
 }

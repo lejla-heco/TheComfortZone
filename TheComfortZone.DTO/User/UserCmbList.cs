@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using TheComfortZone.DTO.Utils;
 
-namespace TheComfortZone.DTO.Coupon
+namespace TheComfortZone.DTO.User
 {
-    public class CouponSearchRequest : BaseSearchObject
+    public class UserCmbList
     {
+        public int UserId { get; set; }
         public string Username { get; set; }
     }
 }

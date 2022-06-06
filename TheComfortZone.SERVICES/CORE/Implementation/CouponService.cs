@@ -23,5 +23,13 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             query = query.Include(x => x.User);
             return query;
         }
+
+        public override IQueryable<Coupon> AddFilter(IQueryable<Coupon> query, CouponSearchRequest search = null)
+        {
+            if (!string.IsNullOrWhiteSpace(search?.Username))
+                query = query.Where(x => x.User.Username == search.Username);
+
+            return query;
+        }
     }
 }
