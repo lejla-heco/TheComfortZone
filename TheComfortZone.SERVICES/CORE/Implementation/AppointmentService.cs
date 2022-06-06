@@ -24,5 +24,14 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
                 .Include(x => x.AppointmentType);
             return query;
         }
+        public override IQueryable<Appointment> AddFilter(IQueryable<Appointment> query, AppointmentSearchRequest search = null)
+        {
+            if (search?.EmployeeId.HasValue == true)
+                query = query.Where(x => x.EmployeeId == search.EmployeeId);
+            if (search?.AppointmentDate.HasValue == true)
+                query = query.Where(x => x.AppointmentDate.Value.Date == search.AppointmentDate.Value.Date);
+
+            return query.OrderByDescending(x => x.AppointmentDate);
+        }
     }
 }
