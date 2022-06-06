@@ -156,26 +156,26 @@
             // furnitureOverviewToolStripMenuItem
             // 
             this.furnitureOverviewToolStripMenuItem.Name = "furnitureOverviewToolStripMenuItem";
-            this.furnitureOverviewToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
+            this.furnitureOverviewToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.furnitureOverviewToolStripMenuItem.Text = "Furniture overview";
             this.furnitureOverviewToolStripMenuItem.Click += new System.EventHandler(this.furnitureOverviewToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(210, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(221, 6);
             // 
             // spacesToolStripMenuItem
             // 
             this.spacesToolStripMenuItem.Name = "spacesToolStripMenuItem";
-            this.spacesToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
+            this.spacesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.spacesToolStripMenuItem.Text = "Spaces";
             this.spacesToolStripMenuItem.Click += new System.EventHandler(this.spacesToolStripMenuItem_Click);
             // 
             // categoriesToolStripMenuItem
             // 
             this.categoriesToolStripMenuItem.Name = "categoriesToolStripMenuItem";
-            this.categoriesToolStripMenuItem.Size = new System.Drawing.Size(213, 26);
+            this.categoriesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.categoriesToolStripMenuItem.Text = "Categories";
             this.categoriesToolStripMenuItem.Click += new System.EventHandler(this.categoriesToolStripMenuItem_Click);
             // 
@@ -201,6 +201,7 @@
             this.appointmentsToolStripMenuItem.Name = "appointmentsToolStripMenuItem";
             this.appointmentsToolStripMenuItem.Size = new System.Drawing.Size(117, 24);
             this.appointmentsToolStripMenuItem.Text = "Appointments";
+            this.appointmentsToolStripMenuItem.Click += new System.EventHandler(this.appointmentsToolStripMenuItem_Click);
             // 
             // toolStripSeparator9
             // 

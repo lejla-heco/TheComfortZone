@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TheComfortZone.DTO.Utils;
+using TheComfortZone.WINUI.Forms.Appointment;
 using TheComfortZone.WINUI.Forms.Category;
 using TheComfortZone.WINUI.Forms.Collection;
 using TheComfortZone.WINUI.Forms.Designer;
@@ -167,6 +168,11 @@ namespace TheComfortZone.WINUI.Forms
         private void employeesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmEmployeeOverview frm = new frmEmployeeOverview();
+            OpenForm(frm);
+        }
+        private void appointmentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAppointmentOverview frm = new frmAppointmentOverview();
             OpenForm(frm);
         }
 

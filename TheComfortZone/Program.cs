@@ -48,6 +48,7 @@ builder.Services.AddTransient<IMaterialService, MaterialService>();
 builder.Services.AddTransient<IColorService, ColorService>();
 builder.Services.AddTransient<IOrderService, OrderService>();
 builder.Services.AddTransient<IOrderItemService, OrderItemService>();
+builder.Services.AddTransient<IAppointmentService, AppointmentService>();
 
 builder.Services.AddAutoMapper(typeof(IUserService));
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
