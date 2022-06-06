@@ -37,5 +37,22 @@ namespace TheComfortZone.WINUI.Forms.Appointment
             var appointments = await appointmentAPIService.Get(searchRequest);
             dgvAppointments.DataSource = appointments;
         }
+
+        private async void btnSearch_Click(object sender, EventArgs e)
+        {
+            searchRequest.AppointmentDate = dtpAppointmentDate.Value;
+            btnClearSearch.Enabled = true;
+
+            await getGridData();
+        }
+
+        private async void btnClearSearch_Click(object sender, EventArgs e)
+        {
+            searchRequest.AppointmentDate = null;
+            dtpAppointmentDate.Value = DateTime.Now;
+            btnClearSearch.Enabled = false;
+
+            await getGridData();
+        }
     }
 }
