@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using TheComfortZone.DTO.Utils;
 using TheComfortZone.WINUI.Forms.Appointment;
 using TheComfortZone.WINUI.Forms.Category;
+using TheComfortZone.WINUI.Forms.Charts;
 using TheComfortZone.WINUI.Forms.Collection;
 using TheComfortZone.WINUI.Forms.Coupon;
 using TheComfortZone.WINUI.Forms.Designer;
@@ -180,6 +181,30 @@ namespace TheComfortZone.WINUI.Forms
         private void discountCouponsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmCouponOverview frm = new frmCouponOverview();
+            OpenForm(frm);
+        }
+
+        private void top10BestSellingProductsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmTop10FP frm = new frmTop10FP();
+            OpenForm(frm);
+        }
+
+        private void salesInACertainPeriodToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmSales frm = new frmSales();
+            OpenForm(frm);
+        }
+
+        private void incomePerEmployeeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmIncome frm = new frmIncome();
+            OpenForm(frm);
+        }
+
+        private void top10MostLoyalCustomersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLoyalCustomers frm = new frmLoyalCustomers();
             OpenForm(frm);
         }
 

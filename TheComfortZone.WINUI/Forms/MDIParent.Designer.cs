@@ -237,18 +237,21 @@
             this.top10BestSellingProductsToolStripMenuItem.Name = "top10BestSellingProductsToolStripMenuItem";
             this.top10BestSellingProductsToolStripMenuItem.Size = new System.Drawing.Size(281, 26);
             this.top10BestSellingProductsToolStripMenuItem.Text = "Top 10 best selling products";
+            this.top10BestSellingProductsToolStripMenuItem.Click += new System.EventHandler(this.top10BestSellingProductsToolStripMenuItem_Click);
             // 
             // salesInACertainPeriodToolStripMenuItem
             // 
             this.salesInACertainPeriodToolStripMenuItem.Name = "salesInACertainPeriodToolStripMenuItem";
             this.salesInACertainPeriodToolStripMenuItem.Size = new System.Drawing.Size(281, 26);
             this.salesInACertainPeriodToolStripMenuItem.Text = "Sales in a certain period";
+            this.salesInACertainPeriodToolStripMenuItem.Click += new System.EventHandler(this.salesInACertainPeriodToolStripMenuItem_Click);
             // 
             // incomePerEmployeeToolStripMenuItem
             // 
             this.incomePerEmployeeToolStripMenuItem.Name = "incomePerEmployeeToolStripMenuItem";
             this.incomePerEmployeeToolStripMenuItem.Size = new System.Drawing.Size(281, 26);
             this.incomePerEmployeeToolStripMenuItem.Text = "Income per employee";
+            this.incomePerEmployeeToolStripMenuItem.Click += new System.EventHandler(this.incomePerEmployeeToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -260,6 +263,7 @@
             this.top10MostLoyalCustomersToolStripMenuItem.Name = "top10MostLoyalCustomersToolStripMenuItem";
             this.top10MostLoyalCustomersToolStripMenuItem.Size = new System.Drawing.Size(281, 26);
             this.top10MostLoyalCustomersToolStripMenuItem.Text = "Top 10 most loyal customers";
+            this.top10MostLoyalCustomersToolStripMenuItem.Click += new System.EventHandler(this.top10MostLoyalCustomersToolStripMenuItem_Click);
             // 
             // toolStripSeparator11
             // 
