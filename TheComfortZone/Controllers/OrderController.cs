@@ -15,6 +15,18 @@ namespace TheComfortZone.Controllers
             orderService = service;
         }
 
+        [Authorize(Roles = "User")]
+        public override async Task<OrderResponse> Insert([FromBody] OrderInsertRequest insert)
+        {
+            return await base.Insert(insert);
+        }
+
+        [Authorize(Roles = "Administrator,Employee")]
+        public override async Task<OrderResponse> Update(int id, [FromBody] OrderUpdateRequest update)
+        {
+            return await base.Update(id, update);
+        }
+
         [NonAction]
         public override async Task<string> Delete(int id)
         {

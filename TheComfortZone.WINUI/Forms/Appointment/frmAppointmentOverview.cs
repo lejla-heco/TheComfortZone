@@ -54,5 +54,39 @@ namespace TheComfortZone.WINUI.Forms.Appointment
 
             await getGridData();
         }
+
+        private async void dgvAppointments_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var selectedRow = dgvAppointments.SelectedRows[0].DataBoundItem as AppointmentResponse;
+            bool statusChanged = false;
+
+            /** ACCEPTED CHANGED **/
+            if (e.ColumnIndex == 6)
+            {
+                if (selectedRow.Approved == null) selectedRow.Approved = true;
+                else selectedRow.Approved = !selectedRow.Approved;
+                statusChanged = true;
+            }
+            /** DECLINED CHANGED **/
+            if (e.ColumnIndex == 7)
+            {
+                if (selectedRow.Approved == null) selectedRow.Approved = false;
+                else selectedRow.Approved = !selectedRow.Approved;
+                statusChanged = true;
+            }
+
+            if (statusChanged)
+            {
+                AppointmentUpdateRequest update = new AppointmentUpdateRequest();
+                update.Approved = selectedRow.Approved;
+                var result = await appointmentAPIService.Put(selectedRow.AppointmentId, update);
+
+                if (result != null)
+                {
+                    MessageBox.Show("Successfully updated appointment status!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    await getGridData();
+                }
+            }
+        }
     }
 }

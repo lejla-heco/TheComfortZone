@@ -6,5 +6,6 @@ namespace TheComfortZone.DTO.Appointment
 {
     public class AppointmentUpdateRequest
     {
+        public bool? Approved { get; set; }
     }
 }
