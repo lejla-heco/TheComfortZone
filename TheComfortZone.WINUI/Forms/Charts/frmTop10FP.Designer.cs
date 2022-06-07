@@ -92,11 +92,13 @@
             this.btnSearch.TabIndex = 53;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // frmTop10FP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(932, 538);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.cmbSpace);
@@ -105,6 +107,7 @@
             this.Controls.Add(this.label1);
             this.Name = "frmTop10FP";
             this.Text = "Top 10 best selling furniture pieces";
+            this.Load += new System.EventHandler(this.frmTop10FP_Load);
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

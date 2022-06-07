@@ -41,6 +41,5 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
 
             return query.OrderByDescending(x => x.OrderDate);
         }
-
     }
 }

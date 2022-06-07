@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TheComfortZone.DTO.Charts;
 using TheComfortZone.DTO.FurnitureItem;
 using TheComfortZone.SERVICES.API;
 
@@ -29,6 +30,12 @@ namespace TheComfortZone.Controllers
         public override async Task<string> Delete(int id)
         {
             return await base.Delete(id);
+        }
+
+        [HttpGet("best-selling-items/{space}")]
+        public List<LineChartListResponse> GetBestSellingItems(string space)
+        {
+            return furnitureItemService.GetBestSellingItems(space);
         }
     }
 }
