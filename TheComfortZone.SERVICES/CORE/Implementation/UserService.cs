@@ -116,26 +116,26 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             return mapper.Map<List<UserCmbList>>(query.ToList());
         }
 
-        public async Task<List<SalesResponse>> GetSalesByPeriod(DateTime? fromDate = null, DateTime? toDate = null)
+        public async Task<List<SalesResponse>> GetSalesByPeriod(SalesSearchRequest search = null)
         {
 
-            if (fromDate != default(DateTime) && toDate != default(DateTime)
-                && fromDate.Value.Date.CompareTo(toDate.Value.Date) > 0)
-                throw new UserException("Start date must be earlier than end date");
+            if (search?.FromDate.HasValue == true && search?.ToDate.HasValue == true
+                && search.FromDate.Value.Date.CompareTo(search.ToDate.Value.Date) > 0)
+                throw new UserException("Start date must be earlier than end date!");
 
             var queryOrders = context.Orders.Include(x => x.User).Include(x => x.Employee).AsQueryable();
             var queryAppointments = context.Appointments.Include(x => x.User).Include(x => x.Employee).AsQueryable();
 
-            if (fromDate.HasValue && fromDate != default(DateTime))
+            if (search?.FromDate.HasValue == true && search?.FromDate != default(DateTime))
             {
-                queryOrders = queryOrders.Where(x => x.OrderDate.Value.Date.CompareTo(fromDate.Value.Date) >= 0);
-                queryAppointments = queryAppointments.Where(x => x.AppointmentDate.Value.Date.CompareTo(fromDate.Value.Date) >= 0);
+                queryOrders = queryOrders.Where(x => x.OrderDate.Value.Date.CompareTo(search.FromDate.Value.Date) >= 0);
+                queryAppointments = queryAppointments.Where(x => x.AppointmentDate.Value.Date.CompareTo(search.FromDate.Value.Date) >= 0);
             }
 
-            if (toDate.HasValue && toDate != default(DateTime))
+            if (search?.ToDate.HasValue == true && search?.ToDate != default(DateTime))
             {
-                queryOrders = queryOrders.Where(x => x.OrderDate.Value.Date.CompareTo(toDate.Value.Date) <= 0);
-                queryAppointments = queryAppointments.Where(x => x.AppointmentDate.Value.Date.CompareTo(toDate.Value.Date) <= 0);
+                queryOrders = queryOrders.Where(x => x.OrderDate.Value.Date.CompareTo(search.ToDate.Value.Date) <= 0);
+                queryAppointments = queryAppointments.Where(x => x.AppointmentDate.Value.Date.CompareTo(search.ToDate.Value.Date) <= 0);
             }
 
             var queryOrdersList = queryOrders.ToList();

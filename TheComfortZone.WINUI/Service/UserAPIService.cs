@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using TheComfortZone.WINUI.Utils;
 using TheComfortZone.DTO.Utils;
 using TheComfortZone.DTO.User;
+using TheComfortZone.DTO.Charts;
 
 namespace TheComfortZone.WINUI.Service
 {
@@ -49,6 +50,29 @@ namespace TheComfortZone.WINUI.Service
             {
                 var errors = await ex.GetResponseJsonAsync<Dictionary<string, dynamic>>();
                 return ExceptionHandler.HandleException<List<UserCmbList>>(errors);
+            }
+        }
+
+        public async Task<List<SalesResponse>> GetSalesByPeriod(SalesSearchRequest search = null)
+        {
+            try
+            {
+                string url = new Uri(endpoint)
+                    .AppendPathSegment(resource)
+                    .AppendPathSegment("sales-by-period");
+                if (search != null)
+                {
+                    url += "?";
+                    url += await search.ToQueryString();
+                }
+                return await url
+                    .WithBasicAuth(CredentialHelper.Username, CredentialHelper.Password)
+                    .GetJsonAsync<List<SalesResponse>>();
+            }
+            catch(FlurlHttpException ex)
+            {
+                var errors = await ex.GetResponseJsonAsync<Dictionary<string, dynamic>>();
+                return ExceptionHandler.HandleException<List<SalesResponse>>(errors);
             }
         }
     }

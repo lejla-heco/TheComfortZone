@@ -52,9 +52,9 @@ namespace TheComfortZone.Controllers
 
         [Authorize(Roles ="Administrator")]
         [HttpGet("sales-by-period")]
-        public async Task<List<SalesResponse>> GetSalesByPeriod([FromQuery] DateTime fromDate, [FromQuery] DateTime toDate)
+        public async Task<List<SalesResponse>> GetSalesByPeriod([FromQuery] SalesSearchRequest search = null)
         {
-            return await userService.GetSalesByPeriod(fromDate, toDate);
+            return await userService.GetSalesByPeriod(search);
         }
     }
 }

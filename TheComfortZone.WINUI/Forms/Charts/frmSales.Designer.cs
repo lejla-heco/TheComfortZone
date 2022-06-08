@@ -35,6 +35,7 @@
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TotalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnClearSearch = new System.Windows.Forms.Button();
             this.dtpToDate = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -77,6 +78,7 @@
             // Customer
             // 
             this.Customer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Customer.DataPropertyName = "Customer";
             this.Customer.HeaderText = "Customer";
             this.Customer.MinimumWidth = 6;
             this.Customer.Name = "Customer";
@@ -85,6 +87,7 @@
             // Employee
             // 
             this.Employee.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Employee.DataPropertyName = "Employee";
             this.Employee.HeaderText = "Employee";
             this.Employee.MinimumWidth = 6;
             this.Employee.Name = "Employee";
@@ -93,6 +96,7 @@
             // Date
             // 
             this.Date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Date.DataPropertyName = "Date";
             this.Date.HeaderText = "Date";
             this.Date.MinimumWidth = 6;
             this.Date.Name = "Date";
@@ -101,6 +105,7 @@
             // TotalPrice
             // 
             this.TotalPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TotalPrice.DataPropertyName = "TotalPrice";
             this.TotalPrice.HeaderText = "Total price (KM)";
             this.TotalPrice.MinimumWidth = 6;
             this.TotalPrice.Name = "TotalPrice";
@@ -108,6 +113,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnClearSearch);
             this.groupBox1.Controls.Add(this.dtpToDate);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.btnSearch);
@@ -118,46 +124,59 @@
             this.groupBox1.Size = new System.Drawing.Size(911, 94);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Search (optional)";
+            // 
+            // btnClearSearch
+            // 
+            this.btnClearSearch.Enabled = false;
+            this.btnClearSearch.Location = new System.Drawing.Point(769, 37);
+            this.btnClearSearch.Name = "btnClearSearch";
+            this.btnClearSearch.Size = new System.Drawing.Size(127, 29);
+            this.btnClearSearch.TabIndex = 4;
+            this.btnClearSearch.Text = "Clear search";
+            this.btnClearSearch.UseVisualStyleBackColor = true;
+            this.btnClearSearch.Click += new System.EventHandler(this.btnClearSearch_Click);
             // 
             // dtpToDate
             // 
-            this.dtpToDate.Location = new System.Drawing.Point(515, 38);
+            this.dtpToDate.Location = new System.Drawing.Point(374, 38);
             this.dtpToDate.Name = "dtpToDate";
-            this.dtpToDate.Size = new System.Drawing.Size(266, 27);
+            this.dtpToDate.Size = new System.Drawing.Size(265, 27);
             this.dtpToDate.TabIndex = 5;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(411, 41);
+            this.label2.Location = new System.Drawing.Point(340, 41);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 20);
+            this.label2.Size = new System.Drawing.Size(28, 20);
             this.label2.TabIndex = 4;
-            this.label2.Text = "To (optional):";
+            this.label2.Text = "To:";
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(810, 37);
+            this.btnSearch.Location = new System.Drawing.Point(669, 37);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(94, 29);
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(7, 41);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(116, 20);
+            this.label1.Size = new System.Drawing.Size(46, 20);
             this.label1.TabIndex = 1;
-            this.label1.Text = "From (optional):";
+            this.label1.Text = "From:";
             // 
             // dtpFromDate
             // 
-            this.dtpFromDate.Location = new System.Drawing.Point(129, 38);
+            this.dtpFromDate.Location = new System.Drawing.Point(59, 38);
             this.dtpFromDate.Name = "dtpFromDate";
-            this.dtpFromDate.Size = new System.Drawing.Size(266, 27);
+            this.dtpFromDate.Size = new System.Drawing.Size(265, 27);
             this.dtpFromDate.TabIndex = 0;
             // 
             // frmSales
@@ -169,6 +188,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "frmSales";
             this.Text = "Sales in a certain period";
+            this.Load += new System.EventHandler(this.frmSales_Load);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSales)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -185,11 +205,12 @@
         private Button btnSearch;
         private Label label1;
         private DateTimePicker dtpFromDate;
+        private DateTimePicker dtpToDate;
+        private Label label2;
         private DataGridViewTextBoxColumn Customer;
         private DataGridViewTextBoxColumn Employee;
         private DataGridViewTextBoxColumn Date;
         private DataGridViewTextBoxColumn TotalPrice;
-        private DateTimePicker dtpToDate;
-        private Label label2;
+        private Button btnClearSearch;
     }
 }
