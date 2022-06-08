@@ -51,7 +51,7 @@
             this.groupBox2.Controls.Add(this.dgvIncome);
             this.groupBox2.Location = new System.Drawing.Point(11, 130);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(485, 396);
+            this.groupBox2.Size = new System.Drawing.Size(485, 402);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Income";
@@ -72,7 +72,7 @@
             this.dgvIncome.ReadOnly = true;
             this.dgvIncome.RowHeadersWidth = 51;
             this.dgvIncome.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvIncome.Size = new System.Drawing.Size(479, 370);
+            this.dgvIncome.Size = new System.Drawing.Size(479, 376);
             this.dgvIncome.TabIndex = 0;
             // 
             // Employee
@@ -166,7 +166,7 @@
             this.formsPlot.Location = new System.Drawing.Point(501, 131);
             this.formsPlot.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.formsPlot.Name = "formsPlot";
-            this.formsPlot.Size = new System.Drawing.Size(421, 402);
+            this.formsPlot.Size = new System.Drawing.Size(421, 401);
             this.formsPlot.TabIndex = 6;
             // 
             // frmIncome

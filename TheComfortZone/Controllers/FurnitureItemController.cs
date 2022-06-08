@@ -33,6 +33,7 @@ namespace TheComfortZone.Controllers
         }
 
         [HttpGet("best-selling-items/{space}")]
+        [Authorize(Roles = "Administrator")]
         public List<LineChartListResponse> GetBestSellingItems(string space)
         {
             return furnitureItemService.GetBestSellingItems(space);

@@ -68,6 +68,10 @@ namespace TheComfortZone.SERVICES.CORE.Mapper
                 .ForMember(dto => dto.Adress, opts => opts.MapFrom(entity => entity.User.Adress));
             CreateMap<DTO.Order.OrderUpdateRequest, DAO.Model.Order>();
             CreateMap<DTO.Order.OrderUpdateRequest, DAO.Model.Order>();
+            CreateMap<DAO.Model.Order, DTO.Charts.SalesResponse>()
+                .ForMember(dto => dto.Customer, opts => opts.MapFrom(entity => $"{entity.User.FirstName} {entity.User.LastName}"))
+                .ForMember(dto => dto.Employee, opts => opts.MapFrom(entity => $"{entity.Employee.FirstName} {entity.Employee.LastName}"))
+                .ForMember(dto => dto.Date, opts => opts.MapFrom(entity => entity.OrderDate));
 
             /** ORDER ITEM **/
             CreateMap<DAO.Model.OrderItem, DTO.OrderItem.OrderItemResponse>()
@@ -82,6 +86,10 @@ namespace TheComfortZone.SERVICES.CORE.Mapper
             CreateMap<DAO.Model.Appointment, DTO.Appointment.AppointmentResponse>()
                 .ForMember(dto => dto.Customer, opts => opts.MapFrom(entity => $"{entity.User.FirstName} {entity.User.LastName}"));
             CreateMap<DTO.Appointment.AppointmentUpdateRequest, DAO.Model.Appointment>();
+            CreateMap<DAO.Model.Appointment, DTO.Charts.SalesResponse>()
+                .ForMember(dto => dto.Customer, opts => opts.MapFrom(entity => $"{entity.User.FirstName} {entity.User.LastName}"))
+                .ForMember(dto => dto.Employee, opts => opts.MapFrom(entity => $"{entity.Employee.FirstName} {entity.Employee.LastName}"))
+                .ForMember(dto => dto.Date, opts => opts.MapFrom(entity => entity.AppointmentDate));
 
             /** APPOINTMENT TYPE **/
             CreateMap<DAO.Model.AppointmentType, DTO.AppointmentType.AppointmentTypeResponse>();

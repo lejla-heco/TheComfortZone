@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
 using System.Text;
+using TheComfortZone.DTO.Charts;
 using TheComfortZone.DTO.User;
 using TheComfortZone.DTO.Utils;
 using TheComfortZone.SERVICES.API;
@@ -47,6 +48,13 @@ namespace TheComfortZone.Controllers
         public async Task<List<UserCmbList>> GetCmbList()
         {
             return await userService.GetUsernames();
+        }
+
+        [Authorize(Roles ="Administrator")]
+        [HttpGet("sales-by-period")]
+        public async Task<List<SalesResponse>> GetSalesByPeriod([FromQuery] DateTime fromDate, [FromQuery] DateTime toDate)
+        {
+            return await userService.GetSalesByPeriod(fromDate, toDate);
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheComfortZone.DTO.Charts;
 using TheComfortZone.DTO.Role;
 using TheComfortZone.DTO.User;
 using TheComfortZone.DTO.Utils;
@@ -113,6 +114,54 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
         {
             var query = context.Users.Include(u => u.Role).Where(u => u.Role.Name == UserType.User.ToString());
             return mapper.Map<List<UserCmbList>>(query.ToList());
+        }
+
+        public async Task<List<SalesResponse>> GetSalesByPeriod(DateTime? fromDate = null, DateTime? toDate = null)
+        {
+
+            if (fromDate != default(DateTime) && toDate != default(DateTime)
+                && fromDate.Value.Date.CompareTo(toDate.Value.Date) > 0)
+                throw new UserException("Start date must be earlier than end date");
+
+            var queryOrders = context.Orders.Include(x => x.User).Include(x => x.Employee).AsQueryable();
+            var queryAppointments = context.Appointments.Include(x => x.User).Include(x => x.Employee).AsQueryable();
+
+            if (fromDate.HasValue && fromDate != default(DateTime))
+            {
+                queryOrders = queryOrders.Where(x => x.OrderDate.Value.Date.CompareTo(fromDate.Value.Date) >= 0);
+                queryAppointments = queryAppointments.Where(x => x.AppointmentDate.Value.Date.CompareTo(fromDate.Value.Date) >= 0);
+            }
+
+            if (toDate.HasValue && toDate != default(DateTime))
+            {
+                queryOrders = queryOrders.Where(x => x.OrderDate.Value.Date.CompareTo(toDate.Value.Date) <= 0);
+                queryAppointments = queryAppointments.Where(x => x.AppointmentDate.Value.Date.CompareTo(toDate.Value.Date) <= 0);
+            }
+
+            var queryOrdersList = queryOrders.ToList();
+            var queryAppointmentsList = queryAppointments.ToList();
+
+            List<SalesResponse> salesOrders = mapper.Map<List<SalesResponse>>(queryOrdersList);
+            List<SalesResponse> salesAppointments = mapper.Map<List<SalesResponse>>(queryAppointmentsList);
+
+            salesOrders.AddRange((IEnumerable<SalesResponse>)salesAppointments);
+
+            var response = salesOrders.Select(x => new SalesResponse()
+            {
+                Customer = x.Customer,
+                Employee = x.Employee,
+                TotalPrice = salesOrders
+                .Where(y => y.Customer == x.Customer)
+                .Where(y => y.Employee == x.Employee)
+                .Where(y => y.Date.Date == x.Date.Date)
+                .Sum(y => y.TotalPrice),
+                Date = x.Date.Date,
+            })
+                .GroupBy(x => new { x.Customer, x.Employee, x.Date})
+                .Select(x => x.First())
+                .OrderByDescending(x => x.Date);
+
+            return response.ToList();
         }
 
         /** VALIDATION **/
