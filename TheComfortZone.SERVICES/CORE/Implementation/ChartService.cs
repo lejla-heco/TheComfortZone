@@ -196,5 +196,27 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
 
             return response;
         }
+
+        public async Task<List<PieChartCustomerResponse>> GetLoyalCustomers()
+        {
+            var response = context.Users
+                    .Include(x => x.Role)
+                    .Include(x => x.OrderUsers)
+                    .Include(x => x.AppointmentUsers)
+                    .Where(x => x.Role.Name == UserType.User.ToString())
+                    .Select(x => new PieChartCustomerResponse()
+                    {
+                        UserId = x.UserId,
+                        Customer = $"{x.FirstName} {x.LastName}",
+                        NumberOfPurchases = x.OrderUsers.Count,
+                        NumberOfAppointments = x.AppointmentUsers.Count,
+                        AmountSpent = (float)x.AppointmentUsers.Sum(y => y.TotalPrice) + (float)x.OrderUsers.Sum(y => y.TotalPrice)
+                    })
+                    .OrderByDescending(x => x.AmountSpent)
+                    .Take(10)
+                    .ToList();
+
+            return response;
+        }
     }
 }

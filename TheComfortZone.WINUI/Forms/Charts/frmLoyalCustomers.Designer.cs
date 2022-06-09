@@ -31,15 +31,15 @@
             this.formsPlot = new ScottPlot.FormsPlot();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvLoyalCustomers = new System.Windows.Forms.DataGridView();
-            this.Customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NumberOfPurchases = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NumberOfAppointments = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AmountSpent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.nudDiscount = new System.Windows.Forms.NumericUpDown();
             this.btnDiscount = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.Customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumberOfPurchases = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumberOfAppointments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AmountSpent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLoyalCustomers)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -83,38 +83,6 @@
             this.dgvLoyalCustomers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLoyalCustomers.Size = new System.Drawing.Size(479, 393);
             this.dgvLoyalCustomers.TabIndex = 0;
-            // 
-            // Customer
-            // 
-            this.Customer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Customer.HeaderText = "Customer";
-            this.Customer.MinimumWidth = 6;
-            this.Customer.Name = "Customer";
-            this.Customer.ReadOnly = true;
-            // 
-            // NumberOfPurchases
-            // 
-            this.NumberOfPurchases.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NumberOfPurchases.HeaderText = "No. of purchases";
-            this.NumberOfPurchases.MinimumWidth = 6;
-            this.NumberOfPurchases.Name = "NumberOfPurchases";
-            this.NumberOfPurchases.ReadOnly = true;
-            // 
-            // NumberOfAppointments
-            // 
-            this.NumberOfAppointments.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NumberOfAppointments.HeaderText = "No. of appointments";
-            this.NumberOfAppointments.MinimumWidth = 6;
-            this.NumberOfAppointments.Name = "NumberOfAppointments";
-            this.NumberOfAppointments.ReadOnly = true;
-            // 
-            // AmountSpent
-            // 
-            this.AmountSpent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.AmountSpent.HeaderText = "Amount spent (KM)";
-            this.AmountSpent.MinimumWidth = 6;
-            this.AmountSpent.Name = "AmountSpent";
-            this.AmountSpent.ReadOnly = true;
             // 
             // groupBox1
             // 
@@ -163,6 +131,42 @@
             this.label2.TabIndex = 10;
             this.label2.Text = "Top 10 most loyal customers";
             // 
+            // Customer
+            // 
+            this.Customer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Customer.DataPropertyName = "Customer";
+            this.Customer.HeaderText = "Customer";
+            this.Customer.MinimumWidth = 6;
+            this.Customer.Name = "Customer";
+            this.Customer.ReadOnly = true;
+            // 
+            // NumberOfPurchases
+            // 
+            this.NumberOfPurchases.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NumberOfPurchases.DataPropertyName = "NumberOfPurchases";
+            this.NumberOfPurchases.HeaderText = "No. of purchases";
+            this.NumberOfPurchases.MinimumWidth = 6;
+            this.NumberOfPurchases.Name = "NumberOfPurchases";
+            this.NumberOfPurchases.ReadOnly = true;
+            // 
+            // NumberOfAppointments
+            // 
+            this.NumberOfAppointments.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NumberOfAppointments.DataPropertyName = "NumberOfAppointments";
+            this.NumberOfAppointments.HeaderText = "No. of appointments";
+            this.NumberOfAppointments.MinimumWidth = 6;
+            this.NumberOfAppointments.Name = "NumberOfAppointments";
+            this.NumberOfAppointments.ReadOnly = true;
+            // 
+            // AmountSpent
+            // 
+            this.AmountSpent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.AmountSpent.DataPropertyName = "AmountSpent";
+            this.AmountSpent.HeaderText = "Amount spent (KM)";
+            this.AmountSpent.MinimumWidth = 6;
+            this.AmountSpent.Name = "AmountSpent";
+            this.AmountSpent.ReadOnly = true;
+            // 
             // frmLoyalCustomers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -174,6 +178,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "frmLoyalCustomers";
             this.Text = "Top 10 most loyal customers";
+            this.Load += new System.EventHandler(this.frmLoyalCustomers_Load);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLoyalCustomers)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -189,14 +194,14 @@
         private ScottPlot.FormsPlot formsPlot;
         private GroupBox groupBox2;
         private DataGridView dgvLoyalCustomers;
-        private DataGridViewTextBoxColumn Customer;
-        private DataGridViewTextBoxColumn NumberOfPurchases;
-        private DataGridViewTextBoxColumn NumberOfAppointments;
-        private DataGridViewTextBoxColumn AmountSpent;
         private GroupBox groupBox1;
         private NumericUpDown nudDiscount;
         private Button btnDiscount;
         private Label label1;
         private Label label2;
+        private DataGridViewTextBoxColumn Customer;
+        private DataGridViewTextBoxColumn NumberOfPurchases;
+        private DataGridViewTextBoxColumn NumberOfAppointments;
+        private DataGridViewTextBoxColumn AmountSpent;
     }
 }

@@ -12,5 +12,6 @@ namespace TheComfortZone.SERVICES.API
         Task<List<LineChartListResponse>> GetBestSellingItems(string space);
         Task<List<DTO.Charts.SalesResponse>> GetSalesByPeriod(DateRangeSearchRequest search = null);
         Task<List<DTO.Charts.PieChartEmployeeResponse>> GetIncomePerEmployee(DateRangeSearchRequest search = null);
+        Task<List<DTO.Charts.PieChartCustomerResponse>> GetLoyalCustomers();
     }
 }

@@ -78,5 +78,22 @@ namespace TheComfortZone.WINUI.Service
                 return ExceptionHandler.HandleException<List<PieChartEmployeeResponse>>(errors);
             }
         }
+
+        public async Task<List<PieChartCustomerResponse>> GetLoyalCustomers()
+        {
+            try
+            {
+                return await new Uri(endpoint)
+                    .AppendPathSegment(resource)
+                    .AppendPathSegment("loyal-customers")
+                    .WithBasicAuth(CredentialHelper.Username, CredentialHelper.Password)
+                    .GetJsonAsync<List<PieChartCustomerResponse>>();
+            }
+            catch (FlurlHttpException ex)
+            {
+                var errors = await ex.GetResponseJsonAsync<Dictionary<string, dynamic>>();
+                return ExceptionHandler.HandleException<List<PieChartCustomerResponse>>(errors);
+            }
+        }
     }
 }

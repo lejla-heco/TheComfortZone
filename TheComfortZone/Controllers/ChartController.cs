@@ -34,5 +34,11 @@ namespace TheComfortZone.Controllers
         {
             return await chartService.GetIncomePerEmployee(search);
         }
+
+        [HttpGet("loyal-customers")]
+        public async Task<List<PieChartCustomerResponse>> GetLoyalCustomers()
+        {
+            return await chartService.GetLoyalCustomers();
+        }
     }
 }
