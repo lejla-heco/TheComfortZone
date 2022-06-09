@@ -48,18 +48,18 @@
             // 
             // formsPlot
             // 
-            this.formsPlot.Location = new System.Drawing.Point(501, 118);
+            this.formsPlot.Location = new System.Drawing.Point(501, 113);
             this.formsPlot.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.formsPlot.Name = "formsPlot";
-            this.formsPlot.Size = new System.Drawing.Size(421, 412);
+            this.formsPlot.Size = new System.Drawing.Size(421, 419);
             this.formsPlot.TabIndex = 9;
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dgvLoyalCustomers);
-            this.groupBox2.Location = new System.Drawing.Point(11, 118);
+            this.groupBox2.Location = new System.Drawing.Point(11, 113);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(485, 405);
+            this.groupBox2.Size = new System.Drawing.Size(485, 419);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Most loyal customers";
@@ -80,7 +80,7 @@
             this.dgvLoyalCustomers.ReadOnly = true;
             this.dgvLoyalCustomers.RowHeadersWidth = 51;
             this.dgvLoyalCustomers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLoyalCustomers.Size = new System.Drawing.Size(479, 379);
+            this.dgvLoyalCustomers.Size = new System.Drawing.Size(479, 393);
             this.dgvLoyalCustomers.TabIndex = 0;
             // 
             // Customer
@@ -122,20 +122,21 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(9, 34);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(911, 78);
+            this.groupBox1.Size = new System.Drawing.Size(911, 74);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             // 
             // nudDiscount
             // 
-            this.nudDiscount.Location = new System.Drawing.Point(354, 29);
+            this.nudDiscount.Location = new System.Drawing.Point(354, 27);
             this.nudDiscount.Name = "nudDiscount";
             this.nudDiscount.Size = new System.Drawing.Size(266, 27);
             this.nudDiscount.TabIndex = 6;
             // 
             // btnDiscount
             // 
-            this.btnDiscount.Location = new System.Drawing.Point(676, 28);
+            this.btnDiscount.Enabled = false;
+            this.btnDiscount.Location = new System.Drawing.Point(676, 26);
             this.btnDiscount.Name = "btnDiscount";
             this.btnDiscount.Size = new System.Drawing.Size(189, 29);
             this.btnDiscount.TabIndex = 2;
@@ -145,7 +146,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(263, 32);
+            this.label1.Location = new System.Drawing.Point(263, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 20);
             this.label1.TabIndex = 1;

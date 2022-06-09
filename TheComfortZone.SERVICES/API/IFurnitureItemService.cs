@@ -11,6 +11,6 @@ namespace TheComfortZone.SERVICES.API
 {
     public interface IFurnitureItemService : ICRUDService<FurnitureItemResponse, FurnitureItemSearchRequest, FurnitureItemUpsertRequest, FurnitureItemUpsertRequest>
     {
-        public List<LineChartListResponse> GetBestSellingItems(string space);
+
     }
 }

@@ -49,12 +49,5 @@ namespace TheComfortZone.Controllers
         {
             return await userService.GetUsernames();
         }
-
-        [Authorize(Roles ="Administrator")]
-        [HttpGet("sales-by-period")]
-        public async Task<List<SalesResponse>> GetSalesByPeriod([FromQuery] SalesSearchRequest search = null)
-        {
-            return await userService.GetSalesByPeriod(search);
-        }
     }
 }

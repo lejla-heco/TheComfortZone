@@ -14,7 +14,7 @@ namespace TheComfortZone.WINUI.Forms.Charts
 {
     public partial class frmTop10FP : Form
     {
-        FurnitureItemAPIService furnitureItemAPIService = new FurnitureItemAPIService();
+        ChartAPIService chartAPIService = new ChartAPIService();
         SpaceAPIService spaceAPIService = new SpaceAPIService();
         List<DTO.Charts.LineChartListResponse> chartData = new List<DTO.Charts.LineChartListResponse>();
         public frmTop10FP()
@@ -48,7 +48,7 @@ namespace TheComfortZone.WINUI.Forms.Charts
         private async Task loadChartData()
         {
             string space = cmbSpace.Text;
-            chartData = await furnitureItemAPIService.GetLineChartData(space);
+            chartData = await chartAPIService.GetLineChartData(space);
 
             formsPlot.Plot.Clear();
             for (int i = 0; i < chartData.Count; i++)

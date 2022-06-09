@@ -14,7 +14,7 @@ namespace TheComfortZone.WINUI.Forms.Charts
 {
     public partial class frmSales : Form
     {
-        UserAPIService userAPIService = new UserAPIService();
+        ChartAPIService chartAPIService = new ChartAPIService();
         public frmSales()
         {
             InitializeComponent();
@@ -26,15 +26,15 @@ namespace TheComfortZone.WINUI.Forms.Charts
             await getGridData(null);
         }
 
-        private async Task getGridData(SalesSearchRequest search = null)
+        private async Task getGridData(DateRangeSearchRequest search = null)
         {
-            var sales = await userAPIService.GetSalesByPeriod(search);
+            var sales = await chartAPIService.GetSalesByPeriod(search);
             dgvSales.DataSource = sales;
         }
 
         private async void btnSearch_Click(object sender, EventArgs e)
         {
-            SalesSearchRequest search = new SalesSearchRequest();
+            DateRangeSearchRequest search = new DateRangeSearchRequest();
             search.FromDate = dtpFromDate.Value.Date;
             search.ToDate = dtpToDate.Value.Date;
             if (search.FromDate.Value.Date.CompareTo(search.ToDate.Value.Date) <= 0)
