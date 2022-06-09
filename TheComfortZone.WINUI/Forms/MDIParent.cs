@@ -198,7 +198,7 @@ namespace TheComfortZone.WINUI.Forms
 
         private void incomePerEmployeeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmIncome frm = new frmIncome();
+            frmRevenue frm = new frmRevenue();
             OpenForm(frm);
         }
 

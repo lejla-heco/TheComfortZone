@@ -152,13 +152,47 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
 
         public async Task<List<PieChartEmployeeResponse>> GetIncomePerEmployee(DateRangeSearchRequest search = null)
         {
-            var query = context.Users
-                .Include(x => x.Role)
-                .Include(x => x.OrderEmployees)
-                .Include(x => x.AppointmentEmployees)
-                .Where(x => x.Role.Name == UserType.Employee.ToString());
+            if (search?.FromDate.HasValue == true && search?.ToDate.HasValue == true
+                && search.FromDate.Value.Date.CompareTo(search.ToDate.Value.Date) > 0)
+                throw new UserException("Start date must be earlier than end date!");
 
-            var response = mapper.Map<List<PieChartEmployeeResponse>>(query.ToList());
+            List<PieChartEmployeeResponse> response = new List<PieChartEmployeeResponse>();
+
+            if (search?.FromDate == null && search?.ToDate == null)
+                response = context.Users
+                    .Include(x => x.Role)
+                    .Include(x => x.OrderEmployees)
+                    .Include(x => x.AppointmentEmployees)
+                    .Where(x => x.Role.Name == UserType.Employee.ToString())
+                    .Select(x => new PieChartEmployeeResponse()
+                    {
+                        Employee = $"{x.FirstName} {x.LastName}",
+                        NumberOfSalesMade = x.OrderEmployees.Count,
+                        NumberOfAppointments = x.AppointmentEmployees.Count,
+                        Income = (float)x.AppointmentEmployees.Sum(y => y.TotalPrice) + (float)x.OrderEmployees.Sum(y => y.TotalPrice)
+                    }).ToList();
+
+
+            if (search?.FromDate != null && search?.ToDate != null)
+            {
+                response = context.Users
+                    .Include(x => x.Role)
+                    .Include(x => x.OrderEmployees)
+                    .Include(x => x.AppointmentEmployees)
+                    .Where(x => x.Role.Name == UserType.Employee.ToString())
+                    .Select(x => new PieChartEmployeeResponse()
+                    {
+                        Employee = $"{x.FirstName} {x.LastName}",
+                        NumberOfSalesMade = x.OrderEmployees.Where(y => y.OrderDate.Value.Date >= search.FromDate.Value.Date && y.OrderDate.Value.Date <= search.ToDate.Value.Date).Count(),
+                        NumberOfAppointments = x.AppointmentEmployees.Where(y => y.AppointmentDate.Value.Date >= search.FromDate.Value.Date && y.AppointmentDate.Value.Date <= search.ToDate.Value.Date).Count(),
+                        Income = (float)x.AppointmentEmployees
+                        .Where(y => y.AppointmentDate.Value.Date >= search.FromDate.Value.Date && y.AppointmentDate.Value.Date <= search.ToDate.Value.Date)
+                        .Sum(y => y.TotalPrice) +
+                        (float)x.OrderEmployees
+                        .Where(y => y.OrderDate.Value.Date >= search.FromDate.Value.Date && y.OrderDate.Value.Date <= search.ToDate.Value.Date)
+                        .Sum(y => y.TotalPrice)
+                    }).ToList();
+            }
 
             return response;
         }

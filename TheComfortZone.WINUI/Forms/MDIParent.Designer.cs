@@ -250,7 +250,7 @@
             // 
             this.incomePerEmployeeToolStripMenuItem.Name = "incomePerEmployeeToolStripMenuItem";
             this.incomePerEmployeeToolStripMenuItem.Size = new System.Drawing.Size(281, 26);
-            this.incomePerEmployeeToolStripMenuItem.Text = "Income per employee";
+            this.incomePerEmployeeToolStripMenuItem.Text = "Revenue per employee";
             this.incomePerEmployeeToolStripMenuItem.Click += new System.EventHandler(this.incomePerEmployeeToolStripMenuItem_Click);
             // 
             // toolStripSeparator1

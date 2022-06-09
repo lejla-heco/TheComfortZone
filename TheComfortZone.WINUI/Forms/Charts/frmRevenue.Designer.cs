@@ -1,6 +1,6 @@
 ﻿namespace TheComfortZone.WINUI.Forms.Charts
 {
-    partial class frmIncome
+    partial class frmRevenue
     {
         /// <summary>
         /// Required designer variable.
@@ -30,10 +30,6 @@
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvIncome = new System.Windows.Forms.DataGridView();
-            this.Employee = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NumberOfSalesMade = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NumberOfAppointments = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Income = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.formsPlot = new ScottPlot.FormsPlot();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnClearSearch = new System.Windows.Forms.Button();
@@ -42,6 +38,10 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dtpFromDate = new System.Windows.Forms.DateTimePicker();
+            this.Employee = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumberOfSalesMade = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumberOfAppointments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Income = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIncome)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -55,7 +55,7 @@
             this.groupBox2.Size = new System.Drawing.Size(485, 420);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Income";
+            this.groupBox2.Text = "Revenue";
             // 
             // dgvIncome
             // 
@@ -71,42 +71,11 @@
             this.dgvIncome.Location = new System.Drawing.Point(3, 23);
             this.dgvIncome.Name = "dgvIncome";
             this.dgvIncome.ReadOnly = true;
+            this.dgvIncome.RowHeadersVisible = false;
             this.dgvIncome.RowHeadersWidth = 51;
             this.dgvIncome.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvIncome.Size = new System.Drawing.Size(479, 394);
             this.dgvIncome.TabIndex = 0;
-            // 
-            // Employee
-            // 
-            this.Employee.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Employee.HeaderText = "Employee";
-            this.Employee.MinimumWidth = 6;
-            this.Employee.Name = "Employee";
-            this.Employee.ReadOnly = true;
-            // 
-            // NumberOfSalesMade
-            // 
-            this.NumberOfSalesMade.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NumberOfSalesMade.HeaderText = "No. of sales";
-            this.NumberOfSalesMade.MinimumWidth = 6;
-            this.NumberOfSalesMade.Name = "NumberOfSalesMade";
-            this.NumberOfSalesMade.ReadOnly = true;
-            // 
-            // NumberOfAppointments
-            // 
-            this.NumberOfAppointments.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NumberOfAppointments.HeaderText = "No. of appointments";
-            this.NumberOfAppointments.MinimumWidth = 6;
-            this.NumberOfAppointments.Name = "NumberOfAppointments";
-            this.NumberOfAppointments.ReadOnly = true;
-            // 
-            // Income
-            // 
-            this.Income.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Income.HeaderText = "Income (KM)";
-            this.Income.MinimumWidth = 6;
-            this.Income.Name = "Income";
-            this.Income.ReadOnly = true;
             // 
             // formsPlot
             // 
@@ -140,6 +109,7 @@
             this.btnClearSearch.TabIndex = 4;
             this.btnClearSearch.Text = "Clear search";
             this.btnClearSearch.UseVisualStyleBackColor = true;
+            this.btnClearSearch.Click += new System.EventHandler(this.btnClearSearch_Click);
             // 
             // dtpToDate
             // 
@@ -165,6 +135,7 @@
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // label1
             // 
@@ -182,7 +153,43 @@
             this.dtpFromDate.Size = new System.Drawing.Size(265, 27);
             this.dtpFromDate.TabIndex = 0;
             // 
-            // frmIncome
+            // Employee
+            // 
+            this.Employee.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Employee.DataPropertyName = "Employee";
+            this.Employee.HeaderText = "Employee";
+            this.Employee.MinimumWidth = 6;
+            this.Employee.Name = "Employee";
+            this.Employee.ReadOnly = true;
+            // 
+            // NumberOfSalesMade
+            // 
+            this.NumberOfSalesMade.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NumberOfSalesMade.DataPropertyName = "NumberOfSalesMade";
+            this.NumberOfSalesMade.HeaderText = "No. of sales";
+            this.NumberOfSalesMade.MinimumWidth = 6;
+            this.NumberOfSalesMade.Name = "NumberOfSalesMade";
+            this.NumberOfSalesMade.ReadOnly = true;
+            // 
+            // NumberOfAppointments
+            // 
+            this.NumberOfAppointments.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NumberOfAppointments.DataPropertyName = "NumberOfAppointments";
+            this.NumberOfAppointments.HeaderText = "No. of appointments";
+            this.NumberOfAppointments.MinimumWidth = 6;
+            this.NumberOfAppointments.Name = "NumberOfAppointments";
+            this.NumberOfAppointments.ReadOnly = true;
+            // 
+            // Income
+            // 
+            this.Income.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Income.DataPropertyName = "Income";
+            this.Income.HeaderText = "Revenue (KM)";
+            this.Income.MinimumWidth = 6;
+            this.Income.Name = "Income";
+            this.Income.ReadOnly = true;
+            // 
+            // frmRevenue
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -190,8 +197,9 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.formsPlot);
             this.Controls.Add(this.groupBox2);
-            this.Name = "frmIncome";
-            this.Text = "Income per employee";
+            this.Name = "frmRevenue";
+            this.Text = "Revenue per employee";
+            this.Load += new System.EventHandler(this.frmIncome_Load);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvIncome)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -204,10 +212,6 @@
 
         private GroupBox groupBox2;
         private DataGridView dgvIncome;
-        private DataGridViewTextBoxColumn Employee;
-        private DataGridViewTextBoxColumn NumberOfSalesMade;
-        private DataGridViewTextBoxColumn NumberOfAppointments;
-        private DataGridViewTextBoxColumn Income;
         private ScottPlot.FormsPlot formsPlot;
         private GroupBox groupBox1;
         private Button btnClearSearch;
@@ -216,5 +220,9 @@
         private Button btnSearch;
         private Label label1;
         private DateTimePicker dtpFromDate;
+        private DataGridViewTextBoxColumn Employee;
+        private DataGridViewTextBoxColumn NumberOfSalesMade;
+        private DataGridViewTextBoxColumn NumberOfAppointments;
+        private DataGridViewTextBoxColumn Income;
     }
 }

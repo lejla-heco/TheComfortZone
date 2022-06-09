@@ -78,6 +78,7 @@
             this.dgvLoyalCustomers.Location = new System.Drawing.Point(3, 23);
             this.dgvLoyalCustomers.Name = "dgvLoyalCustomers";
             this.dgvLoyalCustomers.ReadOnly = true;
+            this.dgvLoyalCustomers.RowHeadersVisible = false;
             this.dgvLoyalCustomers.RowHeadersWidth = 51;
             this.dgvLoyalCustomers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLoyalCustomers.Size = new System.Drawing.Size(479, 393);

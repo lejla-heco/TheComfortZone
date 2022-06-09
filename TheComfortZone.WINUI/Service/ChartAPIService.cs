@@ -55,5 +55,28 @@ namespace TheComfortZone.WINUI.Service
                 return ExceptionHandler.HandleException<List<SalesResponse>>(errors);
             }
         }
+
+        public async Task<List<PieChartEmployeeResponse>> GetIncomePerEmployee(DateRangeSearchRequest search = null)
+        {
+            try
+            {
+                string url = new Uri(endpoint)
+                    .AppendPathSegment(resource)
+                    .AppendPathSegment("income-per-employee");
+                if (search != null)
+                {
+                    url += "?";
+                    url += await search.ToQueryString();
+                }
+                return await url
+                    .WithBasicAuth(CredentialHelper.Username, CredentialHelper.Password)
+                    .GetJsonAsync<List<PieChartEmployeeResponse>>();
+            }
+            catch (FlurlHttpException ex)
+            {
+                var errors = await ex.GetResponseJsonAsync<Dictionary<string, dynamic>>();
+                return ExceptionHandler.HandleException<List<PieChartEmployeeResponse>>(errors);
+            }
+        }
     }
 }

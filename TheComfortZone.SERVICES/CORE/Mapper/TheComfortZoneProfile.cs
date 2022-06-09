@@ -16,12 +16,6 @@ namespace TheComfortZone.SERVICES.CORE.Mapper
             CreateMap<DTO.User.UserInsertRequest, DAO.Model.User>();
             CreateMap<DTO.User.UserUpdateRequest, DAO.Model.User>();
             CreateMap<DAO.Model.User, DTO.User.UserCmbList>();
-            CreateMap<DAO.Model.User, DTO.Charts.PieChartEmployeeResponse>()
-                .ForMember(dto => dto.Employee, opts => opts.MapFrom(entity => $"{entity.FirstName} {entity.LastName}"))
-                .ForMember(dto => dto.NumberOfSalesMade, opts => opts.MapFrom(entity => entity.OrderEmployees.Count))
-                .ForMember(dto => dto.NumberOfAppointments, opts => opts.MapFrom(entity => entity.AppointmentEmployees.Count))
-                .ForMember(dto => dto.Income, opts => opts.MapFrom(entity => entity.AppointmentEmployees.Sum(y => y.TotalPrice) +
-                entity.OrderEmployees.Sum(y => y.TotalPrice)));
 
             /** ROLE **/
             CreateMap<DAO.Model.Role, DTO.Role.RoleResponse>();
