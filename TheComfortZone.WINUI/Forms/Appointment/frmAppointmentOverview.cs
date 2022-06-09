@@ -18,7 +18,6 @@ namespace TheComfortZone.WINUI.Forms.Appointment
         AppointmentAPIService appointmentAPIService = new AppointmentAPIService();
         private string USER_ROLE = Properties.Settings.Default.LoggedInUserType;
         private int USER_ID = Properties.Settings.Default.LoggedInUserId;
-        private AppointmentSearchRequest searchRequest = new AppointmentSearchRequest();
         public frmAppointmentOverview()
         {
             InitializeComponent();
@@ -29,26 +28,29 @@ namespace TheComfortZone.WINUI.Forms.Appointment
         {
             await getGridData();
         }
-        private async Task getGridData()
+        private async Task getGridData(AppointmentSearchRequest searchRequest = null)
         {
-            if (USER_ROLE == UserType.Employee.ToString())
-                searchRequest.EmployeeId = USER_ID;
+            List<AppointmentResponse> appointments = new List<AppointmentResponse>();
 
-            var appointments = await appointmentAPIService.Get(searchRequest);
+            if (USER_ROLE == UserType.Administrator.ToString())
+                appointments = await appointmentAPIService.Get(searchRequest);
+            if (USER_ROLE == UserType.Employee.ToString())
+                appointments = await appointmentAPIService.GetAppointmentsByEmployeeId(USER_ID, searchRequest);
+
             dgvAppointments.DataSource = appointments;
         }
 
         private async void btnSearch_Click(object sender, EventArgs e)
         {
+            AppointmentSearchRequest searchRequest = new AppointmentSearchRequest();
             searchRequest.AppointmentDate = dtpAppointmentDate.Value;
             btnClearSearch.Enabled = true;
 
-            await getGridData();
+            await getGridData(searchRequest);
         }
 
         private async void btnClearSearch_Click(object sender, EventArgs e)
         {
-            searchRequest.AppointmentDate = null;
             dtpAppointmentDate.Value = DateTime.Now;
             btnClearSearch.Enabled = false;
 

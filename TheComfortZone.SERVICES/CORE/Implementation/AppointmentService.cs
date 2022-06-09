@@ -6,7 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TheComfortZone.DTO.Appointment;
+using TheComfortZone.DTO.Utils;
 using TheComfortZone.SERVICES.API;
+using TheComfortZone.SERVICES.CORE.Utils;
 using TheComfortZone.SERVICES.DAO;
 using TheComfortZone.SERVICES.DAO.Model;
 
@@ -26,12 +28,25 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
         }
         public override IQueryable<Appointment> AddFilter(IQueryable<Appointment> query, AppointmentSearchRequest search = null)
         {
-            if (search?.EmployeeId.HasValue == true)
-                query = query.Where(x => x.EmployeeId == search.EmployeeId);
             if (search?.AppointmentDate.HasValue == true)
                 query = query.Where(x => x.AppointmentDate.Value.Date == search.AppointmentDate.Value.Date);
 
             return query.OrderByDescending(x => x.AppointmentDate);
+        }
+
+        public async Task<List<AppointmentResponse>> GetAppointmentsByEmployeeId(int id, AppointmentSearchRequest search = null)
+        {
+            /** VALIDATION **/
+            if (context.Users.Include(u => u.Role)
+                .Where(u => u.UserId == id && u.Role.Name == UserType.Employee.ToString()).Count() == 0)
+                throw new UserException("Employee with specified ID does not exist!");
+
+            var query = context.Appointments.Where(o => o.EmployeeId == id).AsQueryable();
+
+            query = IncludeList(query);
+            query = AddFilter(query, search);
+
+            return mapper.Map<List<AppointmentResponse>>(query.ToList());
         }
     }
 }

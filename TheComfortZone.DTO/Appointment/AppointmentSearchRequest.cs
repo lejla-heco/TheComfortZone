@@ -7,7 +7,6 @@ namespace TheComfortZone.DTO.Appointment
 {
     public class AppointmentSearchRequest : BaseSearchObject
     {
-        public int?  EmployeeId { get; set; }
         public DateTime? AppointmentDate { get; set; }
     }
 }

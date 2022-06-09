@@ -33,10 +33,10 @@ namespace TheComfortZone.WINUI.Forms.Order
         {
             List<OrderResponse> orders = new List<OrderResponse>();
 
-            if (USER_ROLE == UserType.Employee.ToString())
-                orders = await orderAPIService.GetOrdersByEmployeeId(USER_ID, searchRequest);
             if (USER_ROLE == UserType.Administrator.ToString())
                 orders = await orderAPIService.Get(searchRequest);
+            if (USER_ROLE == UserType.Employee.ToString())
+                orders = await orderAPIService.GetOrdersByEmployeeId(USER_ID, searchRequest);
 
             dgvOrders.DataSource = orders;
         }

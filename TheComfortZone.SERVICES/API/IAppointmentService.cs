@@ -9,5 +9,6 @@ namespace TheComfortZone.SERVICES.API
 {
     public interface IAppointmentService : ICRUDService<AppointmentResponse, AppointmentSearchRequest, AppointmentInsertRequest, AppointmentUpdateRequest>
     {
+        Task<List<AppointmentResponse>> GetAppointmentsByEmployeeId(int id, AppointmentSearchRequest search = null);
     }
 }

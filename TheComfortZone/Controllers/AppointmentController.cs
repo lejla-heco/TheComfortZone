@@ -13,6 +13,12 @@ namespace TheComfortZone.Controllers
             appointmentService = service;
         }
 
+        [Authorize(Roles = "Administrator")]
+        public override async Task<IEnumerable<AppointmentResponse>> Get([FromQuery] AppointmentSearchRequest search = null)
+        {
+            return await base.Get(search);
+        }
+
         [Authorize(Roles = "User")]
         public override async Task<AppointmentResponse> Insert([FromBody] AppointmentInsertRequest insert)
         {
@@ -29,6 +35,13 @@ namespace TheComfortZone.Controllers
         public override async Task<string> Delete(int id)
         {
             return await base.Delete(id);
+        }
+
+        [Authorize(Roles = "Employee")]
+        [HttpGet("appointments-by-employee/{id}")]
+        public async Task<List<AppointmentResponse>> GetAppointmentsByEmployeeId(int id, [FromQuery] AppointmentSearchRequest search = null)
+        {
+            return await appointmentService.GetAppointmentsByEmployeeId(id, search);
         }
     }
 }
