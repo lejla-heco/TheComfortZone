@@ -15,6 +15,12 @@ namespace TheComfortZone.Controllers
             orderService = service;
         }
 
+        [Authorize(Roles = "Administrator")]
+        public override async Task<IEnumerable<OrderResponse>> Get([FromQuery] OrderSearchRequest search = null)
+        {
+            return await base.Get(search);
+        }
+
         [Authorize(Roles = "User")]
         public override async Task<OrderResponse> Insert([FromBody] OrderInsertRequest insert)
         {
@@ -31,6 +37,13 @@ namespace TheComfortZone.Controllers
         public override async Task<string> Delete(int id)
         {
             return await base.Delete(id);
+        }
+
+        [Authorize(Roles = "Employee")]
+        [HttpGet("orders-by-employee/{id}")]
+        public async Task<List<OrderResponse>> GetOrdersByEmployeeId(int id, [FromQuery] OrderSearchRequest search = null)
+        {
+            return await orderService.GetOrdersByEmployeeId(id, search);
         }
     }
 }

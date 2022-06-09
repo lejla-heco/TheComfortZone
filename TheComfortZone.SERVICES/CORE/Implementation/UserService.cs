@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TheComfortZone.DTO.Charts;
+using TheComfortZone.DTO.Order;
 using TheComfortZone.DTO.Role;
 using TheComfortZone.DTO.User;
 using TheComfortZone.DTO.Utils;

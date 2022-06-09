@@ -23,23 +23,34 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
 
         public override IQueryable<Order> IncludeList(IQueryable<Order> query)
         {
-            query = query.Include(x => x.User)
+            query = query
+                .Include(x => x.User)
                 .Include(x => x.Employee);
+
             return query;
         }
 
         public override IQueryable<Order> AddFilter(IQueryable<Order> query, OrderSearchRequest search = null)
         {
-            if (search?.EmployeeId.HasValue == true)
-                query = query.Include(x => x.Employee)
-                    .Where(x => x.EmployeeId == search.EmployeeId && x.Status != OrderStatus.Completed.ToString());
-            if (search?.UserId.HasValue == true)
-                query = query.Include(x => x.User).Where(x => x.UserId == search.UserId);
-
             if (search?.OrderDate.HasValue == true)
-                query = query.Where(x => x.OrderDate.Value.Date == search.OrderDate.Value.Date);
+                query = query.Where(x => x.OrderDate.Value.Date.CompareTo(search.OrderDate.Value.Date) == 0);
 
             return query.OrderByDescending(x => x.OrderDate);
+        }
+
+        public async Task<List<OrderResponse>> GetOrdersByEmployeeId(int id, OrderSearchRequest search = null)
+        {
+            /** VALIDATION **/
+            if (context.Users.Include(u => u.Role)
+                .Where(u => u.UserId == id && u.Role.Name == UserType.Employee.ToString()).Count() == 0)
+                throw new UserException("Employee with specified ID does not exist!");
+
+            var query = context.Orders.Where(o => o.EmployeeId == id).AsQueryable();
+
+            query = IncludeList(query);
+            query = AddFilter(query, search);
+
+            return mapper.Map<List<OrderResponse>>(query.ToList());
         }
     }
 }
