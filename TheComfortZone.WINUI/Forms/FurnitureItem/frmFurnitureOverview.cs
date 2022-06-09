@@ -119,15 +119,22 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
             searchRequest.CategoryId = ((DTO.Category.CategoryResponse)cmbCategory.SelectedItem)?.CategoryId;
             searchRequest.State = cmbState.SelectedIndex == -1 ? null : cmbState.Text;
 
+            if (!string.IsNullOrWhiteSpace(searchRequest.Name) || searchRequest.CategoryId.HasValue == true ||
+                !string.IsNullOrWhiteSpace(searchRequest.State))
+                btnClearFields.Enabled = true;
+
             await getGridData(searchRequest);
         }
 
-        private void btnClearFields_Click(object sender, EventArgs e)
+        private async void btnClearFields_Click(object sender, EventArgs e)
         {
+            btnClearFields.Enabled = false;
             txtName.Text = null;
             cmbSpace.SelectedIndex = -1;
             cmbCategory.DataSource = null;
             cmbState.SelectedIndex = -1;
+
+            await getGridData();
         }
     }
 }

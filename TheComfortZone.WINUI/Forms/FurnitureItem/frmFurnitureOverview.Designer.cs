@@ -187,11 +187,12 @@
             // 
             // btnClearFields
             // 
+            this.btnClearFields.Enabled = false;
             this.btnClearFields.Location = new System.Drawing.Point(418, 39);
             this.btnClearFields.Name = "btnClearFields";
-            this.btnClearFields.Size = new System.Drawing.Size(94, 29);
+            this.btnClearFields.Size = new System.Drawing.Size(127, 29);
             this.btnClearFields.TabIndex = 11;
-            this.btnClearFields.Text = "Clear fields";
+            this.btnClearFields.Text = "Clear search";
             this.btnClearFields.UseVisualStyleBackColor = true;
             this.btnClearFields.Click += new System.EventHandler(this.btnClearFields_Click);
             // 
