@@ -121,6 +121,8 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
         {
             if (insert.Password != insert.PasswordConfirmation)
                 throw new UserException("Password and Password confirmation must be the same!");
+            if (context.Users.Where(u => u.Username == insert.Username).Count() > 0)
+                throw new UserException("Username is taken!");
         }
 
         public override void ValidateUpdate(int id, UserUpdateRequest update)
