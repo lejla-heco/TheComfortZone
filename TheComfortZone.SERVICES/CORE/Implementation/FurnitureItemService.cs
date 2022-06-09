@@ -82,13 +82,19 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
 
         public override void BeforeDelete(int id)
         {
+            List<int> orderIds = context.OrderItems.Where(oi => oi.FurnitureItemId == id).Select(oi => oi.OrderId).ToList();
+
             List<DAO.Model.FurnitureColor> furnitureColors = context.FurnitureColors.Where(fc => fc.FurnitureItemId == id).ToList();
-            List<DAO.Model.OrderItem> orderItems = context.OrderItems.Where(oi => oi.FurnitureItemId == id).ToList();
+            List<DAO.Model.OrderItem> orderItems = context.OrderItems.Where(oi => orderIds.Contains(oi.OrderId)).ToList();
             List<DAO.Model.Favourite> favourites = context.Favourites.Where(f => f.FurnitureItemId == id).ToList();
 
             context.RemoveRange(furnitureColors);
             context.RemoveRange(orderItems);
             context.RemoveRange(favourites);
+
+            var orders = context.Orders.Where(o => orderIds.Contains(o.OrderId)).ToList();
+
+            context.RemoveRange(orders);
 
             context.SaveChanges();
         }

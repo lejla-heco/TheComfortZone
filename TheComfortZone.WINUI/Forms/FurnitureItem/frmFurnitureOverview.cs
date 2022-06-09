@@ -86,7 +86,7 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
 
         private async void btnDelete_Click(object sender, EventArgs e)
         {
-            var confirmation = MessageBox.Show("Are you sure you want to delete selected item?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var confirmation = MessageBox.Show("Are you sure you want to delete selected item?\nIf you choose Yes, orders that contain this item will also be deleted!", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (selectedRow != null && confirmation == DialogResult.Yes)
             {
