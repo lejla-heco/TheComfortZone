@@ -7,7 +7,7 @@ using TheComfortZone.DTO.Coupon;
 
 namespace TheComfortZone.WINUI.Service
 {
-    public class CouponAPIService : BaseAPIService<CouponResponse, CouponSearchRequest, CouponUpsertRequest, CouponUpsertRequest>
+    public class CouponAPIService : BaseAPIService<CouponResponse, CouponSearchRequest, CouponInsertRequest, CouponUpdateRequest>
     {
         private const string API_ROUTE = "Coupon";
         public CouponAPIService() : base(API_ROUTE)

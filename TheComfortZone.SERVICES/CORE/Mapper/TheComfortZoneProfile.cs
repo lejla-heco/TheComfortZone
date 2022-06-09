@@ -97,6 +97,7 @@ namespace TheComfortZone.SERVICES.CORE.Mapper
             /** COUPON **/
             CreateMap<DAO.Model.Coupon, DTO.Coupon.CouponResponse>()
                 .ForMember(dto => dto.Customer, opts => opts.MapFrom(entity => $"{entity.User.FirstName} {entity.User.LastName}"));
+            CreateMap<DTO.Coupon.CouponInsertRequest, DAO.Model.Coupon>();
         }
     }
 }

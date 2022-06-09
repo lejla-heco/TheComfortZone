@@ -31,15 +31,15 @@
             this.formsPlot = new ScottPlot.FormsPlot();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvLoyalCustomers = new System.Windows.Forms.DataGridView();
+            this.Customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumberOfPurchases = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumberOfAppointments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AmountSpent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.nudDiscount = new System.Windows.Forms.NumericUpDown();
             this.btnDiscount = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.Customer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NumberOfPurchases = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NumberOfAppointments = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AmountSpent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLoyalCustomers)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -83,53 +83,7 @@
             this.dgvLoyalCustomers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLoyalCustomers.Size = new System.Drawing.Size(479, 393);
             this.dgvLoyalCustomers.TabIndex = 0;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.nudDiscount);
-            this.groupBox1.Controls.Add(this.btnDiscount);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(9, 34);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(911, 74);
-            this.groupBox1.TabIndex = 7;
-            this.groupBox1.TabStop = false;
-            // 
-            // nudDiscount
-            // 
-            this.nudDiscount.Location = new System.Drawing.Point(354, 27);
-            this.nudDiscount.Name = "nudDiscount";
-            this.nudDiscount.Size = new System.Drawing.Size(266, 27);
-            this.nudDiscount.TabIndex = 6;
-            // 
-            // btnDiscount
-            // 
-            this.btnDiscount.Enabled = false;
-            this.btnDiscount.Location = new System.Drawing.Point(676, 26);
-            this.btnDiscount.Name = "btnDiscount";
-            this.btnDiscount.Size = new System.Drawing.Size(189, 29);
-            this.btnDiscount.TabIndex = 2;
-            this.btnDiscount.Text = "Gift discount coupon";
-            this.btnDiscount.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(263, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 20);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Discount:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(333, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(261, 28);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Top 10 most loyal customers";
+            this.dgvLoyalCustomers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLoyalCustomers_CellClick);
             // 
             // Customer
             // 
@@ -166,6 +120,74 @@
             this.AmountSpent.MinimumWidth = 6;
             this.AmountSpent.Name = "AmountSpent";
             this.AmountSpent.ReadOnly = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.nudDiscount);
+            this.groupBox1.Controls.Add(this.btnDiscount);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Location = new System.Drawing.Point(9, 34);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(911, 74);
+            this.groupBox1.TabIndex = 7;
+            this.groupBox1.TabStop = false;
+            // 
+            // nudDiscount
+            // 
+            this.nudDiscount.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.nudDiscount.Location = new System.Drawing.Point(354, 27);
+            this.nudDiscount.Maximum = new decimal(new int[] {
+            75,
+            0,
+            0,
+            0});
+            this.nudDiscount.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.nudDiscount.Name = "nudDiscount";
+            this.nudDiscount.Size = new System.Drawing.Size(266, 27);
+            this.nudDiscount.TabIndex = 6;
+            this.nudDiscount.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // btnDiscount
+            // 
+            this.btnDiscount.Enabled = false;
+            this.btnDiscount.Location = new System.Drawing.Point(676, 26);
+            this.btnDiscount.Name = "btnDiscount";
+            this.btnDiscount.Size = new System.Drawing.Size(189, 29);
+            this.btnDiscount.TabIndex = 2;
+            this.btnDiscount.Text = "Gift discount coupon";
+            this.btnDiscount.UseVisualStyleBackColor = true;
+            this.btnDiscount.Click += new System.EventHandler(this.btnDiscount_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(263, 30);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(70, 20);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Discount:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(333, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(261, 28);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Top 10 most loyal customers";
             // 
             // frmLoyalCustomers
             // 

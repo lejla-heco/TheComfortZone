@@ -4,7 +4,9 @@ using System.Text;
 
 namespace TheComfortZone.DTO.Coupon
 {
-    public class CouponUpsertRequest
+    public class CouponInsertRequest
     {
+        public int Discount { get; set; }
+        public int UserId { get; set; }
     }
 }

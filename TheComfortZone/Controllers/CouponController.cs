@@ -5,7 +5,7 @@ using TheComfortZone.SERVICES.API;
 
 namespace TheComfortZone.Controllers
 {
-    public class CouponController : BaseCRUDController<CouponResponse, CouponSearchRequest, CouponUpsertRequest, CouponUpsertRequest>
+    public class CouponController : BaseCRUDController<CouponResponse, CouponSearchRequest, CouponInsertRequest, CouponUpdateRequest>
     {
         private readonly ICouponService couponService;
         public CouponController(ICouponService service) : base(service)
@@ -20,18 +20,18 @@ namespace TheComfortZone.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public override async Task<CouponResponse> Insert([FromBody] CouponUpsertRequest insert)
+        public override async Task<CouponResponse> Insert([FromBody] CouponInsertRequest insert)
         {
             return await base.Insert(insert);
         }
 
         [Authorize(Roles = "User")]
-        public override async Task<CouponResponse> Update(int id, [FromBody] CouponUpsertRequest update)
+        public override async Task<CouponResponse> Update(int id, [FromBody] CouponUpdateRequest update)
         {
             return await base.Update(id, update);
         }
 
-        [NonAction]
+        [Authorize(Roles = "Administrator")]
         public override async Task<string> Delete(int id)
         {
             return await base.Delete(id);

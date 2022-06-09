@@ -39,6 +39,7 @@
             this.btnClearSearch = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCoupons)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -73,6 +74,7 @@
             this.dgvCoupons.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCoupons.Size = new System.Drawing.Size(905, 388);
             this.dgvCoupons.TabIndex = 0;
+            this.dgvCoupons.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCoupons_CellClick);
             // 
             // Customer
             // 
@@ -96,7 +98,7 @@
             // 
             this.Discount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Discount.DataPropertyName = "Discount";
-            this.Discount.HeaderText = "Discount";
+            this.Discount.HeaderText = "Discount (%)";
             this.Discount.MinimumWidth = 6;
             this.Discount.Name = "Discount";
             this.Discount.ReadOnly = true;
@@ -112,6 +114,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnDelete);
             this.groupBox1.Controls.Add(this.cmbCustomers);
             this.groupBox1.Controls.Add(this.btnClearSearch);
             this.groupBox1.Controls.Add(this.btnSearch);
@@ -126,7 +129,7 @@
             // 
             this.cmbCustomers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCustomers.FormattingEnabled = true;
-            this.cmbCustomers.Location = new System.Drawing.Point(302, 36);
+            this.cmbCustomers.Location = new System.Drawing.Point(193, 38);
             this.cmbCustomers.Name = "cmbCustomers";
             this.cmbCustomers.Size = new System.Drawing.Size(294, 28);
             this.cmbCustomers.TabIndex = 6;
@@ -134,7 +137,7 @@
             // btnClearSearch
             // 
             this.btnClearSearch.Enabled = false;
-            this.btnClearSearch.Location = new System.Drawing.Point(761, 36);
+            this.btnClearSearch.Location = new System.Drawing.Point(646, 38);
             this.btnClearSearch.Name = "btnClearSearch";
             this.btnClearSearch.Size = new System.Drawing.Size(127, 29);
             this.btnClearSearch.TabIndex = 3;
@@ -144,7 +147,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(661, 36);
+            this.btnSearch.Location = new System.Drawing.Point(546, 38);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(94, 29);
             this.btnSearch.TabIndex = 2;
@@ -155,11 +158,22 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(118, 40);
+            this.label1.Location = new System.Drawing.Point(9, 42);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(145, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Customer (optional):";
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Enabled = false;
+            this.btnDelete.Location = new System.Drawing.Point(811, 38);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(94, 29);
+            this.btnDelete.TabIndex = 7;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // frmCouponOverview
             // 
@@ -192,5 +206,6 @@
         private DataGridViewTextBoxColumn CouponCode;
         private DataGridViewTextBoxColumn Discount;
         private DataGridViewCheckBoxColumn Active;
+        private Button btnDelete;
     }
 }

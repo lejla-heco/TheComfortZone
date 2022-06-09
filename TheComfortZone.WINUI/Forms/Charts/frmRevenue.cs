@@ -48,7 +48,6 @@ namespace TheComfortZone.WINUI.Forms.Charts
 
             var pie = formsPlot.Plot.AddPie(pieValues.ToArray());
             pie.SliceLabels = sliceLabels.ToArray();
-            pie.ShowPercentages = true;
             pie.Explode = true;
 
             formsPlot.Plot.Legend(true, Alignment.LowerRight);

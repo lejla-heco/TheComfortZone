@@ -16,6 +16,7 @@ namespace TheComfortZone.WINUI.Forms.Coupon
     {
         CouponAPIService couponAPIService = new CouponAPIService();
         UserAPIService userAPIService = new UserAPIService();
+        private CouponResponse selectedRow = null;
         public frmCouponOverview()
         {
             InitializeComponent();
@@ -56,6 +57,30 @@ namespace TheComfortZone.WINUI.Forms.Coupon
             cmbCustomers.SelectedIndex = 0;
 
             await getGridData();
+        }
+
+        private void dgvCoupons_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            selectedRow = dgvCoupons.SelectedRows[0].DataBoundItem as CouponResponse;
+            btnDelete.Enabled = true;
+        }
+
+        private async void btnDelete_Click(object sender, EventArgs e)
+        {
+            var confirmation = MessageBox.Show("Are you sure you want to delete selected coupon?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (selectedRow != null && confirmation == DialogResult.Yes)
+            {
+                string response = await couponAPIService.Delete(selectedRow.CouponId);
+                if (!string.IsNullOrWhiteSpace(response))
+                {
+                    MessageBox.Show(response, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    await getGridData();
+                }
+            }
+
+            selectedRow = null;
+            btnDelete.Enabled = false;
         }
     }
 }

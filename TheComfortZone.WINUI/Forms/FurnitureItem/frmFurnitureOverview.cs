@@ -94,7 +94,7 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
                 if (!string.IsNullOrWhiteSpace(response))
                 {
                     MessageBox.Show(response, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    getGridData();
+                    await getGridData();
                 }
             }
 

@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TheComfortZone.DTO.Charts;
+using TheComfortZone.DTO.Coupon;
 using TheComfortZone.WINUI.Service;
 
 namespace TheComfortZone.WINUI.Forms.Charts
@@ -15,6 +17,8 @@ namespace TheComfortZone.WINUI.Forms.Charts
     public partial class frmLoyalCustomers : Form
     {
         ChartAPIService chartAPIService = new ChartAPIService();
+        CouponAPIService couponAPIService = new CouponAPIService();
+        PieChartCustomerResponse selectedRow = null;
         private List<double> pieValues = new List<double>();
         private List<string> sliceLabels = new List<string>();
         public frmLoyalCustomers()
@@ -47,7 +51,6 @@ namespace TheComfortZone.WINUI.Forms.Charts
 
             var pie = formsPlot.Plot.AddPie(pieValues.ToArray());
             pie.SliceLabels = sliceLabels.ToArray();
-            pie.ShowPercentages = true;
             pie.Explode = true;
             pie.DonutSize = .6;
 
@@ -55,5 +58,27 @@ namespace TheComfortZone.WINUI.Forms.Charts
             formsPlot.Refresh();
         }
 
+        private void dgvLoyalCustomers_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            selectedRow = dgvLoyalCustomers.SelectedRows[0].DataBoundItem as PieChartCustomerResponse;
+            btnDiscount.Enabled = true;
+        }
+
+        private async void btnDiscount_Click(object sender, EventArgs e)
+        {
+            CouponInsertRequest insert = new CouponInsertRequest();
+            insert.UserId = selectedRow.UserId;
+            insert.Discount = (int)nudDiscount.Value;
+
+            var response = await couponAPIService.Post(insert);
+            if (response != null)
+            {
+                MessageBox.Show("Successfully gifted discount coupon!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult = DialogResult.OK;
+            }
+
+            selectedRow = null;
+            btnDiscount.Enabled = false;
+        }
     }
 }

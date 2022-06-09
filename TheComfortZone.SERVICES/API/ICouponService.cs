@@ -7,7 +7,7 @@ using TheComfortZone.DTO.Coupon;
 
 namespace TheComfortZone.SERVICES.API
 {
-    public interface ICouponService : ICRUDService<CouponResponse, CouponSearchRequest, CouponUpsertRequest, CouponUpsertRequest>
+    public interface ICouponService : ICRUDService<CouponResponse, CouponSearchRequest, CouponInsertRequest, CouponUpdateRequest>
     {
     }
 }
