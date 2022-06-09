@@ -137,6 +137,7 @@
             this.dgvMetricUnits.Location = new System.Drawing.Point(3, 23);
             this.dgvMetricUnits.Name = "dgvMetricUnits";
             this.dgvMetricUnits.ReadOnly = true;
+            this.dgvMetricUnits.RowHeadersVisible = false;
             this.dgvMetricUnits.RowHeadersWidth = 51;
             this.dgvMetricUnits.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMetricUnits.Size = new System.Drawing.Size(890, 270);

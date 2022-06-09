@@ -68,6 +68,7 @@
             this.dgvCoupons.Location = new System.Drawing.Point(3, 23);
             this.dgvCoupons.Name = "dgvCoupons";
             this.dgvCoupons.ReadOnly = true;
+            this.dgvCoupons.RowHeadersVisible = false;
             this.dgvCoupons.RowHeadersWidth = 51;
             this.dgvCoupons.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCoupons.Size = new System.Drawing.Size(905, 388);

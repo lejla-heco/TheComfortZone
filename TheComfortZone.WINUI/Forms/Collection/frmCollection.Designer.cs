@@ -73,6 +73,7 @@
             this.dgvCollections.Location = new System.Drawing.Point(3, 23);
             this.dgvCollections.Name = "dgvCollections";
             this.dgvCollections.ReadOnly = true;
+            this.dgvCollections.RowHeadersVisible = false;
             this.dgvCollections.RowHeadersWidth = 51;
             this.dgvCollections.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCollections.Size = new System.Drawing.Size(890, 303);

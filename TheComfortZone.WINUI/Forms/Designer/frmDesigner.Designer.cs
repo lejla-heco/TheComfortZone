@@ -70,6 +70,7 @@
             this.dgvDesigners.Location = new System.Drawing.Point(3, 23);
             this.dgvDesigners.Name = "dgvDesigners";
             this.dgvDesigners.ReadOnly = true;
+            this.dgvDesigners.RowHeadersVisible = false;
             this.dgvDesigners.RowHeadersWidth = 51;
             this.dgvDesigners.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDesigners.Size = new System.Drawing.Size(890, 332);

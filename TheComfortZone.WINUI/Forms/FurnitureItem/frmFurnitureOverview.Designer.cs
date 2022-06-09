@@ -39,6 +39,7 @@
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OnSale = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnClearFields = new System.Windows.Forms.Button();
             this.btnNewItem = new System.Windows.Forms.Button();
             this.cmbState = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,7 +51,6 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnClearFields = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFurnitureItems)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -84,6 +84,7 @@
             this.dgvFurnitureItems.Location = new System.Drawing.Point(3, 23);
             this.dgvFurnitureItems.Name = "dgvFurnitureItems";
             this.dgvFurnitureItems.ReadOnly = true;
+            this.dgvFurnitureItems.RowHeadersVisible = false;
             this.dgvFurnitureItems.RowHeadersWidth = 51;
             this.dgvFurnitureItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvFurnitureItems.Size = new System.Drawing.Size(896, 338);
@@ -183,6 +184,16 @@
             this.groupBox1.Size = new System.Drawing.Size(902, 154);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
+            // 
+            // btnClearFields
+            // 
+            this.btnClearFields.Location = new System.Drawing.Point(418, 39);
+            this.btnClearFields.Name = "btnClearFields";
+            this.btnClearFields.Size = new System.Drawing.Size(94, 29);
+            this.btnClearFields.TabIndex = 11;
+            this.btnClearFields.Text = "Clear fields";
+            this.btnClearFields.UseVisualStyleBackColor = true;
+            this.btnClearFields.Click += new System.EventHandler(this.btnClearFields_Click);
             // 
             // btnNewItem
             // 
@@ -285,16 +296,6 @@
             this.label2.Size = new System.Drawing.Size(52, 20);
             this.label2.TabIndex = 5;
             this.label2.Text = "Space:";
-            // 
-            // btnClearFields
-            // 
-            this.btnClearFields.Location = new System.Drawing.Point(418, 39);
-            this.btnClearFields.Name = "btnClearFields";
-            this.btnClearFields.Size = new System.Drawing.Size(94, 29);
-            this.btnClearFields.TabIndex = 11;
-            this.btnClearFields.Text = "Clear fields";
-            this.btnClearFields.UseVisualStyleBackColor = true;
-            this.btnClearFields.Click += new System.EventHandler(this.btnClearFields_Click);
             // 
             // frmFurnitureOverview
             // 

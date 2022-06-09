@@ -76,6 +76,7 @@
             this.dgvAppointments.Location = new System.Drawing.Point(3, 23);
             this.dgvAppointments.Name = "dgvAppointments";
             this.dgvAppointments.ReadOnly = true;
+            this.dgvAppointments.RowHeadersVisible = false;
             this.dgvAppointments.RowHeadersWidth = 51;
             this.dgvAppointments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvAppointments.Size = new System.Drawing.Size(905, 388);
