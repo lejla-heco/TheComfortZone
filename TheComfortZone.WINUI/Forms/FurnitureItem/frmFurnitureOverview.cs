@@ -69,12 +69,12 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
             dgvFurnitureItems.DataSource = furnitureItems;
         }
 
-        private void btnNewItem_Click(object sender, EventArgs e)
+        private async void btnNewItem_Click(object sender, EventArgs e)
         {
             frmFurnitureItemAddEdit frm = new frmFurnitureItemAddEdit();
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                getGridData();
+                await getGridData();
             }
         }
 
@@ -94,7 +94,7 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
                 if (!string.IsNullOrWhiteSpace(response))
                 {
                     MessageBox.Show(response, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    await getGridData();
+                    await ClearFields();
                 }
             }
 
@@ -102,13 +102,13 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
             btnDelete.Enabled = false;
         }
 
-        private void dgvFurnitureItems_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private async void dgvFurnitureItems_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             var selectedItem = dgvFurnitureItems.SelectedRows[0].DataBoundItem as FurnitureItemResponse;
             frmFurnitureItemAddEdit frm = new frmFurnitureItemAddEdit(selectedItem);
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                getGridData();
+                await getGridData();
             }
         }
 
@@ -128,11 +128,19 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
 
         private async void btnClearFields_Click(object sender, EventArgs e)
         {
-            btnClearFields.Enabled = false;
-            txtName.Text = null;
-            cmbSpace.SelectedIndex = -1;
-            cmbCategory.DataSource = null;
-            cmbState.SelectedIndex = -1;
+            await ClearFields();
+        }
+
+        private async Task ClearFields()
+        {
+            if (btnClearFields.Enabled)
+            {
+                btnClearFields.Enabled = false;
+                txtName.Text = null;
+                cmbSpace.SelectedIndex = -1;
+                cmbCategory.DataSource = null;
+                cmbState.SelectedIndex = -1;
+            }
 
             await getGridData();
         }

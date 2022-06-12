@@ -120,14 +120,16 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
         /** VALIDATION **/
         public override void ValidateInsert(UserInsertRequest insert)
         {
-            if (insert.Password != insert.PasswordConfirmation)
-                throw new UserException("Password and Password confirmation must be the same!");
             if (context.Users.Where(u => u.Username == insert.Username).Count() > 0)
                 throw new UserException("Username is taken!");
+            if (insert.Password != insert.PasswordConfirmation)
+                throw new UserException("Password and Password confirmation must be the same!");
         }
 
         public override void ValidateUpdate(int id, UserUpdateRequest update)
         {
+            if (context.Users.Find(id) == null)
+                throw new UserException("User with specified ID does not exist!");
             if (!string.IsNullOrWhiteSpace(update.Password) && !string.IsNullOrWhiteSpace(update.PasswordConfirmation))
             {
                 if (update.Password != update.PasswordConfirmation)

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TheComfortZone.DTO.Coupon;
 using TheComfortZone.SERVICES.API;
+using TheComfortZone.SERVICES.CORE.Utils;
 using TheComfortZone.SERVICES.DAO;
 using TheComfortZone.SERVICES.DAO.Model;
 
@@ -36,6 +37,13 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
         {
             entity.Active = true;
             entity.CouponCode = Guid.NewGuid().ToString().Substring(0, 12);
+        }
+
+        /** VALIDATION **/
+        public override void ValidateInsert(CouponInsertRequest insert)
+        {
+            if (context.Users.Find(insert.UserId) == null)
+                throw new UserException("User with specified ID does not exist!");
         }
     }
 }

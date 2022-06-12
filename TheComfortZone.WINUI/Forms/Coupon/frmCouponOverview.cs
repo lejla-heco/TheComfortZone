@@ -53,8 +53,16 @@ namespace TheComfortZone.WINUI.Forms.Coupon
 
         private async void btnClearSearch_Click(object sender, EventArgs e)
         {
-            btnClearSearch.Enabled = false;
-            cmbCustomers.SelectedIndex = 0;
+            await ClearSearch();
+        }
+
+        private async Task ClearSearch()
+        {
+            if (btnClearSearch.Enabled)
+            {
+                btnClearSearch.Enabled = false;
+                cmbCustomers.SelectedIndex = 0;
+            }
 
             await getGridData();
         }
@@ -75,7 +83,7 @@ namespace TheComfortZone.WINUI.Forms.Coupon
                 if (!string.IsNullOrWhiteSpace(response))
                 {
                     MessageBox.Show(response, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    await getGridData();
+                    await ClearSearch();
                 }
             }
 

@@ -21,7 +21,8 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
         }
         public override IQueryable<Appointment> IncludeList(IQueryable<Appointment> query)
         {
-            query = query.Include(x => x.User)
+            query = query
+                .Include(x => x.User)
                 .Include(x => x.Designer)
                 .Include(x => x.AppointmentType);
             return query;

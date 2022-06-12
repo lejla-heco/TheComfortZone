@@ -68,7 +68,9 @@ namespace TheComfortZone.WINUI.Forms.Employee
                 if (!string.IsNullOrWhiteSpace(response))
                 {
                     MessageBox.Show(response, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    getGridData();
+                    if (!string.IsNullOrWhiteSpace(txtUsername.Text))
+                        txtUsername.Text = null;
+                    await getGridData();
                 }
             }
 
@@ -76,13 +78,13 @@ namespace TheComfortZone.WINUI.Forms.Employee
             btnDelete.Enabled = false;
         }
 
-        private void dgvEmployees_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private async void dgvEmployees_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             var selectedItem = dgvEmployees.SelectedRows[0].DataBoundItem as UserResponse;
             frmEmployeeAddEdit frm = new frmEmployeeAddEdit(selectedItem);
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                getGridData();
+                await getGridData();
             }
         }
     }

@@ -26,6 +26,11 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
 
         public async Task<List<LineChartListResponse>> GetBestSellingItems(string space)
         {
+            /** VALIDATION **/
+
+            if (context.Spaces.Where(s => s.Name.ToLower() == space.ToLower()).Count() == 0)
+                throw new UserException("Space with specified name does not exist!");
+
             var lastYear = DateTime.Now.Year - 1;
 
             var query = context.OrderItems.Include(x => x.FurnitureItem)
