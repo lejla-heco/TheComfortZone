@@ -49,7 +49,7 @@
             this.ClientSize = new System.Drawing.Size(932, 538);
             this.Controls.Add(this.pictureBox1);
             this.Name = "frmHomePage";
-            this.Text = "Wellcome";
+            this.Text = "Welcome";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
