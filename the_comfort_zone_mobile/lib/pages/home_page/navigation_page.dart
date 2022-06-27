@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:the_comfort_zone_mobile/pages/appointment/appointments_overview.dart';
 import 'package:the_comfort_zone_mobile/pages/favourite/favourites_overview.dart';
-import 'package:the_comfort_zone_mobile/pages/furniture_item/furniture_item_overview.dart';
 import 'package:the_comfort_zone_mobile/pages/home_page/home_page.dart';
 import 'package:the_comfort_zone_mobile/pages/order/orders_overview.dart';
+import 'package:the_comfort_zone_mobile/pages/space/spaces_overview.dart';
 
 class NavigationPage extends StatefulWidget {
   static const String routeName = "/navigation-page";
@@ -16,7 +16,7 @@ class NavigationPage extends StatefulWidget {
 class _NavigationPageState extends State<NavigationPage> {
   int index = 2;
   final screens = [
-    const FurnitureItemOverviewPage(),
+    const SpacesOverviewPage(),
     const FavouritesOverviewPage(),
     const HomePage(),
     const OrdersOverviewPage(),
@@ -86,7 +86,7 @@ class _NavigationPageState extends State<NavigationPage> {
             });
           },
           icon: Icon(Icons.edit),
-          label: Text("new consultation"),
+          label: Text("new consultation", style: TextStyle(fontSize: 15),),
           tooltip: 'Create new consultation!',
           backgroundColor: Colors.black,
         ),

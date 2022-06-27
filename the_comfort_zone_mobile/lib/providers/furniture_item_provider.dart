@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:the_comfort_zone_mobile/model/furniture_item/furniture_item_response.dart';
+import 'package:the_comfort_zone_mobile/model/space/space_response.dart';
 import 'package:the_comfort_zone_mobile/providers/base_provider.dart';
 
 class FurnitureItemProvider extends BaseProvider<FurnitureItemResponse>{

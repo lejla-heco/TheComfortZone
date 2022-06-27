@@ -14,7 +14,11 @@ FurnitureItemResponse _$FurnitureItemResponseFromJson(
       ..categoryId = json['categoryId'] as int?
       ..collectionId = json['collectionId'] as int?
       ..materialId = json['materialId'] as int?
-      ..image = json['image'] as String?;
+      ..image = json['image'] as String?
+      ..designerName = json['designerName'] as String?
+      ..onSale = json['onSale'] as bool?
+      ..regularPrice = (json['regularPrice'] as num?)?.toDouble()
+      ..discountPrice = (json['discountPrice'] as num?)?.toDouble();
 
 Map<String, dynamic> _$FurnitureItemResponseToJson(
         FurnitureItemResponse instance) =>
@@ -25,4 +29,8 @@ Map<String, dynamic> _$FurnitureItemResponseToJson(
       'collectionId': instance.collectionId,
       'materialId': instance.materialId,
       'image': instance.image,
+      'designerName': instance.designerName,
+      'onSale': instance.onSale,
+      'regularPrice': instance.regularPrice,
+      'discountPrice': instance.discountPrice,
     };

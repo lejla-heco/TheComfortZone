@@ -10,6 +10,8 @@ abstract class BaseProvider<T> with ChangeNotifier {
   String? _baseUrl;
   String? _endpoint;
 
+  String? publicUrl;
+
   HttpClient client = new HttpClient();
   IOClient? http;
 
@@ -23,6 +25,8 @@ abstract class BaseProvider<T> with ChangeNotifier {
     _endpoint = endpoint;
     client.badCertificateCallback = (cert, host, port) => true;
     http = IOClient(client);
+
+    publicUrl = "$_baseUrl$_endpoint";
   }
 
   Future<List<T>> getById(int id, [dynamic additionalData]) async {

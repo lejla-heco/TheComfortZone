@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:the_comfort_zone_mobile/pages/furniture_item/furniture_item_overview.dart';
 import 'package:the_comfort_zone_mobile/pages/home_page/navigation_page.dart';
+import 'package:the_comfort_zone_mobile/pages/space/spaces_overview.dart';
 import 'package:the_comfort_zone_mobile/pages/user/login.dart';
 import 'package:the_comfort_zone_mobile/pages/user/registration.dart';
+import 'package:the_comfort_zone_mobile/providers/category_provider.dart';
 import 'package:the_comfort_zone_mobile/providers/furniture_item_provider.dart';
+import 'package:the_comfort_zone_mobile/providers/space_provider.dart';
 import 'package:the_comfort_zone_mobile/providers/user_provider.dart';
 
 void main() {
@@ -12,6 +14,8 @@ void main() {
     providers: [
       ChangeNotifierProvider(create: (_) => FurnitureItemProvider()),
       ChangeNotifierProvider(create: (_) => UserProvider()),
+      ChangeNotifierProvider(create: (_) => SpaceProvider()),
+      ChangeNotifierProvider(create: (_) => CategoryProvider()),
     ],
     child: const MyApp(),
   ));
@@ -34,8 +38,8 @@ class MyApp extends StatelessWidget {
         if (settings.name == RegistrationPage.routeName){
           return MaterialPageRoute(builder:(context) => const RegistrationPage());
         }
-        if (settings.name == FurnitureItemOverviewPage.routeName){
-          return MaterialPageRoute(builder: (context) => const FurnitureItemOverviewPage());
+        if(settings.name == SpacesOverviewPage.routeName){
+          return MaterialPageRoute(builder: (context) => const SpacesOverviewPage());
         }
       },
     );
