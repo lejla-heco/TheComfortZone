@@ -51,4 +51,40 @@ class FurnitureItemProvider extends BaseProvider<FurnitureItemResponse> {
     }
   }
 
+  Future<List<FurnitureItemResponse>> getFavourites([dynamic search]) async {
+    var url = "$publicUrl/favourites/${LoggedInUser.userId}";
+
+    if (search != null) {
+      String queryString = getQueryString(search);
+      url = url + "?" + queryString;
+    }
+
+    var uri = Uri.parse(url);
+
+    Map<String, String> headers = createHeaders();
+    var response = await http!.get(uri, headers: headers);
+    
+    if (isValidResponseCode(response)) {
+      var data = jsonDecode(response.body);
+      return data.map((x) => fromJson(x)).cast<FurnitureItemResponse>().toList();
+    } else {
+      throw Exception("An error occurred!");
+    }
+  }
+
+  Future<String> dislikeFurnitureItem(int furnitureItemId) async {
+    var url =
+        Uri.parse("$publicUrl/dislike/${LoggedInUser.userId}/$furnitureItemId");
+
+    Map<String, String> headers = createHeaders();
+
+    var response = await http!.get(url, headers: headers);
+
+    if (isValidResponseCode(response)) {
+      return response.body.toString();
+    } else {
+      throw Exception("An error occured!");
+    }
+  }
+
 }

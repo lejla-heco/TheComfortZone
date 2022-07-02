@@ -33,15 +33,27 @@ namespace TheComfortZone.Controllers
         }
 
         [HttpGet("like/{userId}/{furnitureItemId}")]
-        public async Task<string> likeFurnitureItem(int userId, int furnitureItemId)
+        public async Task<string> LikeFurnitureItem(int userId, int furnitureItemId)
         {
-            return await furnitureItemService.likeFurnitureItem(userId, furnitureItemId);
+            return await furnitureItemService.LikeFurnitureItem(userId, furnitureItemId);
         }
 
         [HttpGet("furniture-items-with-likes/{id}")]
-        public async Task<List<FurnitureItemResponse>> getFurnitureItemsUserData(int id, [FromQuery] FurnitureItemSearchRequest search)
+        public async Task<List<FurnitureItemResponse>> GetFurnitureItemsUserData(int id, [FromQuery] FurnitureItemSearchRequest search)
         {
-            return await furnitureItemService.getFurnitureItemsUserData(id, search);
+            return await furnitureItemService.GetFurnitureItemsUserData(id, search);
+        }
+
+        [HttpGet("favourites/{userId}")]
+        public async Task<List<FurnitureItemResponse>> GetFavourites(int userId, [FromQuery] FurnitureItemSearchRequest search = null)
+        {
+            return await furnitureItemService.GetFavourites(userId, search);
+        }
+
+        [HttpGet("dislike/{userId}/{furnitureItemId}")]
+        public async Task<string> DeleteFavourite(int userId, int furnitureItemId)
+        {
+            return await furnitureItemService.DeleteFavourite(userId, furnitureItemId);
         }
     }
 }

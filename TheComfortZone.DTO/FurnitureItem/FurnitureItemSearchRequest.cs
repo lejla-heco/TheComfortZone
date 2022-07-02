@@ -11,6 +11,7 @@ namespace TheComfortZone.DTO.FurnitureItem
         [MaxLength(60)]
         public string Name { get; set; }
         public int? CategoryId { get; set; }
+        public int? SpaceId { get; set; }
         public string State { get; set; }
     }
 }

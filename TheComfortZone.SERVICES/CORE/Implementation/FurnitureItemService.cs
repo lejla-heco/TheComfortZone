@@ -33,6 +33,8 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
         {
             if (!string.IsNullOrWhiteSpace(search?.Name))
                 query = query.Where(x => x.Name.ToLower().StartsWith(search.Name.ToLower()));
+            if (search?.SpaceId.HasValue == true)
+                query = query.Where(x => x.Category.SpaceId == search.SpaceId);
             if (search?.CategoryId.HasValue == true)
                 query = query.Where(x => x.CategoryId == search.CategoryId);
             if (!string.IsNullOrWhiteSpace(search?.State))
@@ -99,7 +101,7 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             context.SaveChanges();
         }
 
-        public async Task<List<FurnitureItemResponse>> getFurnitureItemsUserData(int id, FurnitureItemSearchRequest search = null)
+        public async Task<List<FurnitureItemResponse>> GetFurnitureItemsUserData(int id, FurnitureItemSearchRequest search = null)
         {
             IEnumerable<FurnitureItemResponse> response = await Get(search);
             List<FurnitureItemResponse> responseList = response.ToList();
@@ -113,7 +115,7 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             return response.ToList();
         }
 
-        public async Task<string> likeFurnitureItem(int userId, int furnitureItemId)
+        public async Task<string> LikeFurnitureItem(int userId, int furnitureItemId)
         {
             /** VALIDATION **/
             StringBuilder stringBuilder = new StringBuilder();
@@ -148,6 +150,49 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             string response = "Liked item is added in your Favourites section!";
 
             return response;
+        }
+
+        public async Task<List<FurnitureItemResponse>> GetFavourites(int userId, FurnitureItemSearchRequest search = null)
+        {
+            var query = context.Favourites
+                .Where(x => x.UserId == userId)
+                .Include(x => x.FurnitureItem.Category)
+                .Select(x => x.FurnitureItem)
+                .AsQueryable();
+            query = AddFilter(query, search);
+
+            return mapper.Map<List<FurnitureItemResponse>>(query.ToList());
+        }
+        public async Task<string> DeleteFavourite(int userId, int furnitureItemId)
+        {
+            /** VALIDATION **/
+            StringBuilder stringBuilder = new StringBuilder();
+            bool exception = false;
+            if (context.Users.Find(userId) == null)
+            {
+                exception = true;
+                stringBuilder.Append("User with specified ID does not exist!\n");
+            }
+            if (context.FurnitureItems.Find(furnitureItemId) == null)
+            {
+                exception = true;
+                stringBuilder.Append("Furniture item with specified ID does not exist!\n");
+            }
+            if (context.Favourites.Where(x => x.UserId == userId && x.FurnitureItemId == furnitureItemId).Single() == null)
+            {
+                exception = true;
+                stringBuilder.Append("Combination of IDs does not exist!\n");
+            }
+            if (exception)
+            {
+                throw new UserException(stringBuilder.ToString());
+            }
+
+            Favourite favourite = context.Favourites.Where(x => x.UserId == userId && x.FurnitureItemId == furnitureItemId).Single();
+            context.Favourites.Remove(favourite);
+            context.SaveChanges();
+
+            return "Successfully deleted favourite item!";
         }
 
         /** VALIDATION **/

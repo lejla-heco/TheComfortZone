@@ -117,7 +117,6 @@ class _FurnitureItemOverviewPageState extends State<FurnitureItemOverviewPage> {
                         height: MediaQuery.of(context).size.height,
                         width: MediaQuery.of(context).size.width,
                         child: GridView(
-                          physics: NeverScrollableScrollPhysics(),
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: setCrossAxisCount(),
