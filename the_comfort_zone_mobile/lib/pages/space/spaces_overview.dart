@@ -59,7 +59,14 @@ class _SpacesOverviewPageState extends State<SpacesOverviewPage> {
 
   List<Widget> _buildSpaceCardList() {
     if (data.length == 0) {
-      return [Text("Loading...")];
+      return [
+        const Center(
+            child: Text(
+          "Loading...",
+          style: TextStyle(
+              color: Colors.grey, fontSize: 20, fontWeight: FontWeight.bold),
+        )),
+      ];
     }
     List<Widget> list = data
         .map((x) => Container(

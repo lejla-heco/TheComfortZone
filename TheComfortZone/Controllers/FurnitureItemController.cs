@@ -31,5 +31,17 @@ namespace TheComfortZone.Controllers
         {
             return await base.Delete(id);
         }
+
+        [HttpGet("like/{userId}/{furnitureItemId}")]
+        public async Task<string> likeFurnitureItem(int userId, int furnitureItemId)
+        {
+            return await furnitureItemService.likeFurnitureItem(userId, furnitureItemId);
+        }
+
+        [HttpGet("furniture-items-with-likes/{id}")]
+        public async Task<List<FurnitureItemResponse>> getFurnitureItemsUserData(int id, [FromQuery] FurnitureItemSearchRequest search)
+        {
+            return await furnitureItemService.getFurnitureItemsUserData(id, search);
+        }
     }
 }

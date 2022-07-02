@@ -28,6 +28,7 @@ namespace TheComfortZone.DTO.FurnitureItem
         public int InStockQuantity { get; set; }
         public string Height { get; set; }
         public string Width { get; set; }
+        public bool? Favourited { get; set; }
 
         public string CategoryName { get; set; }
         public string SpaceName { get; set; }

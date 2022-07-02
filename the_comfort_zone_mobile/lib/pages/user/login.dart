@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:the_comfort_zone_mobile/pages/user/registration.dart';
 import 'package:the_comfort_zone_mobile/utils/credentials_helper.dart';
+import 'package:the_comfort_zone_mobile/utils/logged_in_user.dart';
 import '../../providers/user_provider.dart';
 import '../../widgets/text_input_widget.dart';
 import '../home_page/navigation_page.dart';
@@ -52,19 +53,22 @@ class LoginPage extends StatelessWidget {
           Authorization.username = _usernameController.text;
           Authorization.password = _passwordController.text;
 
-          await _userProvider.get();
+          var loggedInUser = await _userProvider.getLoggedInUserId();
+          LoggedInUser.userId = loggedInUser.userId;
+
+          print(LoggedInUser.userId);
 
           Navigator.popAndPushNamed(context, NavigationPage.routeName);
         } catch (e) {
           showDialog(
               context: context,
               builder: (BuildContext context) => AlertDialog(
-                    title: Text("Error"),
+                    title: const Text("Error"),
                     content: Text(e.toString()),
                     actions: [
                       TextButton(
                           onPressed: () => Navigator.pop(context),
-                          child: Text("Ok"))
+                          child: const Text("Ok"))
                     ],
                   ));
         }

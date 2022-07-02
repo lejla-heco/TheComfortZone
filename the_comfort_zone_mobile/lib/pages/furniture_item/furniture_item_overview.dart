@@ -9,6 +9,7 @@ import 'package:the_comfort_zone_mobile/providers/furniture_item_provider.dart';
 import 'package:the_comfort_zone_mobile/utils/image_helper.dart';
 
 import '../../model/space/space_response.dart';
+import '../../widgets/alert_dialog_widget.dart';
 
 class FurnitureItemOverviewPage extends StatefulWidget {
   static const String routeName = "/furniture-items";
@@ -59,7 +60,8 @@ class _FurnitureItemOverviewPageState extends State<FurnitureItemOverviewPage> {
       "categoryId": categoryId.toString(),
       "state": "Active"
     };
-    var apiData = await _productProvider?.get(searchRequest);
+    var apiData =
+        await _productProvider?.getFurnitureItemsUserData(searchRequest);
     if (mounted) {
       setState(() {
         data = apiData!;
@@ -177,18 +179,56 @@ class _FurnitureItemOverviewPageState extends State<FurnitureItemOverviewPage> {
                     },
                   ),
                   Text(x.name ?? "",
-                      style:
-                          const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                      style: const TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold)),
                   Text("by ${x.designerName ?? ""}",
                       style: const TextStyle(fontSize: 15, color: Colors.grey)),
                   Text(
                       "${formatter.format(x.onSale == true ? x.discountPrice : x.regularPrice)} KM",
-                      style:
-                          const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                      style: const TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold)),
                   Container(
                     alignment: Alignment.bottomRight,
                     padding: const EdgeInsets.only(right: 15),
-                    child: const Icon(Icons.favorite_border, size: 30),
+                    child: IconButton(
+                      icon: _defineIcon(
+                          x.favourited == null ? false : x.favourited!),
+                      onPressed: () async {
+                        if (x.favourited == null ? false : x.favourited!) {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) =>
+                                  AlertDialogWidget(
+                                    title: "Warning",
+                                    message: "Item is already in Favourites!",
+                                    context: context,
+                                  ));
+                        } else {
+                          try {
+                            var response = await _productProvider
+                                ?.likeFurnitureItem(x.furnitureItemId!);
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) =>
+                                    AlertDialogWidget(
+                                      title: "Success",
+                                      message: response.toString(),
+                                      context: context,
+                                    ));
+                            await loadData(selectedValue!);
+                          } catch (e) {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) =>
+                                    AlertDialogWidget(
+                                      title: "Error",
+                                      message: "An error occured!",
+                                      context: context,
+                                    ));
+                          }
+                        }
+                      },
+                    ),
                   )
                 ],
               ),
@@ -210,5 +250,11 @@ class _FurnitureItemOverviewPageState extends State<FurnitureItemOverviewPage> {
             ))
         .toList();
     return list;
+  }
+
+  Icon _defineIcon(bool isFavourite) {
+    Icon notFavorite = const Icon(Icons.favorite_border, size: 30);
+    Icon favorite = const Icon(Icons.favorite, size: 30);
+    return isFavourite == true ? favorite : notFavorite;
   }
 }

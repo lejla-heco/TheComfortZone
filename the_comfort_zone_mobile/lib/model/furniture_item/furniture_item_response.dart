@@ -21,6 +21,7 @@ class FurnitureItemResponse{
   String? dimensions;
   String? material;
   String? description;
+  bool? favourited;
 
   FurnitureItemResponse(){}
 

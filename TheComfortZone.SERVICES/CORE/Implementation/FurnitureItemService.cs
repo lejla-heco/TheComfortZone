@@ -99,6 +99,57 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             context.SaveChanges();
         }
 
+        public async Task<List<FurnitureItemResponse>> getFurnitureItemsUserData(int id, FurnitureItemSearchRequest search = null)
+        {
+            IEnumerable<FurnitureItemResponse> response = await Get(search);
+            List<FurnitureItemResponse> responseList = response.ToList();
+
+            List<int> favorites = context.Favourites.Where(x => x.UserId == id).Select(x => x.FurnitureItemId).ToList();
+
+
+            foreach(var item in responseList)
+                if (favorites.Contains(item.FurnitureItemId)) item.Favourited = true;
+            
+            return response.ToList();
+        }
+
+        public async Task<string> likeFurnitureItem(int userId, int furnitureItemId)
+        {
+            /** VALIDATION **/
+            StringBuilder stringBuilder = new StringBuilder();
+            bool exception = false;
+            if (context.Users.Find(userId) == null)
+            {
+                exception = true;
+                stringBuilder.Append("User with specified ID does not exist!\n");
+            }
+            if (context.FurnitureItems.Find(furnitureItemId) == null)
+            {
+                exception = true;
+                stringBuilder.Append("Furniture item with specified ID does not exist!\n");
+            }
+            if (exception)
+            {
+                throw new UserException(stringBuilder.ToString());
+            }
+
+            bool condition = context.Favourites.Where(x => x.UserId == userId && x.FurnitureItemId == furnitureItemId).Count() == 0;
+            if (!condition)
+                throw new UserException("This item is already in Favourites!");
+
+            Favourite favourite = new Favourite()
+            {
+                UserId = userId,
+                FurnitureItemId = furnitureItemId,
+            };
+            context.Favourites.Add(favourite);
+            context.SaveChanges();
+
+            string response = "Liked item is added in your Favourites section!";
+
+            return response;
+        }
+
         /** VALIDATION **/
         public override void ValidateInsert(FurnitureItemUpsertRequest insert)
         {

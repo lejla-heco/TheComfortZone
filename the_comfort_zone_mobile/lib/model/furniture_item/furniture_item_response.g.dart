@@ -24,7 +24,8 @@ FurnitureItemResponse _$FurnitureItemResponseFromJson(
       ..colors = json['colors'] as String?
       ..dimensions = json['dimensions'] as String?
       ..material = json['material'] as String?
-      ..description = json['description'] as String?;
+      ..description = json['description'] as String?
+      ..favourited = json['favourited'] as bool?;
 
 Map<String, dynamic> _$FurnitureItemResponseToJson(
         FurnitureItemResponse instance) =>
@@ -45,4 +46,5 @@ Map<String, dynamic> _$FurnitureItemResponseToJson(
       'dimensions': instance.dimensions,
       'material': instance.material,
       'description': instance.description,
+      'favourited': instance.favourited,
     };
