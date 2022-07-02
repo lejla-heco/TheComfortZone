@@ -124,6 +124,11 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
                 exception = true;
                 stringBuilder.Append("Metric unit with specified ID does not exist!\n");
             }
+            if (insert?.ColorIdList.Count == 0)
+            {
+                exception = true;
+                stringBuilder.Append("Furniture item must have at least one color!\n");
+            }
             if (exception)
             {
                 throw new UserException(stringBuilder.ToString());

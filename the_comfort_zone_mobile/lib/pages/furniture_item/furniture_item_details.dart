@@ -101,7 +101,7 @@ class _FurnitureItemDetailsPageState extends State<FurnitureItemDetailsPage> {
                         print("added to cart");
                       },
                       icon: const Icon(
-                        Icons.shopping_cart_checkout,
+                        Icons.shopping_cart_checkout_rounded,
                         size: 28,
                       ),
                       label: const Text('Add to cart'),

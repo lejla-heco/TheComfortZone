@@ -423,5 +423,20 @@ namespace TheComfortZone.WINUI.Forms.FurnitureItem
                 errorProvider.SetError(txtDescription, null);
             }
         }
+
+        private void clbColors_Validating(object sender, CancelEventArgs e)
+        {
+            if (clbColors.CheckedItems.Count == 0)
+            {
+                e.Cancel = true;
+                clbColors.Focus();
+                errorProvider.SetError(clbColors, "Furniture item must have at least one color!");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider.SetError(clbColors, null);
+            }
+        }
     }
 }

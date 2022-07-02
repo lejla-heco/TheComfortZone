@@ -509,6 +509,7 @@
             this.clbColors.Name = "clbColors";
             this.clbColors.Size = new System.Drawing.Size(312, 132);
             this.clbColors.TabIndex = 41;
+            this.clbColors.Validating += new System.ComponentModel.CancelEventHandler(this.clbColors_Validating);
             // 
             // openFileDialog
             // 
