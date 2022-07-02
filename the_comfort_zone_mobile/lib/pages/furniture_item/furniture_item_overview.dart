@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:the_comfort_zone_mobile/model/category/category_response.dart';
 import 'package:the_comfort_zone_mobile/model/furniture_item/furniture_item_response.dart';
+import 'package:the_comfort_zone_mobile/pages/furniture_item/furniture_item_details.dart';
 import 'package:the_comfort_zone_mobile/providers/category_provider.dart';
 import 'package:the_comfort_zone_mobile/providers/furniture_item_provider.dart';
 import 'package:the_comfort_zone_mobile/utils/image_helper.dart';
@@ -54,7 +55,10 @@ class _FurnitureItemOverviewPageState extends State<FurnitureItemOverviewPage> {
   }
 
   Future loadData(int categoryId) async {
-    Map<String, int> searchRequest = {"categoryId": categoryId};
+    Map<String, String> searchRequest = {
+      "categoryId": categoryId.toString(),
+      "state": "Active"
+    };
     var apiData = await _productProvider?.get(searchRequest);
     if (mounted) {
       setState(() {
@@ -67,9 +71,9 @@ class _FurnitureItemOverviewPageState extends State<FurnitureItemOverviewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          iconTheme: const IconThemeData(color: Colors.black),
-          title: Text(space.name!, style: TextStyle(color: Colors.black)),
-          backgroundColor: Colors.grey[100],
+          iconTheme: const IconThemeData(color: Colors.white),
+          title: Text(space.name!, style: TextStyle(color: Colors.white)),
+          backgroundColor: Colors.black,
           centerTitle: true,
           elevation: 0.0,
         ),
@@ -88,10 +92,10 @@ class _FurnitureItemOverviewPageState extends State<FurnitureItemOverviewPage> {
                             fontSize: 25,
                             fontWeight: FontWeight.bold)))
               ]),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
-              Text("Categories", style: const TextStyle(fontSize: 18)),
+              const Text("Categories", style: const TextStyle(fontSize: 18)),
               DropdownButton(
                   items: _buildCategoriesDropDownList(),
                   value: selectedValue,
@@ -110,19 +114,17 @@ class _FurnitureItemOverviewPageState extends State<FurnitureItemOverviewPage> {
                       Container(
                         height: MediaQuery.of(context).size.height,
                         width: MediaQuery.of(context).size.width,
-                        child: SafeArea(
-                          child: GridView(
-                            physics: NeverScrollableScrollPhysics(),
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    childAspectRatio: 3 / 6,
-                                    crossAxisSpacing: 10,
-                                    mainAxisSpacing: 10),
-                            children: _buildFurnitureItemCardList(),
-                          ),
+                        child: GridView(
+                          physics: NeverScrollableScrollPhysics(),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: setCrossAxisCount(),
+                                  childAspectRatio: setChildAspectRatio(),
+                                  crossAxisSpacing: 10,
+                                  mainAxisSpacing: 10),
+                          children: _buildFurnitureItemCardList(),
                         ),
-                      )
+                      ),
                     ],
                   ))
             ],
@@ -130,9 +132,26 @@ class _FurnitureItemOverviewPageState extends State<FurnitureItemOverviewPage> {
         ));
   }
 
+  double setChildAspectRatio() {
+    if (data.length == 0) return 1;
+    return 3 / 6;
+  }
+
+  int setCrossAxisCount() {
+    if (data.length == 0) return 1;
+    return 2;
+  }
+
   List<Widget> _buildFurnitureItemCardList() {
     if (data.length == 0) {
-      return [];
+      return [
+        const Center(
+            child: Text(
+          "Empty category",
+          style: TextStyle(
+              color: Colors.grey, fontSize: 25, fontWeight: FontWeight.bold),
+        )),
+      ];
     }
     List<Widget> list = data
         .map((x) => Container(
@@ -142,28 +161,34 @@ class _FurnitureItemOverviewPageState extends State<FurnitureItemOverviewPage> {
               ),
               child: Column(
                 children: [
-                  Container(
-                    height: 270,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        imageFromBase64String(x.image!),
-                      ],
+                  GestureDetector(
+                    child: Container(
+                      height: 270,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          imageFromBase64String(x.image!),
+                        ],
+                      ),
                     ),
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => FurnitureItemDetailsPage(x)));
+                    },
                   ),
                   Text(x.name ?? "",
                       style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                          const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
                   Text("by ${x.designerName ?? ""}",
-                      style: TextStyle(fontSize: 15, color: Colors.grey)),
+                      style: const TextStyle(fontSize: 15, color: Colors.grey)),
                   Text(
                       "${formatter.format(x.onSale == true ? x.discountPrice : x.regularPrice)} KM",
                       style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                          const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
                   Container(
                     alignment: Alignment.bottomRight,
-                    padding: EdgeInsets.only(right: 15),
-                    child: Icon(Icons.favorite_border, size: 30),
+                    padding: const EdgeInsets.only(right: 15),
+                    child: const Icon(Icons.favorite_border, size: 30),
                   )
                 ],
               ),
