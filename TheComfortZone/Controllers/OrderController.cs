@@ -45,5 +45,11 @@ namespace TheComfortZone.Controllers
         {
             return await orderService.GetOrdersByEmployeeId(id, search);
         }
+
+        [HttpGet("orders-by-user/{id}")]
+        public async Task<List<OrderResponse>> GetOrdersByUserId(int id, [FromQuery] OrderSearchRequest search = null)
+        {
+            return await orderService.GetOrdersByUserId(id, search);
+        }
     }
 }

@@ -6,6 +6,7 @@ import 'package:the_comfort_zone_mobile/pages/user/login.dart';
 import 'package:the_comfort_zone_mobile/pages/user/registration.dart';
 import 'package:the_comfort_zone_mobile/providers/category_provider.dart';
 import 'package:the_comfort_zone_mobile/providers/furniture_item_provider.dart';
+import 'package:the_comfort_zone_mobile/providers/order_provider.dart';
 import 'package:the_comfort_zone_mobile/providers/space_provider.dart';
 import 'package:the_comfort_zone_mobile/providers/user_provider.dart';
 
@@ -16,6 +17,7 @@ void main() {
       ChangeNotifierProvider(create: (_) => UserProvider()),
       ChangeNotifierProvider(create: (_) => SpaceProvider()),
       ChangeNotifierProvider(create: (_) => CategoryProvider()),
+      ChangeNotifierProvider(create: (_) => OrderProvider()),
     ],
     child: const MyApp(),
   ));
