@@ -43,5 +43,11 @@ namespace TheComfortZone.Controllers
         {
             return await appointmentService.GetAppointmentsByEmployeeId(id, search);
         }
+
+        [HttpGet("appointments-by-user/{id}")]
+        public async Task<List<AppointmentResponse>> GetAppointmentsByUserId(int id, [FromQuery] AppointmentSearchRequest search = null)
+        {
+            return await appointmentService.GetAppointmentsByUserId(id, search);
+        }
     }
 }

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:json_annotation/json_annotation.dart';
 part 'furniture_item_response.g.dart';
 
@@ -23,7 +21,7 @@ class FurnitureItemResponse{
   String? description;
   bool? favourited;
 
-  FurnitureItemResponse(){}
+  FurnitureItemResponse();
 
   factory FurnitureItemResponse.fromJson(Map<String, dynamic> json) => _$FurnitureItemResponseFromJson(json);
   /// Connect the generated [_$FurnitureItemResponseToJson] function to the `toJson` method.

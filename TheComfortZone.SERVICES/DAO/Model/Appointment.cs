@@ -14,6 +14,7 @@ namespace TheComfortZone.SERVICES.DAO.Model
         public int DesignerId { get; set; }
         public int AppointmentTypeId { get; set; }
         public int? EmployeeId { get; set; }
+        public string AppointmentNumber { get; set; } = null!;
 
         public virtual AppointmentType AppointmentType { get; set; } = null!;
         public virtual Designer Designer { get; set; } = null!;

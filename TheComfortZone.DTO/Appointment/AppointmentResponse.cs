@@ -17,6 +17,7 @@ namespace TheComfortZone.DTO.Appointment
         public int DesignerId { get; set; }
         public int AppointmentTypeId { get; set; }
         public string Customer { get; set; }
+        public string AppointmentNumber { get; set; }
 
         /** RELATIONSHIPHS **/
         public virtual AppointmentTypeResponse AppointmentType { get; set; }

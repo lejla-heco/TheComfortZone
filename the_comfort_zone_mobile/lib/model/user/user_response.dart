@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:json_annotation/json_annotation.dart';
 part 'user_response.g.dart';
 
@@ -15,7 +13,7 @@ class UserResponse {
   String? userType;
   String? fullName;
 
-  UserResponse(){}
+  UserResponse();
 
   factory UserResponse.fromJson(Map<String, dynamic> json) => _$UserResponseFromJson(json);
   /// Connect the generated [_$UserResponseToJson] function to the `toJson` method.

@@ -49,5 +49,20 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
 
             return mapper.Map<List<AppointmentResponse>>(query.ToList());
         }
+
+        public async Task<List<AppointmentResponse>> GetAppointmentsByUserId(int id, AppointmentSearchRequest search = null)
+        {
+            /** VALIDATION **/
+            if (context.Users.Include(u => u.Role)
+                .Where(u => u.UserId == id).Count() == 0)
+                throw new UserException("User with specified ID does not exist!");
+
+            var query = context.Appointments.Where(o => o.UserId == id).AsQueryable();
+
+            query = IncludeList(query);
+            query = AddFilter(query, search);
+
+            return mapper.Map<List<AppointmentResponse>>(query.ToList());
+        }
     }
 }

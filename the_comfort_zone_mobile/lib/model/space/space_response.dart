@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:json_annotation/json_annotation.dart';
 part 'space_response.g.dart';
 
@@ -9,7 +7,7 @@ class SpaceResponse {
   String? name;
   String? image;
 
-  SpaceResponse() {}
+  SpaceResponse();
 
   factory SpaceResponse.fromJson(Map<String, dynamic> json) =>
       _$SpaceResponseFromJson(json);

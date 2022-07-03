@@ -16,7 +16,7 @@ class OrdersOverviewPage extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<OrdersOverviewPage> {
-  late ScrollController _scrollController;
+  ScrollController? _scrollController;
 
   OrderProvider? _orderProvider = null;
   List<OrderResponse> data = [];

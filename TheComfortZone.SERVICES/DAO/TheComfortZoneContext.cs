@@ -54,6 +54,10 @@ namespace TheComfortZone.SERVICES.DAO
 
                 entity.Property(e => e.AppointmentDate).HasColumnType("datetime");
 
+                entity.Property(e => e.AppointmentNumber)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.AppointmentTypeId).HasColumnName("AppointmentTypeID");
 
                 entity.Property(e => e.DesignerId).HasColumnName("DesignerID");

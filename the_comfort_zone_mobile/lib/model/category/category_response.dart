@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:json_annotation/json_annotation.dart';
 part 'category_response.g.dart';
 
@@ -8,7 +6,7 @@ class CategoryResponse{
   int? categoryId;
   String? name;
 
-  CategoryResponse() {}
+  CategoryResponse();
 
  factory CategoryResponse.fromJson(Map<String, dynamic> json) =>
       _$CategoryResponseFromJson(json);
