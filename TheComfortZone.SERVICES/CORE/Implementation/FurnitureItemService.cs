@@ -157,6 +157,13 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             var query = context.Favourites
                 .Where(x => x.UserId == userId)
                 .Include(x => x.FurnitureItem.Category)
+                .Include(x => x.FurnitureItem.Category.Space)
+                .Include(x => x.FurnitureItem.Collection)
+                .Include(x => x.FurnitureItem.Collection.Designer)
+                .Include (x => x.FurnitureItem.MetricUnit)
+                .Include (x => x.FurnitureItem.Material)
+                .Include(x => x.FurnitureItem.FurnitureColors)
+                .ThenInclude(y => y.Color)
                 .Select(x => x.FurnitureItem)
                 .AsQueryable();
             query = AddFilter(query, search);

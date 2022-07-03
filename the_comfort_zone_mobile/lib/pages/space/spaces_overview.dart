@@ -47,7 +47,7 @@ class _SpacesOverviewPageState extends State<SpacesOverviewPage> {
             width: MediaQuery.of(context).size.width,
             child: SafeArea(
               child: ListView(
-                //padding: EdgeInsets.only(bottom: 150),
+                padding: EdgeInsets.only(bottom: 150),
                 children: _buildSpaceCardList(),
               ),
             ),

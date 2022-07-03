@@ -85,7 +85,8 @@ class _FurnitureItemOverviewPageState extends State<FurnitureItemOverviewPage> {
       ),
       body: SafeArea(
         child: CupertinoScrollbar(
-          isAlwaysShown: true,
+          thumbVisibility: true,
+          thickness: 5,
           controller: _scrollController,
           child: ListView(
             controller: _scrollController,

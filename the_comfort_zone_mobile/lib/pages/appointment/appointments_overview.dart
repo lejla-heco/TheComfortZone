@@ -53,6 +53,7 @@ class _MyWidgetState extends State<AppointmentsOverviewPage> {
       body: SafeArea(
         child: CupertinoScrollbar(
           thumbVisibility: true,
+          thickness: 5,
           controller: _scrollController,
           child: ListView(
             controller: _scrollController,
@@ -64,7 +65,7 @@ class _MyWidgetState extends State<AppointmentsOverviewPage> {
                         height: 200,
                         decoration: const BoxDecoration(
                             image: DecorationImage(
-                          image: AssetImage("assets/images/wishlist-bg.jpg"),
+                          image: AssetImage("assets/images/consultation-bg.png"),
                           fit: BoxFit.fill,
                         ))),
                     const Center(

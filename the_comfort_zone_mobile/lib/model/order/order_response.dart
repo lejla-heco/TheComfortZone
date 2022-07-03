@@ -10,7 +10,7 @@ class OrderResponse {
   int? noip;
   double? totalPrice;
 
-  OrderResponse(){}
+  OrderResponse();
 
   factory OrderResponse.fromJson(Map<String, dynamic> json) => _$OrderResponseFromJson(json);
   /// Connect the generated [_$OrderResponseToJson] function to the `toJson` method.
