@@ -8,14 +8,14 @@ class RegistrationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    TextEditingController _firstNameController = new TextEditingController();
-    TextEditingController _lastNameController = new TextEditingController();
-    TextEditingController _adressController = new TextEditingController();
-    TextEditingController _phoneNumberController = new TextEditingController();
-    TextEditingController _emailController = new TextEditingController();
-    TextEditingController _usernameController = new TextEditingController();
-    TextEditingController _passwordController = new TextEditingController();
-    TextEditingController _passwordConfirmationController = new TextEditingController();
+    TextEditingController _firstNameController = TextEditingController();
+    TextEditingController _lastNameController = TextEditingController();
+    TextEditingController _adressController = TextEditingController();
+    TextEditingController _phoneNumberController = TextEditingController();
+    TextEditingController _emailController = TextEditingController();
+    TextEditingController _usernameController = TextEditingController();
+    TextEditingController _passwordController = TextEditingController();
+    TextEditingController _passwordConfirmationController = TextEditingController();
 
     /** WIDGETS */
     

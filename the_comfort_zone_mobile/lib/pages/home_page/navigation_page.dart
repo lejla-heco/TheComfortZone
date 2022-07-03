@@ -62,13 +62,13 @@ class _NavigationPageState extends State<NavigationPage> {
         child: ListView(
           children: [
             ListTile(
-              title: Text('Products'),
+              title: Text('My Cart'),
               onTap: (){
-                Navigator.of(context).pushNamed("/products");
+                Navigator.of(context).pushNamed("/cart");
               },
             ),
             ListTile(
-                title: Text("Cart"),
+                title: Text("Logout"),
                 onTap:(){
                   print("cart");
                 }
@@ -77,19 +77,15 @@ class _NavigationPageState extends State<NavigationPage> {
         ),
       ),
       body: screens[index],
-      floatingActionButton: SizedBox(
-        width: 190,
-        child: FloatingActionButton.extended(
-          onPressed: () {
-            setState(() {
-              //TODO
-            });
-          },
-          icon: Icon(Icons.edit),
-          label: Text("new consultation", style: TextStyle(fontSize: 15),),
-          tooltip: 'Create new consultation!',
-          backgroundColor: Colors.black,
-        ),
+      floatingActionButton: index == 1 ? null : FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            //TODO
+          });
+        },
+        child: Icon(Icons.edit),
+        tooltip: 'Create new consultation!',
+        backgroundColor: Colors.black,
       ),
     );
   }

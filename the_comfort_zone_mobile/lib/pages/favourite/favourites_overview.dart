@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -27,9 +28,24 @@ class _FavouritesOverviewPageState extends State<FavouritesOverviewPage> {
   var formatter = NumberFormat('###.0#');
   int? selectedValue;
 
+  bool _showBackToTopButton = false;
+  late ScrollController _scrollController;
+
   @override
   void initState() {
     super.initState();
+
+  _scrollController = ScrollController()
+      ..addListener(() {
+        setState(() {
+          if (_scrollController.offset >= 10) {
+            _showBackToTopButton = true;
+          } else {
+            _showBackToTopButton = false;
+          }
+        });
+      });
+
     _productProvider = context.read<FurnitureItemProvider>();
     _spaceProvider = context.read<SpaceProvider>();
     loadSpaces();
@@ -60,61 +76,91 @@ class _FavouritesOverviewPageState extends State<FavouritesOverviewPage> {
   }
 
   @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollToTop() {
+    _scrollController.animateTo(0,
+        duration: const Duration(milliseconds: 200), curve: Curves.linear);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-      child: SingleChildScrollView(
-          child: Column(
-        children: [
-          Stack(alignment: Alignment.center, children: [
-            Container(
-                height: 200,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                  image: AssetImage("assets/images/favourites-bg.jpg"),
-                  fit: BoxFit.fill,
-                ))),
-            const Center(
-                child: Text("Your wishlist",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold)))
-          ]),
-          const SizedBox(
-            height: 10,
-          ),
-          const Text("Spaces", style: const TextStyle(fontSize: 18)),
-          DropdownButton(
-              items: _buildSpacesDropDownList(),
-              value: selectedValue,
-              onChanged: (dynamic newValue) {
-                if (mounted) {
-                  setState(() {
-                    selectedValue = newValue;
-                    loadData(newValue);
-                  });
-                }
-              }),
-          Container(
-              padding: EdgeInsets.only(left: 8, right: 8),
-              child: Column(children: [
-                Container(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                  child: GridView(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: setCrossAxisCount(),
-                        childAspectRatio: setChildAspectRatio(),
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10),
-                    children: _buildFurnitureItemCardList(),
+      body: SafeArea(
+        child: CupertinoScrollbar(
+          isAlwaysShown: true,
+          controller: _scrollController,
+          child: ListView(
+            controller: _scrollController,
+            children: [
+              Column(
+                children: [
+                  Stack(alignment: Alignment.center, children: [
+                    Container(
+                        height: 150,
+                        decoration: const BoxDecoration(
+                            image: DecorationImage(
+                          image: AssetImage("assets/images/wishlist-bg.jpg"),
+                          fit: BoxFit.fill,
+                        ))),
+                    const Center(
+                        child: Text("Your wishlist",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold)))
+                  ]),
+                  const SizedBox(
+                    height: 10,
                   ),
-                ),
-              ]))
-        ],
-      )),
-    ));
+                  const Text("Spaces", style: const TextStyle(fontSize: 18)),
+                  DropdownButton(
+                      items: _buildSpacesDropDownList(),
+                      value: selectedValue,
+                      onChanged: (dynamic newValue) {
+                        if (mounted) {
+                          setState(() {
+                            selectedValue = newValue;
+                            loadData(newValue);
+                          });
+                        }
+                      }),
+                  Container(
+                      padding: const EdgeInsets.only(left: 8, right: 8),
+                      child: Column(children: [
+                        Container(
+                          height: MediaQuery.of(context).size.height,
+                          width: MediaQuery.of(context).size.width,
+                          child: GridView(
+                            controller: ScrollController(),
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: setCrossAxisCount(),
+                                    childAspectRatio: setChildAspectRatio(),
+                                    crossAxisSpacing: 10,
+                                    mainAxisSpacing: 10),
+                            children: _buildFurnitureItemCardList(),
+                          ),
+                        ),
+                      ]))
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButton: _showBackToTopButton == false
+          ? null
+          : FloatingActionButton(
+              onPressed: _scrollToTop,
+              child: const Icon(Icons.arrow_upward),
+              tooltip: 'Back to top!',
+              backgroundColor: Colors.black,
+            ),
+    );
   }
 
   List<DropdownMenuItem> _buildSpacesDropDownList() {
@@ -192,33 +238,35 @@ class _FavouritesOverviewPageState extends State<FavouritesOverviewPage> {
                         try {
                           showDialog(
                               context: context,
-                              builder: (BuildContext context) => AlertDialog(
+                              builder: (BuildContext dialogContex) =>
+                                  AlertDialog(
                                     title: const Text("Warning"),
                                     content: const Text(
                                         "Are you sure you want to remove this item from Favourites?"),
                                     actions: [
                                       TextButton(
                                           onPressed: () async {
-                                            Navigator.pop(context);
+                                            Navigator.pop(dialogContex);
                                             var response =
                                                 await _productProvider
                                                     ?.dislikeFurnitureItem(
                                                         x.furnitureItemId!);
                                             showDialog(
                                                 context: context,
-                                                builder:
-                                                    (BuildContext context) =>
-                                                        AlertDialogWidget(
-                                                          title: "Success",
-                                                          message: response
-                                                              .toString(),
-                                                          context: context,
-                                                        ));
+                                                builder: (BuildContext
+                                                        dialogContex) =>
+                                                    AlertDialogWidget(
+                                                      title: "Success",
+                                                      message:
+                                                          response.toString(),
+                                                      context: context,
+                                                    ));
                                             await loadData(selectedValue!);
                                           },
                                           child: const Text("Yes")),
                                       TextButton(
-                                        onPressed: () => Navigator.pop(context),
+                                        onPressed: () =>
+                                            Navigator.pop(dialogContex),
                                         child: const Text("No"),
                                       )
                                     ],
@@ -226,11 +274,11 @@ class _FavouritesOverviewPageState extends State<FavouritesOverviewPage> {
                         } catch (e) {
                           showDialog(
                               context: context,
-                              builder: (BuildContext context) =>
+                              builder: (BuildContext dialogContex) =>
                                   AlertDialogWidget(
                                     title: "Error",
                                     message: "An error occured!",
-                                    context: context,
+                                    context: dialogContex,
                                   ));
                         }
                       },

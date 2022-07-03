@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -33,11 +34,14 @@ class _FurnitureItemOverviewPageState extends State<FurnitureItemOverviewPage> {
   final SpaceResponse space;
   int? selectedValue;
 
+  late ScrollController _scrollController;
+
   _FurnitureItemOverviewPageState(this.space);
 
   @override
   void initState() {
     super.initState();
+    _scrollController = ScrollController();
     _productProvider = context.read<FurnitureItemProvider>();
     _categoryProvider = context.read<CategoryProvider>();
     loadCategories();
@@ -72,65 +76,75 @@ class _FurnitureItemOverviewPageState extends State<FurnitureItemOverviewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          iconTheme: const IconThemeData(color: Colors.white),
-          title: Text(space.name!, style: TextStyle(color: Colors.white)),
-          backgroundColor: Colors.black,
-          centerTitle: true,
-          elevation: 0.0,
-        ),
-        body: SafeArea(
-          child: SingleChildScrollView(
-              child: Column(
+      appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.white),
+        title: Text(space.name!, style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.black,
+        centerTitle: true,
+        elevation: 0.0,
+      ),
+      body: SafeArea(
+        child: CupertinoScrollbar(
+          isAlwaysShown: true,
+          controller: _scrollController,
+          child: ListView(
+            controller: _scrollController,
             children: [
-              Stack(alignment: Alignment.center, children: [
-                Container(
-                  child: imageFromBase64String(space.image!),
-                ),
-                Center(
-                    child: Text(space.name!,
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold)))
-              ]),
-              const SizedBox(
-                height: 10,
+              Column(
+                children: [
+                  Stack(alignment: Alignment.center, children: [
+                    Container(
+                      child: imageFromBase64String(space.image!),
+                    ),
+                    Center(
+                        child: Text(space.name!,
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold)))
+                  ]),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Text("Categories", style: const TextStyle(fontSize: 18)),
+                  DropdownButton(
+                      items: _buildCategoriesDropDownList(),
+                      value: selectedValue,
+                      onChanged: (dynamic newValue) {
+                        if (mounted) {
+                          setState(() {
+                            selectedValue = newValue;
+                            loadData(newValue);
+                          });
+                        }
+                      }),
+                  Container(
+                      padding: EdgeInsets.only(left: 8, right: 8),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: MediaQuery.of(context).size.height,
+                            width: MediaQuery.of(context).size.width,
+                            child: GridView(
+                              controller: ScrollController(),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: setCrossAxisCount(),
+                                      childAspectRatio: setChildAspectRatio(),
+                                      crossAxisSpacing: 10,
+                                      mainAxisSpacing: 10),
+                              children: _buildFurnitureItemCardList(),
+                            ),
+                          ),
+                        ],
+                      ))
+                ],
               ),
-              const Text("Categories", style: const TextStyle(fontSize: 18)),
-              DropdownButton(
-                  items: _buildCategoriesDropDownList(),
-                  value: selectedValue,
-                  onChanged: (dynamic newValue) {
-                    if (mounted) {
-                      setState(() {
-                        selectedValue = newValue;
-                        loadData(newValue);
-                      });
-                    }
-                  }),
-              Container(
-                  padding: EdgeInsets.only(left: 8, right: 8),
-                  child: Column(
-                    children: [
-                      Container(
-                        height: MediaQuery.of(context).size.height,
-                        width: MediaQuery.of(context).size.width,
-                        child: GridView(
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: setCrossAxisCount(),
-                                  childAspectRatio: setChildAspectRatio(),
-                                  crossAxisSpacing: 10,
-                                  mainAxisSpacing: 10),
-                          children: _buildFurnitureItemCardList(),
-                        ),
-                      ),
-                    ],
-                  ))
             ],
-          )),
-        ));
+          ),
+        ),
+      ),
+    );
   }
 
   double setChildAspectRatio() {
