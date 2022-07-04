@@ -117,7 +117,7 @@ class _MyWidgetState extends State<AppointmentsOverviewPage> {
                               builder: (BuildContext dialogContex) =>
                                   AlertDialogWidget(
                                     title: "Error",
-                                    message: "An error occured!",
+                                    message: "You don't have any appointments!",
                                     context: dialogContex,
                                   ));
                       }
@@ -141,9 +141,10 @@ class _MyWidgetState extends State<AppointmentsOverviewPage> {
   List<Widget> _buildAppointmentCards() {
     if (data.isEmpty) {
       return [
+        const SizedBox(height: 100,),
         const Center(
             child: Text(
-          "No data",
+          "You don't have any appointments",
           style: TextStyle(
               color: Colors.grey, fontSize: 25, fontWeight: FontWeight.bold),
         )),

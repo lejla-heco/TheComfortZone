@@ -110,11 +110,14 @@ class _MyWidgetState extends State<OrdersOverviewPage> {
                         setState(() {
                           data = apiData;
                         });
-                      } catch (e) {
-                        AlertDialogWidget(
-                            title: "Error",
-                            message: "An error occured!",
-                            context: context);
+                      } catch (e) {showDialog(
+                              context: context,
+                              builder: (BuildContext dialogContex) =>
+                                  AlertDialogWidget(
+                                    title: "Error",
+                                    message: "You don't have any orders!",
+                                    context: dialogContex,
+                                  ));
                       }
                     }, currentTime: DateTime.now(), locale: LocaleType.en);
                   },
@@ -136,9 +139,10 @@ class _MyWidgetState extends State<OrdersOverviewPage> {
   List<Widget> _buildOrderCards() {
     if (data.length == 0) {
       return [
+        const SizedBox(height: 100,),
         const Center(
             child: Text(
-          "No data",
+          "You don't have any orders",
           style: TextStyle(
               color: Colors.grey, fontSize: 25, fontWeight: FontWeight.bold),
         )),

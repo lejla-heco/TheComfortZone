@@ -192,7 +192,7 @@ class _FavouritesOverviewPageState extends State<FavouritesOverviewPage> {
       return [
         const Center(
             child: Text(
-          "No data",
+          "You don't have favourites",
           style: TextStyle(
               color: Colors.grey, fontSize: 25, fontWeight: FontWeight.bold),
         )),
