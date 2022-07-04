@@ -50,6 +50,7 @@ builder.Services.AddTransient<IOrderService, OrderService>();
 builder.Services.AddTransient<IOrderItemService, OrderItemService>();
 builder.Services.AddTransient<IAppointmentService, AppointmentService>();
 builder.Services.AddTransient<ICouponService, CouponService>();
+builder.Services.AddTransient<IAppointmentTypeService, AppointmentTypeService>();
 builder.Services.AddTransient<IChartService, ChartService>();
 
 builder.Services.AddAutoMapper(typeof(IUserService));
@@ -58,6 +59,7 @@ builder.Services.AddDbContext<TheComfortZoneContext>(options => options.UseSqlSe
 
 builder.Services.AddAuthentication("BasicAuthentication")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+
 
 var app = builder.Build();
 
