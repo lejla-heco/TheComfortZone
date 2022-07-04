@@ -29,7 +29,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
     publicUrl = "$_baseUrl$_endpoint";
   }
 
-  Future<List<T>> getById(int id, [dynamic additionalData]) async {
+  Future<T> getById(int id, [dynamic additionalData]) async {
     var url = Uri.parse("$_baseUrl$_endpoint/$id");
 
     Map<String, String> headers = createHeaders();
@@ -38,7 +38,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
 
     if (isValidResponseCode(response)) {
       var data = jsonDecode(response.body);
-      return data.map((x) => fromJson(x)).cast<T>().toList();
+      return fromJson(data);
     } else {
       throw Exception("An error occured!");
     }

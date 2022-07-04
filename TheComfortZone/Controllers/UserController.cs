@@ -30,7 +30,6 @@ namespace TheComfortZone.Controllers
             return await base.Insert(insert);
         }
 
-        [Authorize(Roles = "Administrator,User")]
         public override async Task<UserResponse> Update(int id, [FromBody] UserUpdateRequest update)
         {
             return await base.Update(id, update);

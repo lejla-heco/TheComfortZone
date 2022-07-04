@@ -205,10 +205,8 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
         public async Task<List<PieChartCustomerResponse>> GetLoyalCustomers()
         {
             var response = context.Users
-                    .Include(x => x.Role)
                     .Include(x => x.OrderUsers)
                     .Include(x => x.AppointmentUsers)
-                    .Where(x => x.Role.Name == UserType.User.ToString())
                     .Select(x => new PieChartCustomerResponse()
                     {
                         UserId = x.UserId,

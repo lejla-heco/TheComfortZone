@@ -6,6 +6,7 @@ import 'package:the_comfort_zone_mobile/pages/home_page/navigation_page.dart';
 import 'package:the_comfort_zone_mobile/pages/space/spaces_overview.dart';
 import 'package:the_comfort_zone_mobile/pages/user/login.dart';
 import 'package:the_comfort_zone_mobile/pages/user/registration.dart';
+import 'package:the_comfort_zone_mobile/pages/user/user_information.dart';
 import 'package:the_comfort_zone_mobile/providers/appointment_provider.dart';
 import 'package:the_comfort_zone_mobile/providers/appointment_type_provider.dart';
 import 'package:the_comfort_zone_mobile/providers/cart_provider.dart';
@@ -64,6 +65,10 @@ class MyApp extends StatelessWidget {
         if(settings.name == AppointmentCreatePage.routeName){
           return MaterialPageRoute(
               builder: (context) => const AppointmentCreatePage());
+        }
+        if(settings.name == UserInformationPage.routeName){
+          return MaterialPageRoute(
+              builder: (context) => const UserInformationPage());
         }
       },
     );

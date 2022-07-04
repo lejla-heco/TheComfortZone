@@ -99,7 +99,7 @@ class _NavigationPageState extends State<NavigationPage> {
             ListTile(
                 title: const Text("My Profile"),
                 onTap: () {
-                  print("cart");
+                  Navigator.of(context).pushNamed("/user-information");
                 }),
             ListTile(
                 title: const Text("Logout"),

@@ -53,8 +53,8 @@ class LoginPage extends StatelessWidget {
           Authorization.username = _usernameController.text;
           Authorization.password = _passwordController.text;
 
-          var loggedInUser = await _userProvider.getLoggedInUserId();
-          LoggedInUser.userId = loggedInUser.userId;
+          var loggedInUserId = await _userProvider.getLoggedInUserId();
+          LoggedInUser.userId = loggedInUserId;
 
           print(LoggedInUser.userId);
 

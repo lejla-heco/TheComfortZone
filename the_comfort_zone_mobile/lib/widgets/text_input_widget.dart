@@ -9,6 +9,7 @@ Widget TextInputWidget({required String label, required TextEditingController co
           ? label + " " + mandatoryField
           : null;
     },
+    style: TextStyle(color: Colors.white),
     controller: controller,
     decoration: InputDecoration(
         labelText: label,

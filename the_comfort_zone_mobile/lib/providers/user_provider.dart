@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import '../model/user/logged_user.dart';
 import '../model/user/user_response.dart';
 import 'base_provider.dart';
 
@@ -13,7 +12,7 @@ class UserProvider extends BaseProvider<UserResponse>{
     return UserResponse.fromJson(data);
   }
 
-  Future<LoggedUser> getLoggedInUserId() async {
+  Future<int> getLoggedInUserId() async {
     var url = Uri.parse("$publicUrl/user-role");
 
     Map<String, String> headers = createHeaders();
@@ -23,10 +22,7 @@ class UserProvider extends BaseProvider<UserResponse>{
     if (isValidResponseCode(response)) {
       var data = jsonDecode(response.body);
 
-      LoggedUser loggedUser = LoggedUser();
-      loggedUser.userId = data['userId'];
-
-      return loggedUser;
+      return data['userId'];
     } else {
       throw Exception("An error occured!");
     }
