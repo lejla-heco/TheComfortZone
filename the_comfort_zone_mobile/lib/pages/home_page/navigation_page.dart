@@ -4,6 +4,7 @@ import 'package:the_comfort_zone_mobile/pages/favourite/favourites_overview.dart
 import 'package:the_comfort_zone_mobile/pages/home_page/home_page.dart';
 import 'package:the_comfort_zone_mobile/pages/order/orders_overview.dart';
 import 'package:the_comfort_zone_mobile/pages/space/spaces_overview.dart';
+import 'package:the_comfort_zone_mobile/pages/user/login.dart';
 
 class NavigationPage extends StatefulWidget {
   static const String routeName = "/navigation-page";
@@ -103,7 +104,29 @@ class _NavigationPageState extends State<NavigationPage> {
             ListTile(
                 title: const Text("Logout"),
                 onTap: () {
-                  print("cart");
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext dialogContex) => AlertDialog(
+                            title: const Text("Question"),
+                            content:
+                                const Text("Are you sure you want to logout?"),
+                            actions: [
+                              TextButton(
+                                  onPressed: () async {
+                                    Navigator.pop(dialogContex);
+
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => LoginPage()));
+                                  },
+                                  child: const Text("Yes")),
+                              TextButton(
+                                onPressed: () => Navigator.pop(dialogContex),
+                                child: const Text("No"),
+                              )
+                            ],
+                          ));
                 }),
           ],
         ),
