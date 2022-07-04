@@ -134,13 +134,14 @@ class _NavigationPageState extends State<NavigationPage> {
       body: screens[index],
       floatingActionButton: index == 1
           ? null
-          : FloatingActionButton(
+          : FloatingActionButton.extended(
               onPressed: () {
                 setState(() {
-                  //TODO
+                  Navigator.of(context).pushNamed('/appointment-create');
                 });
               },
-              child: Icon(Icons.edit),
+              icon: const Icon(Icons.edit),
+              label: const Text("new consultation"),
               tooltip: 'Create new consultation!',
               backgroundColor: Colors.black,
             ),

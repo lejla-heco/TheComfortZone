@@ -180,7 +180,7 @@ class _MyWidgetState extends State<AppointmentsOverviewPage> {
                             style: const TextStyle(
                                 color: Colors.black, fontSize: 15)),
                         Text(
-                            "Consultation status: ${x.approved == null ? AppointmentStatus.declined.toShortString().toUpperCase() : x.approved == true ? AppointmentStatus.accepted.toShortString().toUpperCase() : AppointmentStatus.declined.toShortString().toUpperCase()}",
+                            "Consultation status: ${x.approved == null ? "ON HOLD" : x.approved == true ? AppointmentStatus.accepted.toShortString().toUpperCase() : AppointmentStatus.declined.toShortString().toUpperCase()}",
                             style: const TextStyle(
                                 color: Colors.black, fontSize: 15)),
                         Align(

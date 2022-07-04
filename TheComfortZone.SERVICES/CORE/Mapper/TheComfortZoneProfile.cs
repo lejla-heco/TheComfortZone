@@ -90,6 +90,7 @@ namespace TheComfortZone.SERVICES.CORE.Mapper
                 .ForMember(dto => dto.Customer, opts => opts.MapFrom(entity => $"{entity.User.FirstName} {entity.User.LastName}"))
                 .ForMember(dto => dto.Employee, opts => opts.MapFrom(entity => $"{entity.Employee.FirstName} {entity.Employee.LastName}"))
                 .ForMember(dto => dto.Date, opts => opts.MapFrom(entity => entity.AppointmentDate));
+            CreateMap<DTO.Appointment.AppointmentInsertRequest, DAO.Model.Appointment>();
 
             /** APPOINTMENT TYPE **/
             CreateMap<DAO.Model.AppointmentType, DTO.AppointmentType.AppointmentTypeResponse>();

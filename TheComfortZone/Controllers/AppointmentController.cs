@@ -19,7 +19,6 @@ namespace TheComfortZone.Controllers
             return await base.Get(search);
         }
 
-        [Authorize(Roles = "User")]
         public override async Task<AppointmentResponse> Insert([FromBody] AppointmentInsertRequest insert)
         {
             return await base.Insert(insert);

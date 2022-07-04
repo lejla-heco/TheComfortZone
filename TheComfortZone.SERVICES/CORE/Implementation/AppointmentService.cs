@@ -64,5 +64,41 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
 
             return mapper.Map<List<AppointmentResponse>>(query.ToList());
         }
+
+        public override void BeforeInsert(AppointmentInsertRequest insert, Appointment entity)
+        {
+            entity.AppointmentNumber = Guid.NewGuid().ToString().Substring(0, 8);
+
+            int numberOfEmployees = context.Users.Where(u => u.Role.Name == UserType.Employee.ToString()).Count();
+            Random rand = new Random();
+            int nextNum = rand.Next(0, numberOfEmployees);
+
+            entity.EmployeeId = context.Users.Where(u => u.Role.Name == UserType.Employee.ToString()).ToList()[nextNum].UserId;
+        }
+
+        public override void ValidateInsert(AppointmentInsertRequest insert)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            bool exception = false;
+            if (context.Users.Find(insert.UserId) == null)
+            {
+                exception = true;
+                stringBuilder.Append("User with specified ID does not exist!\n");
+            }
+            if (context.Designers.Find(insert.DesignerId) == null)
+            {
+                exception = true;
+                stringBuilder.Append("Designer with specified ID does not exist!");
+            }
+            if (context.AppointmentTypes.Find(insert.AppointmentTypeId) == null)
+            {
+                exception = true;
+                stringBuilder.Append("Appointment Type with specified ID does not exist!");
+            }
+            if (exception)
+            {
+                throw new UserException(stringBuilder.ToString());
+            }
+        }
     }
 }
