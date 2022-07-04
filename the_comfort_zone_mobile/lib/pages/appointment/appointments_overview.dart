@@ -112,11 +112,14 @@ class _MyWidgetState extends State<AppointmentsOverviewPage> {
                         setState(() {
                           data = apiData;
                         });
-                      } catch (e) {
-                        AlertDialogWidget(
-                            title: "Error",
-                            message: "An error occured!",
-                            context: context);
+                      } catch (e) {showDialog(
+                              context: context,
+                              builder: (BuildContext dialogContex) =>
+                                  AlertDialogWidget(
+                                    title: "Error",
+                                    message: "An error occured!",
+                                    context: dialogContex,
+                                  ));
                       }
                     }, currentTime: DateTime.now(), locale: LocaleType.en);
                   },

@@ -67,5 +67,69 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
 
             return mapper.Map<List<OrderResponse>>(query.ToList());
         }
+
+        public override async Task<OrderResponse> Insert(OrderInsertRequest insert)
+        {
+            /** VALIDATION **/
+            if (context.Users.Find(insert.UserId) == null)
+                throw new UserException("User with specified ID does not exsist!");
+            int numberOfOrders = context.Orders.Where(o => o.UserId == insert.UserId).Count();
+
+            Order order = new Order();
+            order.OrderDate = DateTime.Now;
+            order.Status = OrderStatus.Sent.ToString();
+            order.OrderNumber = ++numberOfOrders;
+            if (insert?.CouponId != null)
+            {
+                if (context.Coupons.Find(insert.CouponId) == null)
+                    throw new UserException("Coupon with specified ID does not exsist!");
+
+                Coupon coupon = context.Coupons.Where(o => o.CouponId == insert.CouponId).Single();
+                order.UsedDiscountCoupon = true;
+                order.Discount = coupon.Discount;
+                coupon.Active = false;
+            }
+            else order.UsedDiscountCoupon = false;
+
+            order.UserId = insert.UserId;
+
+            int numberOfEmployees = context.Users.Where(u => u.Role.Name == UserType.Employee.ToString()).Count();
+            Random rand = new Random();
+            int nextNum = rand.Next(0, numberOfEmployees);
+
+            order.EmployeeId = context.Users.Where(u => u.Role.Name == UserType.Employee.ToString()).ToList()[nextNum].UserId;
+            order.Noip = 0;
+            order.TotalPrice = 0;
+
+            context.Add(order);
+            context.SaveChanges();
+
+            int numberOfItemsPurchased = 0;
+            float totalPrice = 0;
+
+            foreach(var orderItemReq in insert.items)
+            {
+                OrderItem orderItem = new OrderItem();
+                orderItem.FurnitureItemId = orderItemReq.FurnitureItemId;
+                orderItem.OrderId = order.OrderId;
+                orderItem.OrderQuantity = orderItemReq.OrderQuantity;
+                orderItem.Color = orderItemReq.Color;
+                numberOfItemsPurchased += orderItemReq.OrderQuantity;
+                totalPrice += orderItemReq.OrderQuantity * orderItemReq.UnitPrice;
+                context.OrderItems.Add(orderItem);
+            }
+
+            order.Noip = numberOfItemsPurchased;
+            order.TotalPrice = totalPrice;
+
+            if (insert.CouponId != null)
+            {
+                order.TotalPrice = order.TotalPrice * (1 - (order.Discount / 100f));
+            }
+
+            context.SaveChanges();
+
+            return mapper.Map<OrderResponse>(order);
+        }
     }
 }

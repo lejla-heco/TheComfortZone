@@ -19,6 +19,7 @@ class _FurnitureItemDetailsPageState extends State<FurnitureItemDetailsPage> {
   final FurnitureItemResponse item;
   var formatter = NumberFormat('###.0#');
   int? selectedValue = 1;
+  List<String> colors = [];
 
   _FurnitureItemDetailsPageState(this.item);
 
@@ -116,7 +117,9 @@ class _FurnitureItemDetailsPageState extends State<FurnitureItemDetailsPage> {
         ),
         ElevatedButton.icon(
             onPressed: () {
-              _cartProvider?.addToCart(item);
+              FurnitureItemResponse newItem = FurnitureItemResponse.fromItem(item.furnitureItemId, item.name, item.image, item.onSale, item.regularPrice, item.discountPrice);
+              newItem.color = colors[selectedValue! - 1];
+              _cartProvider?.addToCart(newItem);
             },
             icon: const Icon(
               Icons.shopping_cart_checkout_rounded,
@@ -154,6 +157,7 @@ class _FurnitureItemDetailsPageState extends State<FurnitureItemDetailsPage> {
 
   List<DropdownMenuItem> _buildColorsList() {
     var substrings = item.colors!.split(',');
+    colors = substrings;
     var startValue = 1;
     List<DropdownMenuItem> list = substrings
         .map((x) => DropdownMenuItem(

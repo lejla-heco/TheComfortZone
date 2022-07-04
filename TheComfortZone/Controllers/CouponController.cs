@@ -36,5 +36,11 @@ namespace TheComfortZone.Controllers
         {
             return await base.Delete(id);
         }
+
+        [HttpGet("coupons-by-user-id/{id}")]
+        public async Task<List<CouponResponse>> GetCouponsByUserId(int id)
+        {
+            return await couponService.GetCouponsByUserId(id);
+        }
     }
 }

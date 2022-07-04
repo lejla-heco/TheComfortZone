@@ -39,6 +39,16 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             entity.CouponCode = Guid.NewGuid().ToString().Substring(0, 12);
         }
 
+        public async Task<List<CouponResponse>> GetCouponsByUserId(int id)
+        {
+            /** VALIDATION **/
+            if (context.Users.Find(id) == null)
+                throw new UserException("User with specified ID does not exsist!");
+
+            var coupons = context.Coupons.Where(x => x.UserId == id && x.Active == true).ToList();
+            return mapper.Map<List<CouponResponse>>(coupons);
+        }
+
         /** VALIDATION **/
         public override void ValidateInsert(CouponInsertRequest insert)
         {

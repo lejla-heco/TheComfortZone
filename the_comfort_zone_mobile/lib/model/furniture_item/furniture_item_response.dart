@@ -20,8 +20,11 @@ class FurnitureItemResponse{
   String? material;
   String? description;
   bool? favourited;
+  String? color;
 
   FurnitureItemResponse();
+
+  FurnitureItemResponse.fromItem(this.furnitureItemId, this.name, this.image, this.onSale, this.regularPrice, this.discountPrice);
 
   factory FurnitureItemResponse.fromJson(Map<String, dynamic> json) => _$FurnitureItemResponseFromJson(json);
   /// Connect the generated [_$FurnitureItemResponseToJson] function to the `toJson` method.

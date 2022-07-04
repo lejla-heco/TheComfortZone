@@ -18,7 +18,6 @@ namespace TheComfortZone.SERVICES.DAO.Model
         public float? TotalPrice { get; set; }
         public bool? UsedDiscountCoupon { get; set; }
         public int UserId { get; set; }
-        public bool? CurrentOrder { get; set; }
         public int? EmployeeId { get; set; }
         public int? Discount { get; set; }
 
