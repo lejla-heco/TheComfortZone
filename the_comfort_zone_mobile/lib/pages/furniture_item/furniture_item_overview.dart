@@ -152,7 +152,7 @@ class _FurnitureItemOverviewPageState extends State<FurnitureItemOverviewPage> {
 
   double setChildAspectRatio() {
     if (data.length == 0) return 1;
-    return 3 / 6;
+    return 2.9 / 6;
   }
 
   int setCrossAxisCount() {

@@ -171,7 +171,7 @@ class _CartPageState extends State<CartPage> {
 
   double setChildAspectRatio() {
     if (_cartProvider.cart.items.isEmpty) return 1;
-    return 3 / 6;
+    return 2.9 / 6;
   }
 
   int setCrossAxisCount() {
