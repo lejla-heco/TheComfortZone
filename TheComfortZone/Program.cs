@@ -78,12 +78,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-/*using (var scope = app.Services.CreateScope())
-{
-    var dataContext = scope.ServiceProvider.GetRequiredService<TheComfortZoneContext>();
-    dataContext.Database.Migrate();
-}*/
-
 using (var scope = app.Services.CreateScope())
 {
     var database = scope.ServiceProvider.GetService<TheComfortZoneContext>();
