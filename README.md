@@ -32,8 +32,8 @@ Mobilna aplikacija
     Korisnicko ime: user                        
     Lozinka: user!password     
 
-    Korisnicko ime: user1
-    Lozinka: user1!password   
+    Korisnicko ime: user2
+    Lozinka: user!password   
 
 Pokretanje aplikacija
 
