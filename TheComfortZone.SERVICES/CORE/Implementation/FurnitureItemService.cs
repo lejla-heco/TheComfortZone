@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.ML;
+using Microsoft.ML.Data;
+using Microsoft.ML.Trainers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -109,9 +112,9 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             List<int> favorites = context.Favourites.Where(x => x.UserId == id).Select(x => x.FurnitureItemId).ToList();
 
 
-            foreach(var item in responseList)
+            foreach (var item in responseList)
                 if (favorites.Contains(item.FurnitureItemId)) item.Favourited = true;
-            
+
             return response.ToList();
         }
 
@@ -160,8 +163,8 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
                 .Include(x => x.FurnitureItem.Category.Space)
                 .Include(x => x.FurnitureItem.Collection)
                 .Include(x => x.FurnitureItem.Collection.Designer)
-                .Include (x => x.FurnitureItem.MetricUnit)
-                .Include (x => x.FurnitureItem.Material)
+                .Include(x => x.FurnitureItem.MetricUnit)
+                .Include(x => x.FurnitureItem.Material)
                 .Include(x => x.FurnitureItem.FurnitureColors)
                 .ThenInclude(y => y.Color)
                 .Select(x => x.FurnitureItem)
@@ -201,6 +204,124 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
 
             return "Successfully deleted favourite item!";
         }
+
+        static object isLocked = new object();
+        static MLContext mlContext = null;
+        static ITransformer model = null;
+        public async Task<List<FurnitureItemResponse>> Recommend(int id)
+        {
+            trainData();
+
+            var finalResult = preditctItems(id);
+
+            return mapper.Map<List<FurnitureItemResponse>>(finalResult);
+        }
+
+        private void trainData()
+        {
+            lock (isLocked)
+            {
+                if (mlContext == null)
+                {
+                    mlContext = new MLContext();
+
+                    var tmpData = context.Orders.Include("OrderItems").ToList();
+
+                    var data = new List<ProductEntry>();
+
+                    foreach (var x in tmpData)
+                    {
+                        if (x.OrderItems.Count > 1)
+                        {
+                            var distinctItemId = x.OrderItems.Select(y => y.FurnitureItemId).ToList();
+
+                            distinctItemId.ForEach(y =>
+                            {
+                                var relatedItems = x.OrderItems.Where(z => z.FurnitureItemId != y);
+
+                                foreach (var z in relatedItems)
+                                {
+                                    data.Add(new ProductEntry()
+                                    {
+                                        ProductID = (uint)y,
+                                        CoPurchaseProductID = (uint)z.FurnitureItemId,
+                                    });
+                                }
+                            });
+                        }
+                    }
+
+                    var disctintData = data.Select(y => new
+                    {
+                        ProductID = y.ProductID,
+                        CoPurchaseProductID = y.CoPurchaseProductID,
+                    }).Distinct();
+
+                    var productEntries = new List<ProductEntry>();
+
+                    foreach (var item in disctintData)
+                    {
+                        productEntries.Add(new ProductEntry()
+                        {
+                            ProductID = item.ProductID,
+                            CoPurchaseProductID = item.CoPurchaseProductID,
+                            Label = 0
+                        });
+                    }
+
+                    var traindata = mlContext.Data.LoadFromEnumerable(productEntries);
+
+
+                    //STEP 3: Your data is already encoded so all you need to do is specify options for MatrxiFactorizationTrainer with a few extra hyperparameters
+                    //        LossFunction, Alpa, Lambda and a few others like K and C as shown below and call the trainer.
+                    MatrixFactorizationTrainer.Options options = new MatrixFactorizationTrainer.Options();
+                    options.MatrixColumnIndexColumnName = nameof(ProductEntry.ProductID);
+                    options.MatrixRowIndexColumnName = nameof(ProductEntry.CoPurchaseProductID);
+                    options.LabelColumnName = "Label";
+                    options.LossFunction = MatrixFactorizationTrainer.LossFunctionType.SquareLossOneClass;
+                    options.Alpha = 0.01;
+                    options.Lambda = 0.025;
+                    // For better results use the following parameters
+                    options.NumberOfIterations = 100;
+                    options.C = 0.00001;
+
+
+                    var est = mlContext.Recommendation().Trainers.MatrixFactorization(options);
+
+                    model = est.Fit(traindata);
+                }
+
+            }
+        }
+        private List<FurnitureItem> preditctItems(int id)
+        {
+            List<FurnitureItem> allItems = new List<FurnitureItem>();
+
+            for (int i = 0; i < 10000; i++)
+            {
+                var tmp = context.FurnitureItems.Where(x => x.FurnitureItemId != id);
+                allItems.AddRange(tmp);
+            }
+
+
+            var predictionResult = new List<Tuple<FurnitureItem, float>>();
+
+            foreach (var item in allItems)
+            {
+                var predictionEngine = mlContext.Model.CreatePredictionEngine<ProductEntry, Copurchase_prediction>(model);
+                var prediction = predictionEngine.Predict(new ProductEntry()
+                {
+                    ProductID = (uint)id,
+                    CoPurchaseProductID = (uint)item.FurnitureItemId
+                });
+
+                predictionResult.Add(new Tuple<FurnitureItem, float>(item, prediction.Score));
+            }
+
+            return predictionResult.OrderByDescending(x => x.Item2).Distinct()
+                .Select(x => x.Item1).Take(3).ToList();
+        }
+
 
         /** VALIDATION **/
         public override void ValidateInsert(FurnitureItemUpsertRequest insert)
@@ -245,5 +366,20 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
 
             ValidateInsert(update);
         }
+    }
+    public class Copurchase_prediction
+    {
+        public float Score { get; set; }
+    }
+
+    public class ProductEntry
+    {
+        [KeyType(count: 25000)]
+        public uint ProductID { get; set; }
+
+        [KeyType(count: 25000)]
+        public uint CoPurchaseProductID { get; set; }
+
+        public float Label { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace TheComfortZone.DTO.User
         public string Adress { get; set; }
         [Required(AllowEmptyStrings = false)]
         [MaxLength(15)]
-        [Phone]
+        [RegularExpression("^[0-9]{3}/[0-9]{3}-[0-9]{3}$")]
         public string PhoneNumber { get; set; }
         [Required(AllowEmptyStrings = false)]
         [MaxLength(30)]

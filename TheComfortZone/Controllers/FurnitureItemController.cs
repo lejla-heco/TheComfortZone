@@ -55,5 +55,11 @@ namespace TheComfortZone.Controllers
         {
             return await furnitureItemService.DeleteFavourite(userId, furnitureItemId);
         }
+
+        [HttpGet("reccommend/{furnitureItemId}")]
+        public async Task<List<FurnitureItemResponse>> Reccommend(int furnitureItemId)
+        {
+            return await furnitureItemService.Recommend(furnitureItemId);
+        }
     }
 }

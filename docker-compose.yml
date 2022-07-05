@@ -1,0 +1,38 @@
+version: '3'
+services:
+#mssql docker
+  thecomfortzone-sql:
+    build: 
+      context: .
+      dockerfile: Dockerfile.mssql
+    restart: unless-stopped
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=QWElkj132!
+      - MSSQL_PID=Developer
+    ports:
+      - 1401:1433
+    expose:
+        - 1433
+    networks:
+      - thecomfortzonenet
+
+  thecomfortzone-api:
+    restart: unless-stopped
+    build:
+      context: .
+    environment:
+      - ConnectionStrings:DefaultConnection=Server=thecomfortzone-sql,1433;Database=TheComfortZone;User=sa;Password=QWElkj132!;ConnectRetryCount=0
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - 5238:5238
+    networks:
+      - thecomfortzonenet
+    links:
+      - thecomfortzone-sql
+    depends_on:
+      - thecomfortzone-sql
+      
+networks:
+  thecomfortzonenet:
+    driver: bridge      

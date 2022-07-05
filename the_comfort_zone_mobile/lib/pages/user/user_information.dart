@@ -204,7 +204,8 @@ class _UserInformationPageState extends State<UserInformationPage> {
                       ));
             } else {
               try {
-                await _userProvider.update(LoggedInUser.userId!, request.toJson());
+                await _userProvider.update(
+                    LoggedInUser.userId!, request.toJson());
                 showDialog(
                     context: context,
                     builder: (BuildContext dialogContex) => AlertDialogWidget(
@@ -231,6 +232,12 @@ class _UserInformationPageState extends State<UserInformationPage> {
       ),
     );
 
+    const txtSubtitle = Text("Manage your account!",
+        style: TextStyle(
+          fontSize: 20,
+          color: Colors.white,
+        ));
+
     return FutureBuilder(
         future: loadUserData(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -247,7 +254,7 @@ class _UserInformationPageState extends State<UserInformationPage> {
             _usernameController.text = user.username!;
             _phoneNumberController.text = user.phoneNumber!;
 
-            return SingleChildScrollView(
+            return Center(
                 child: Container(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
@@ -257,50 +264,66 @@ class _UserInformationPageState extends State<UserInformationPage> {
                 image: AssetImage("assets/images/registration-background.jpg"),
                 fit: BoxFit.fill,
               )),
-              child: Form(
-                key: _formKey,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                child: ListView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    txtFirstName,
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    txtLastName,
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    txtAdress,
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    txtPhoneNumber,
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    txtEmail,
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    txtUsername,
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    txtPassword,
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    txtPasswordConfirmation,
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    btnUpdate,
-                  ],
-                ),
+              child: ListView(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Form(
+                        key: _formKey,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        child: Column(
+                          children: [
+                        const SizedBox(
+                          height: 6,
+                        ),
+                        txtSubtitle,
+                        const SizedBox(
+                          height: 25,
+                        ),
+                            txtFirstName,
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            txtLastName,
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            txtAdress,
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            txtPhoneNumber,
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            txtEmail,
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            txtUsername,
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            txtPassword,
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            txtPasswordConfirmation,
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            btnUpdate,
+                            const SizedBox(
+                              height: 20,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ));
           }

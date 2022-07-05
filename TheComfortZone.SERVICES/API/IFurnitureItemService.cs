@@ -15,5 +15,6 @@ namespace TheComfortZone.SERVICES.API
         public Task<string> LikeFurnitureItem(int userId, int furnitureItemId);
         public Task<List<FurnitureItemResponse>> GetFavourites(int userId, FurnitureItemSearchRequest search = null);
         public Task<string> DeleteFavourite(int userId, int furnitureItemId);
+        public Task<List<FurnitureItemResponse>> Recommend(int id);
     }
 }

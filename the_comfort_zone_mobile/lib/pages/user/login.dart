@@ -56,8 +56,6 @@ class LoginPage extends StatelessWidget {
           var loggedInUserId = await _userProvider.getLoggedInUserId();
           LoggedInUser.userId = loggedInUserId;
 
-          print(LoggedInUser.userId);
-
           Navigator.popAndPushNamed(context, NavigationPage.routeName);
         } catch (e) {
           showDialog(
