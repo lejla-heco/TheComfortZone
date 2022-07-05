@@ -61,7 +61,7 @@ namespace TheComfortZone.WINUI.Forms.Coupon
             if (btnClearSearch.Enabled)
             {
                 btnClearSearch.Enabled = false;
-                cmbCustomers.SelectedIndex = 0;
+                cmbCustomers.SelectedIndex = -1;
             }
 
             await getGridData();

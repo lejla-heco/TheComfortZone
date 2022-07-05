@@ -60,7 +60,9 @@ class _FurnitureItemDetailsPageState extends State<FurnitureItemDetailsPage> {
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(child: imageFromBase64String(item.image!)),
+              Container(
+                padding: const EdgeInsets.only(top: 5),
+                child: Center(child: imageFromBase64String(item.image!))),
               const SizedBox(
                 height: 10,
               ),

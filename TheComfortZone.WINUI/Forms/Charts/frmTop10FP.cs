@@ -48,19 +48,22 @@ namespace TheComfortZone.WINUI.Forms.Charts
         private async Task loadChartData()
         {
             string space = cmbSpace.Text;
-            chartData = await chartAPIService.GetLineChartData(space);
-
-            formsPlot.Plot.Clear();
-            for (int i = 0; i < chartData.Count; i++)
+            if (!string.IsNullOrEmpty(space))
             {
-                var xAxis = chartData[i].ChartData.Select(x => (double)x.XValue).ToArray();
-                var yAxis = chartData[i].ChartData.Select(y => (double)y.YValue).ToArray();
-                var scatter = formsPlot.Plot.AddScatter(xAxis, yAxis, label: chartData[i].FurnitureName);
-                scatter.MarkerSize = 10;
-            }
+                chartData = await chartAPIService.GetLineChartData(space);
 
-            formsPlot.Plot.Legend(true, Alignment.UpperRight);
-            formsPlot.Refresh();
+                formsPlot.Plot.Clear();
+                for (int i = 0; i < chartData.Count; i++)
+                {
+                    var xAxis = chartData[i].ChartData.Select(x => (double)x.XValue).ToArray();
+                    var yAxis = chartData[i].ChartData.Select(y => (double)y.YValue).ToArray();
+                    var scatter = formsPlot.Plot.AddScatter(xAxis, yAxis, label: chartData[i].FurnitureName);
+                    scatter.MarkerSize = 10;
+                }
+
+                formsPlot.Plot.Legend(true, Alignment.UpperRight);
+                formsPlot.Refresh();
+            }
         }
     }
 }

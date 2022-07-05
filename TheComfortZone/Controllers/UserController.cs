@@ -24,6 +24,7 @@ namespace TheComfortZone.Controllers
             return base.Get(search);
         }
 
+        [AllowAnonymous]
         public override async Task<UserResponse> Insert([FromBody] UserInsertRequest insert)
         {
             return await base.Insert(insert);

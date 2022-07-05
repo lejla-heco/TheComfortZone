@@ -44,14 +44,17 @@ namespace TheComfortZone.WINUI.Forms.Charts
 
         private void loadChartData()
         {
-            formsPlot.Plot.Clear();
+            if (pieValues != null && pieValues.Count > 0)
+            {
+                formsPlot.Plot.Clear();
 
-            var pie = formsPlot.Plot.AddPie(pieValues.ToArray());
-            pie.SliceLabels = sliceLabels.ToArray();
-            pie.Explode = true;
+                var pie = formsPlot.Plot.AddPie(pieValues.ToArray());
+                pie.SliceLabels = sliceLabels.ToArray();
+                pie.Explode = true;
 
-            formsPlot.Plot.Legend(true, Alignment.LowerRight);
-            formsPlot.Refresh();
+                formsPlot.Plot.Legend(true, Alignment.LowerRight);
+                formsPlot.Refresh();
+            }
         }
 
         private async void btnSearch_Click(object sender, EventArgs e)

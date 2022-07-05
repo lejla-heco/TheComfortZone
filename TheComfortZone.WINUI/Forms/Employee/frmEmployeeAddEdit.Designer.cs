@@ -196,7 +196,7 @@
             // 
             this.txtPhoneNumber.Location = new System.Drawing.Point(180, 161);
             this.txtPhoneNumber.Name = "txtPhoneNumber";
-            this.txtPhoneNumber.PlaceholderText = "033 111 111";
+            this.txtPhoneNumber.PlaceholderText = "033/111-111";
             this.txtPhoneNumber.Size = new System.Drawing.Size(312, 27);
             this.txtPhoneNumber.TabIndex = 20;
             this.txtPhoneNumber.Validating += new System.ComponentModel.CancelEventHandler(this.txtPhoneNumber_Validating);

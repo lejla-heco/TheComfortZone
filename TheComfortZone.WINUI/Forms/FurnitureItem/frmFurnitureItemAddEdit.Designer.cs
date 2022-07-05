@@ -170,11 +170,6 @@
             // nudInStockQuantity
             // 
             this.nudInStockQuantity.Location = new System.Drawing.Point(149, 266);
-            this.nudInStockQuantity.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.nudInStockQuantity.Name = "nudInStockQuantity";
             this.nudInStockQuantity.Size = new System.Drawing.Size(97, 27);
             this.nudInStockQuantity.TabIndex = 10;

@@ -207,6 +207,7 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
             var response = context.Users
                     .Include(x => x.OrderUsers)
                     .Include(x => x.AppointmentUsers)
+                    .Where(x => x.Role.Name == UserType.User.ToString())
                     .Select(x => new PieChartCustomerResponse()
                     {
                         UserId = x.UserId,

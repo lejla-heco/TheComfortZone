@@ -116,6 +116,15 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
                 orderItem.Color = orderItemReq.Color;
                 numberOfItemsPurchased += orderItemReq.OrderQuantity;
                 totalPrice += orderItemReq.OrderQuantity * orderItemReq.UnitPrice;
+
+                FurnitureItem item = context.FurnitureItems.Find(orderItem.FurnitureItemId);
+                item.InStockQuantity -= orderItemReq.OrderQuantity;
+                if (item.InStockQuantity <= 0)
+                {
+                    item.State = StateEnum.Hidden.ToString();
+                    item.InStockQuantity = 0;
+                }
+
                 context.OrderItems.Add(orderItem);
             }
 
