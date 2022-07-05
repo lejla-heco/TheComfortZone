@@ -112,14 +112,7 @@ class _MyWidgetState extends State<AppointmentsOverviewPage> {
                         setState(() {
                           data = apiData;
                         });
-                      } catch (e) {showDialog(
-                              context: context,
-                              builder: (BuildContext dialogContex) =>
-                                  AlertDialogWidget(
-                                    title: "Error",
-                                    message: "You don't have any appointments!",
-                                    context: dialogContex,
-                                  ));
+                      } catch (e) {
                       }
                     }, currentTime: DateTime.now(), locale: LocaleType.en);
                   },

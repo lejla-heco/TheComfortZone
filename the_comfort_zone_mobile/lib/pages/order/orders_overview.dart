@@ -110,15 +110,7 @@ class _MyWidgetState extends State<OrdersOverviewPage> {
                         setState(() {
                           data = apiData;
                         });
-                      } catch (e) {showDialog(
-                              context: context,
-                              builder: (BuildContext dialogContex) =>
-                                  AlertDialogWidget(
-                                    title: "Error",
-                                    message: "You don't have any orders!",
-                                    context: dialogContex,
-                                  ));
-                      }
+                      } catch (e) {}
                     }, currentTime: DateTime.now(), locale: LocaleType.en);
                   },
                   child: const Text(
@@ -139,7 +131,9 @@ class _MyWidgetState extends State<OrdersOverviewPage> {
   List<Widget> _buildOrderCards() {
     if (data.length == 0) {
       return [
-        const SizedBox(height: 100,),
+        const SizedBox(
+          height: 100,
+        ),
         const Center(
             child: Text(
           "You don't have any orders",
