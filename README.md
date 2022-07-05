@@ -1,4 +1,5 @@
-THE COMFORT ZONE - R2 SEMINARSKI RAD
+The Comfort Zone - R2 seminarski rad
+=====================================
 
 TheComfortZone je aplikacija koja služi za pregled najava pregled ponude salona namještaja, pruža mogućnost naručivanja, lajkanja (premještanja u sekciju favourites), pregleda historije narudžbi, te pruža i mogućnost zakazivanja i pregleda historije dizajn konsultacija + obuhvata administracijski dio samog poslovnog procesa kao cjeline:
 
