@@ -297,7 +297,7 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
         {
             List<FurnitureItem> allItems = new List<FurnitureItem>();
 
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 var tmp = context.FurnitureItems
                 .Include(x => x.Category.Space)
@@ -381,10 +381,10 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
 
     public class ProductEntry
     {
-        [KeyType(count: 25000)]
+        [KeyType(count: 500)]
         public uint ProductID { get; set; }
 
-        [KeyType(count: 25000)]
+        [KeyType(count: 500)]
         public uint CoPurchaseProductID { get; set; }
 
         public float Label { get; set; }

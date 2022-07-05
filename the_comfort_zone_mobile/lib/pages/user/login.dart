@@ -18,8 +18,22 @@ class LoginPage extends StatelessWidget {
 
     final txtUsername =
         TextInputWidget(label: "Username", controller: _usernameController);
-    final txtPassword =
-        TextInputWidget(label: "Password", controller: _passwordController);
+    final txtPassword = TextFormField(
+      controller: _passwordController,
+      obscureText: true,
+      style: const TextStyle(color: Colors.white),
+      decoration: InputDecoration(
+          labelText: "Password",
+          labelStyle: const TextStyle(fontSize: 16, color: Colors.white),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Colors.grey.shade300)),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide:
+                const BorderSide(color: Color.fromARGB(255, 114, 75, 50)),
+          )),
+    );
 /** WIDGETS */
 
     final txtRegister = InkWell(
