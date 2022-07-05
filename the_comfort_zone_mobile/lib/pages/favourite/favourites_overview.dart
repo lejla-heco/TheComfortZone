@@ -89,6 +89,7 @@ class _FavouritesOverviewPageState extends State<FavouritesOverviewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       body: SafeArea(
         child: CupertinoScrollbar(
           thumbVisibility: true,
@@ -203,6 +204,7 @@ class _FavouritesOverviewPageState extends State<FavouritesOverviewPage> {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
               ),
               child: Column(
                 children: [
@@ -221,6 +223,7 @@ class _FavouritesOverviewPageState extends State<FavouritesOverviewPage> {
                           builder: (context) => FurnitureItemDetailsPage(x)));
                     },
                   ),
+                  const SizedBox(height: 5),
                   Text(x.name ?? "",
                       style: const TextStyle(
                           fontSize: 15, fontWeight: FontWeight.bold)),
@@ -230,60 +233,57 @@ class _FavouritesOverviewPageState extends State<FavouritesOverviewPage> {
                       "${formatter.format(x.onSale == true ? x.discountPrice : x.regularPrice)} KM",
                       style: const TextStyle(
                           fontSize: 15, fontWeight: FontWeight.bold)),
-                  Container(
-                    alignment: Alignment.bottomRight,
-                    padding: const EdgeInsets.only(right: 15),
-                    child: IconButton(
-                      icon: const Icon(Icons.delete_forever_rounded, size: 30),
-                      onPressed: () async {
-                        try {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext dialogContex) =>
-                                  AlertDialog(
-                                    title: const Text("Warning"),
-                                    content: const Text(
-                                        "Are you sure you want to remove this item from Favourites?"),
-                                    actions: [
-                                      TextButton(
-                                          onPressed: () async {
-                                            Navigator.pop(dialogContex);
-                                            var response =
-                                                await _productProvider
-                                                    ?.dislikeFurnitureItem(
-                                                        x.furnitureItemId!);
-                                            showDialog(
-                                                context: context,
-                                                builder: (BuildContext
-                                                        dialogContex) =>
-                                                    AlertDialogWidget(
-                                                      title: "Success",
-                                                      message:
-                                                          response.toString(),
-                                                      context: context,
-                                                    ));
-                                            await loadData(selectedValue!);
-                                          },
-                                          child: const Text("Yes")),
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(dialogContex),
-                                        child: const Text("No"),
-                                      )
-                                    ],
-                                  ));
-                        } catch (e) {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext dialogContex) =>
-                                  AlertDialogWidget(
-                                    title: "Error",
-                                    message: "An error occured!",
-                                    context: dialogContex,
-                                  ));
-                        }
-                      },
-                    ),
+                  TextButton.icon(
+                    label: const Text("Remove", style: TextStyle(color: Colors.black),),
+                    icon: const Icon(Icons.delete_outline_rounded, size: 30, color: Colors.black),
+                    onPressed: () async {
+                      try {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext dialogContex) =>
+                                AlertDialog(
+                                  title: const Text("Warning"),
+                                  content: const Text(
+                                      "Are you sure you want to remove this item from Favourites?"),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () async {
+                                          Navigator.pop(dialogContex);
+                                          var response =
+                                              await _productProvider
+                                                  ?.dislikeFurnitureItem(
+                                                      x.furnitureItemId!);
+                                          showDialog(
+                                              context: context,
+                                              builder: (BuildContext
+                                                      dialogContex) =>
+                                                  AlertDialogWidget(
+                                                    title: "Success",
+                                                    message:
+                                                        response.toString(),
+                                                    context: context,
+                                                  ));
+                                          await loadData(selectedValue!);
+                                        },
+                                        child: const Text("Yes")),
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(dialogContex),
+                                      child: const Text("No"),
+                                    )
+                                  ],
+                                ));
+                      } catch (e) {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext dialogContex) =>
+                                AlertDialogWidget(
+                                  title: "Error",
+                                  message: "An error occured!",
+                                  context: dialogContex,
+                                ));
+                      }
+                    },
                   )
                 ],
               ),

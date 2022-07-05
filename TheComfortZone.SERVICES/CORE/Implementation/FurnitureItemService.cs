@@ -299,7 +299,14 @@ namespace TheComfortZone.SERVICES.CORE.Implementation
 
             for (int i = 0; i < 10000; i++)
             {
-                var tmp = context.FurnitureItems.Where(x => x.FurnitureItemId != id);
+                var tmp = context.FurnitureItems
+                .Include(x => x.Category.Space)
+                .Include(x => x.Collection.Designer)
+                .Include(x => x.Material)
+                .Include(x => x.MetricUnit)
+                .Include("FurnitureColors.Color")
+                .Where(x => x.FurnitureItemId != id);
+
                 allItems.AddRange(tmp);
             }
 

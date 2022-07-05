@@ -25,7 +25,7 @@ namespace TheComfortZone.WINUI.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://localhost:7238/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:5238/")]
         public string ApiURL {
             get {
                 return ((string)(this["ApiURL"]));

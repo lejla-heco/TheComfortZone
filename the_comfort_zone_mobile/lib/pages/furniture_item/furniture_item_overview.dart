@@ -76,6 +76,7 @@ class _FurnitureItemOverviewPageState extends State<FurnitureItemOverviewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         title: Text(space.name!, style: TextStyle(color: Colors.white)),
@@ -107,7 +108,8 @@ class _FurnitureItemOverviewPageState extends State<FurnitureItemOverviewPage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Text("Categories", style: const TextStyle(fontSize: 18)),
+                  const Text("Categories",
+                      style: const TextStyle(fontSize: 18)),
                   DropdownButton(
                       items: _buildCategoriesDropDownList(),
                       value: selectedValue,
@@ -174,6 +176,7 @@ class _FurnitureItemOverviewPageState extends State<FurnitureItemOverviewPage> {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
               ),
               child: Column(
                 children: [
@@ -192,6 +195,7 @@ class _FurnitureItemOverviewPageState extends State<FurnitureItemOverviewPage> {
                           builder: (context) => FurnitureItemDetailsPage(x)));
                     },
                   ),
+                  const SizedBox(height: 5),
                   Text(x.name ?? "",
                       style: const TextStyle(
                           fontSize: 15, fontWeight: FontWeight.bold)),
@@ -201,48 +205,46 @@ class _FurnitureItemOverviewPageState extends State<FurnitureItemOverviewPage> {
                       "${formatter.format(x.onSale == true ? x.discountPrice : x.regularPrice)} KM",
                       style: const TextStyle(
                           fontSize: 15, fontWeight: FontWeight.bold)),
-                  Container(
-                    alignment: Alignment.bottomRight,
-                    padding: const EdgeInsets.only(right: 15),
-                    child: IconButton(
-                      icon: _defineIcon(
-                          x.favourited == null ? false : x.favourited!),
-                      onPressed: () async {
-                        if (x.favourited == null ? false : x.favourited!) {
+                  TextButton.icon(
+                    label: _defineLabel(
+                        x.favourited == null ? false : x.favourited!),
+                    icon: _defineIcon(
+                        x.favourited == null ? false : x.favourited!),
+                    onPressed: () async {
+                      if (x.favourited == null ? false : x.favourited!) {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                AlertDialogWidget(
+                                  title: "Warning",
+                                  message: "Item is already in Favourites!",
+                                  context: context,
+                                ));
+                      } else {
+                        try {
+                          var response = await _productProvider
+                              ?.likeFurnitureItem(x.furnitureItemId!);
                           showDialog(
                               context: context,
                               builder: (BuildContext context) =>
                                   AlertDialogWidget(
-                                    title: "Warning",
-                                    message: "Item is already in Favourites!",
+                                    title: "Success",
+                                    message: response.toString(),
                                     context: context,
                                   ));
-                        } else {
-                          try {
-                            var response = await _productProvider
-                                ?.likeFurnitureItem(x.furnitureItemId!);
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) =>
-                                    AlertDialogWidget(
-                                      title: "Success",
-                                      message: response.toString(),
-                                      context: context,
-                                    ));
-                            await loadData(selectedValue!);
-                          } catch (e) {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) =>
-                                    AlertDialogWidget(
-                                      title: "Error",
-                                      message: "An error occured!",
-                                      context: context,
-                                    ));
-                          }
+                          await loadData(selectedValue!);
+                        } catch (e) {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) =>
+                                  AlertDialogWidget(
+                                    title: "Error",
+                                    message: "An error occured!",
+                                    context: context,
+                                  ));
                         }
-                      },
-                    ),
+                      }
+                    },
                   )
                 ],
               ),
@@ -266,9 +268,22 @@ class _FurnitureItemOverviewPageState extends State<FurnitureItemOverviewPage> {
     return list;
   }
 
+  Text _defineLabel(bool isFavourite) {
+    const Text notFavorite = Text(
+      "Like",
+      style: TextStyle(color: Colors.black),
+    );
+    const Text favorite = Text(
+      "Liked",
+      style: TextStyle(color: Colors.black),
+    );
+    return isFavourite == true ? favorite : notFavorite;
+  }
+
   Icon _defineIcon(bool isFavourite) {
-    Icon notFavorite = const Icon(Icons.favorite_border, size: 30);
-    Icon favorite = const Icon(Icons.favorite, size: 30);
+    Icon notFavorite =
+        const Icon(Icons.favorite_border, size: 30, color: Colors.black);
+    Icon favorite = const Icon(Icons.favorite, size: 30, color: Colors.black);
     return isFavourite == true ? favorite : notFavorite;
   }
 }

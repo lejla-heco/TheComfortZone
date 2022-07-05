@@ -55,6 +55,7 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         title: const Text("My Cart", style: TextStyle(color: Colors.white)),
@@ -191,9 +192,10 @@ class _CartPageState extends State<CartPage> {
     }
     List<Widget> list = _cartProvider.cart.items
         .map((x) => Container(
-              width: double.infinity,
+      width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
               ),
               child: Column(
                 children: [
@@ -207,9 +209,10 @@ class _CartPageState extends State<CartPage> {
                       ],
                     ),
                   )),
+                  const SizedBox(height: 5),
                   Text(x.furnitureItem.name ?? "",
                       style: const TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.bold)),
+                          fontSize: 16, fontWeight: FontWeight.bold)),
                   Text(x.furnitureItem.color ?? "",
                       style: const TextStyle(fontSize: 15, color: Colors.grey)),
                   Text(

@@ -86,4 +86,19 @@ class FurnitureItemProvider extends BaseProvider<FurnitureItemResponse> {
     }
   }
 
+    Future<List<FurnitureItemResponse>> getRecommendedItems(int furnitureItemId) async {
+    var url = "$publicUrl/reccommend/$furnitureItemId";
+
+    var uri = Uri.parse(url);
+    Map<String, String> headers = createHeaders();
+    var response = await http!.get(uri, headers: headers);
+    
+    if (isValidResponseCode(response)) {
+      var data = jsonDecode(response.body);
+      return data.map((x) => fromJson(x)).cast<FurnitureItemResponse>().toList();
+    } else {
+      throw Exception("An error occurred!");
+    }
+  }
+
 }
