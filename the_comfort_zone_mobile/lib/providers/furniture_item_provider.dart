@@ -6,8 +6,8 @@ import 'package:the_comfort_zone_mobile/providers/base_provider.dart';
 import '../utils/logged_in_user.dart';
 
 class FurnitureItemProvider extends BaseProvider<FurnitureItemResponse> {
-  static const String API_KEY = "FurnitureItem";
-  FurnitureItemProvider() : super(API_KEY);
+  static const String apiRoute = "FurnitureItem";
+  FurnitureItemProvider() : super(apiRoute);
 
   @override
   FurnitureItemResponse fromJson(data) {

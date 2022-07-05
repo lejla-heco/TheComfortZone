@@ -12,7 +12,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
 
   String? publicUrl;
 
-  HttpClient client = new HttpClient();
+  HttpClient client = HttpClient();
   IOClient? http;
 
   BaseProvider(String endpoint) {
@@ -76,7 +76,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
 
     if (isValidResponseCode(response)) {
       var data = jsonDecode(response.body);
-      return fromJson(data) as T;
+      return fromJson(data);
     } else {
       return null;
     }
@@ -93,7 +93,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
 
     if (isValidResponseCode(response)) {
       var data = jsonDecode(response.body);
-      return fromJson(data) as T;
+      return fromJson(data);
     } else {
       return null;
     }
@@ -137,7 +137,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
         }
         query += '$prefix$key=$encoded';
       } else if (value is DateTime) {
-        query += '$prefix$key=${(value as DateTime).toIso8601String()}';
+        query += '$prefix$key=${(value).toIso8601String()}';
       } else if (value is List || value is Map) {
         if (value is List) value = value.asMap();
         value.forEach((k, v) {

@@ -6,8 +6,8 @@ import 'package:the_comfort_zone_mobile/providers/base_provider.dart';
 import '../utils/logged_in_user.dart';
 
 class OrderProvider extends BaseProvider<OrderResponse>{
-  static const String API_KEY = "Order";
-  OrderProvider() : super(API_KEY);
+  static const String apiRoute = "Order";
+  OrderProvider() : super(apiRoute);
 
   @override
   OrderResponse fromJson(data) {

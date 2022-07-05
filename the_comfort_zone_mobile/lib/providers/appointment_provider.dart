@@ -6,8 +6,8 @@ import 'package:the_comfort_zone_mobile/providers/base_provider.dart';
 import '../utils/logged_in_user.dart';
 
 class AppointmentProvider extends BaseProvider<AppointmentResponse> {
-  static const String API_KEY = "Appointment";
-  AppointmentProvider() : super(API_KEY);
+  static const String API_ROUTE = "Appointment";
+  AppointmentProvider() : super(API_ROUTE);
 
   @override
   AppointmentResponse fromJson(data) {

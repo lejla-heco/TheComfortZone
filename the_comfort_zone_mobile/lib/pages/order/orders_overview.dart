@@ -4,7 +4,6 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:the_comfort_zone_mobile/providers/order_provider.dart';
-import 'package:the_comfort_zone_mobile/widgets/alert_dialog_widget.dart';
 
 import '../../model/order/order_response.dart';
 
@@ -18,7 +17,7 @@ class OrdersOverviewPage extends StatefulWidget {
 class _MyWidgetState extends State<OrdersOverviewPage> {
   ScrollController? _scrollController;
 
-  OrderProvider? _orderProvider = null;
+  OrderProvider? _orderProvider;
   List<OrderResponse> data = [];
   var formatter = NumberFormat('###.0#');
 
@@ -129,7 +128,7 @@ class _MyWidgetState extends State<OrdersOverviewPage> {
   }
 
   List<Widget> _buildOrderCards() {
-    if (data.length == 0) {
+    if (data.isEmpty) {
       return [
         const SizedBox(
           height: 100,
@@ -147,7 +146,7 @@ class _MyWidgetState extends State<OrdersOverviewPage> {
         .map((x) => Column(
               children: [
                 Container(
-                    padding: EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(color: Colors.grey.shade200),
                     width: MediaQuery.of(context).size.width,
                     child: Column(
