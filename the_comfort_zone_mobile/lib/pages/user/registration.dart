@@ -70,7 +70,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       controller: _phoneNumberController,
       style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
-          labelText: "Phone Number",
+          labelText: "Phone Number (e.g. 033/111-111)",
           labelStyle: const TextStyle(fontSize: 16, color: Colors.white),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
