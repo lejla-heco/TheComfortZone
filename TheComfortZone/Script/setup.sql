@@ -218,7 +218,7 @@ INSERT [dbo].[Color] ([ColorID], [Name]) VALUES (1, N'black')
 
 INSERT [dbo].[Color] ([ColorID], [Name]) VALUES (2, N'white')
 
-INSERT [dbo].[Color] ([ColorID], [Name]) VALUES (3, N'ld')
+INSERT [dbo].[Color] ([ColorID], [Name]) VALUES (3, N'gold')
 
 INSERT [dbo].[Color] ([ColorID], [Name]) VALUES (4, N'red')
 
