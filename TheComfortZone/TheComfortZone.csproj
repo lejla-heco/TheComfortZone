@@ -29,4 +29,10 @@
 		<ProjectReference Include="..\TheComfortZone.SERVICES\TheComfortZone.SERVICES.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<None Update="Script\setup.sql">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
 </Project>

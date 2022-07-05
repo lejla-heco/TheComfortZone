@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using TheComfortZone;
 using TheComfortZone.Authentication;
 using TheComfortZone.SERVICES.API;
 using TheComfortZone.SERVICES.CORE.Implementation;
@@ -82,5 +83,12 @@ app.MapControllers();
     var dataContext = scope.ServiceProvider.GetRequiredService<TheComfortZoneContext>();
     dataContext.Database.Migrate();
 }*/
+
+using (var scope = app.Services.CreateScope())
+{
+    var database = scope.ServiceProvider.GetService<TheComfortZoneContext>();
+    new DBSetup().Init(database);
+    new DBSetup().InsertData(database);
+}
 
 app.Run();

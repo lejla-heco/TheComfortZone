@@ -2,9 +2,7 @@ version: '3'
 services:
 #mssql docker
   thecomfortzone-sql:
-    build: 
-      context: .
-      dockerfile: Dockerfile.mssql
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
     restart: unless-stopped
     environment:
       - ACCEPT_EULA=Y
