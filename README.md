@@ -3,7 +3,7 @@ The Comfort Zone - R2 seminarski rad
 
 TheComfortZone je aplikacija koja služi za pregled ponude salona namještaja, pruža mogućnost naručivanja, lajkanja (premještanja u sekciju favourites), pregleda historije narudžbi, te pruža i mogućnost zakazivanja i pregleda historije dizajn konsultacija + obuhvata administracijski dio samog poslovnog procesa kao cjeline:
 
-desktop aplikacija je namijenjena administratorima i zaposlenicima za obavljanje administracijskog i poslovnog dijela procesa
+Desktop aplikacija je namijenjena administratorima i zaposlenicima za obavljanje administracijskog i poslovnog dijela procesa
 mobilna aplikacija je namijenjena krajnjim korisnicima
 
 Kredencijali za prijavu
@@ -37,7 +37,7 @@ Mobilna aplikacija
 
 Pokretanje aplikacija
 
-Nakon kloniranja repozitorija sa lokacije: https://github.com/lejla-heco/TheComfortZone.git navigirati kroz komandnu liniju do istog, te pokrenuti dokerizovani API i TheComfortZone DB upotrebom slijedećih naredbi (za seeding se koristi skripta setup.sql):
+Nakon kloniranja repozitorija sa lokacije: https://github.com/lejla-heco/TheComfortZone.git navigirati kroz komandnu liniju do istog, te pokrenuti dokerizovani API i TheComfortZone DB upotrebom sljedećih naredbi (za seeding se koristi skripta setup.sql):
 
     docker-compose build
     docker-compose up
